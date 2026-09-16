@@ -28,8 +28,9 @@ export const Navbar: React.FC = () => {
 
   const navLinks = [
     { to: '/', label: t.nav.preview, anchor: '#preview' },
-    { to: '/', label: t.nav.features, anchor: '#features' },
-    { to: '/', label: t.nav.opensource, anchor: '#opensource' },
+    { to: '/features', label: 'Fonctionnalités' },
+    { to: '/documentation', label: 'Documentation' },
+    { to: '/tech', label: 'Technique' },
     { to: '/download', label: t.nav.download },
   ];
 

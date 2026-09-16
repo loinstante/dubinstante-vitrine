@@ -91,8 +91,8 @@ export const DownloadHub: React.FC = () => {
                     href={p.url}
                     className={`w-full flex items-center justify-center gap-1.5 px-4 py-2 rounded-lg text-xs font-semibold transition-colors ${
                       isDetected
-                        ? 'bg-accent hover:bg-accent-hover dark:bg-accent dark:hover:bg-[accent] text-white'
-                        : 'bg-[var(--bg-surface)] hover:bg-black/[0.1] dark:hover:bg-white/[0.12] text-[var(--text-primary)]'
+                        ? 'bg-accent hover:bg-accent-hover text-ink'
+                        : 'bg-[var(--bg-surface)] hover:bg-[var(--bg-sunk)] text-[var(--text-primary)]'
                     }`}
                   >
                     <Download className="w-3.5 h-3.5" />
