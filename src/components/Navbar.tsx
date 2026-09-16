@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { CURRENT_VERSION, GITHUB_REPO_URL } from '../config/downloads';
@@ -10,6 +11,8 @@ export const Navbar: React.FC = () => {
   const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isLanding = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,58 +27,67 @@ export const Navbar: React.FC = () => {
   };
 
   const navLinks = [
-    { href: '#preview', label: t.nav.preview },
-    { href: '#features', label: t.nav.features },
-    { href: '#opensource', label: t.nav.opensource },
-    { href: '#download', label: t.nav.download },
+    { to: '/', label: t.nav.preview, anchor: '#preview' },
+    { to: '/', label: t.nav.features, anchor: '#features' },
+    { to: '/', label: t.nav.opensource, anchor: '#opensource' },
+    { to: '/download', label: t.nav.download },
   ];
 
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 ${
         isScrolled
-          ? 'bg-[#fafafb]/90 dark:bg-[#0a0a0c]/90 backdrop-blur-md border-b border-black/[0.06] dark:border-white/[0.08]'
+          ? 'bg-[var(--bg-main)]/90 backdrop-blur-md border-b border-[var(--border-subtle)]'
           : 'bg-transparent'
       }`}
     >
       <div className="max-w-6xl mx-auto h-16 px-4 sm:px-6 flex items-center justify-between gap-4">
         {/* Brand identity */}
-        <a href="#" className="flex items-center gap-2.5 group">
+        <Link to="/" className="flex items-center gap-2.5 group">
           <img
             src="/assets/DubInstante.png"
             alt="DubInstante"
             className="w-7 h-7 object-contain rounded-md"
           />
           <div className="flex items-center gap-2">
-            <span className="text-base font-bold tracking-tight text-[#121217] dark:text-[#f3f3f6]">
+            <span className="text-base font-bold tracking-tight text-[var(--text-primary)] font-display">
               DubInstante
             </span>
-            <span className="text-[11px] font-mono font-medium text-[#7a7a85] dark:text-[#8a8a9e]">
+            <span className="text-[11px] font-mono font-medium text-[var(--text-muted)]">
               {CURRENT_VERSION}
             </span>
           </div>
-        </a>
+        </Link>
 
         {/* Desktop links */}
         <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-[#5a5a68] dark:text-[#9e9eb0] hover:text-[#121217] dark:hover:text-white transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) =>
+            link.anchor ? (
+              <a
+                key={link.anchor}
+                href={isLanding ? link.anchor : `/${link.anchor}`}
+                className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+              >
+                {link.label}
+              </a>
+            ) : (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+              >
+                {link.label}
+              </Link>
+            ),
+          )}
         </nav>
 
         {/* Desktop actions */}
         <div className="hidden md:flex items-center gap-3">
-          {/* Theme & Language toggles */}
-          <div className="flex items-center gap-1 text-[#5a5a68] dark:text-[#9e9eb0]">
+          <div className="flex items-center gap-1 text-[var(--text-secondary)]">
             <button
               onClick={toggleTheme}
-              className="w-8 h-8 flex items-center justify-center rounded-md hover:text-[#121217] dark:hover:text-white hover:bg-black/[0.04] dark:hover:bg-white/[0.06] transition-colors"
+              className="w-8 h-8 flex items-center justify-center rounded-md hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)] transition-colors"
               title={theme === 'dark' ? 'Passer au thème clair' : 'Passer au thème sombre'}
               aria-label="Changer de thème"
             >
@@ -84,7 +96,7 @@ export const Navbar: React.FC = () => {
 
             <button
               onClick={toggleLanguage}
-              className="h-8 px-2 flex items-center text-xs font-mono font-semibold rounded-md hover:text-[#121217] dark:hover:text-white hover:bg-black/[0.04] dark:hover:bg-white/[0.06] transition-colors"
+              className="h-8 px-2 flex items-center text-xs font-mono font-semibold rounded-md hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)] transition-colors"
               title="Changer de langue"
               aria-label="Changer de langue"
             >
@@ -92,49 +104,47 @@ export const Navbar: React.FC = () => {
             </button>
           </div>
 
-          <div className="h-4 w-px bg-black/[0.08] dark:bg-white/[0.1]"></div>
+          <div className="h-4 w-px bg-[var(--border-subtle)]"></div>
 
-          {/* GitHub icon link */}
           <a
             href={GITHUB_REPO_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-sm font-medium text-[#5a5a68] dark:text-[#9e9eb0] hover:text-[#121217] dark:hover:text-white transition-colors px-2 py-1.5"
+            className="flex items-center gap-1.5 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors px-2 py-1.5"
             aria-label="Code source GitHub"
           >
             <GithubIcon className="w-4 h-4" />
             <span>GitHub</span>
           </a>
 
-          {/* Primary Download CTA */}
-          <a
-            href="#download"
-            className="flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-lg bg-[#121217] dark:bg-white text-white dark:text-[#121217] hover:bg-[#252530] dark:hover:bg-[#eaebee] transition-colors"
+          <Link
+            to="/download"
+            className="flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-lg bg-accent text-ink hover:bg-accent-hover transition-colors"
           >
             <Download className="w-3.5 h-3.5" />
             <span>{t.nav.download}</span>
-          </a>
+          </Link>
         </div>
 
         {/* Mobile controls */}
         <div className="flex md:hidden items-center gap-1.5">
           <button
             onClick={toggleTheme}
-            className="w-8 h-8 flex items-center justify-center text-[#5a5a68] dark:text-[#9e9eb0]"
+            className="w-8 h-8 flex items-center justify-center text-[var(--text-secondary)]"
             aria-label="Changer de thème"
           >
             {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
           <button
             onClick={toggleLanguage}
-            className="h-8 px-1.5 text-xs font-mono font-semibold text-[#5a5a68] dark:text-[#9e9eb0]"
+            className="h-8 px-1.5 text-xs font-mono font-semibold text-[var(--text-secondary)]"
             aria-label="Changer de langue"
           >
             {language.toUpperCase()}
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="w-8 h-8 flex items-center justify-center text-[#121217] dark:text-white ml-1"
+            className="w-8 h-8 flex items-center justify-center text-[var(--text-primary)] ml-1"
             aria-label="Menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -144,36 +154,47 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#fafafb] dark:bg-[#0a0a0c] border-b border-black/[0.08] dark:border-white/[0.08] px-4 py-5">
+        <div className="md:hidden bg-[var(--bg-main)] border-b border-[var(--border-subtle)] px-4 py-5">
           <div className="flex flex-col gap-3">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-sm font-medium text-[#5a5a68] dark:text-[#9e9eb0] hover:text-[#121217] dark:hover:text-white py-1"
-              >
-                {link.label}
-              </a>
-            ))}
-            <div className="pt-3 mt-1 border-t border-black/[0.08] dark:border-white/[0.08] flex items-center justify-between">
+            {navLinks.map((link) =>
+              link.anchor ? (
+                <a
+                  key={link.anchor}
+                  href={isLanding ? link.anchor : `/${link.anchor}`}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-1"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-1"
+                >
+                  {link.label}
+                </Link>
+              ),
+            )}
+            <div className="pt-3 mt-1 border-t border-[var(--border-subtle)] flex items-center justify-between">
               <a
                 href={GITHUB_REPO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-sm font-medium text-[#5a5a68] dark:text-[#9e9eb0]"
+                className="flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)]"
               >
                 <GithubIcon className="w-4 h-4" />
                 <span>GitHub</span>
               </a>
-              <a
-                href="#download"
+              <Link
+                to="/download"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-[#121217] dark:bg-white text-white dark:text-[#121217]"
+                className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-accent text-ink"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>{t.nav.download}</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -181,4 +202,3 @@ export const Navbar: React.FC = () => {
     </header>
   );
 };
-

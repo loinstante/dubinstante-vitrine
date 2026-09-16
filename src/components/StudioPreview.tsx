@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { Play, Pause, ChevronLeft, ChevronRight, Monitor, PlayCircle } from 'lucide-react';
+import { Reveal, Eyebrow, Halo } from './ui/Primitives';
 
 interface Syllable {
   text: string;
@@ -160,30 +161,29 @@ export const StudioPreview: React.FC = () => {
   const isDark = theme === 'dark';
 
   return (
-    <section id="preview" className="py-16 md:py-24">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+    <section id="preview" className="relative py-24 md:py-32 border-t border-[var(--border-subtle)] overflow-hidden">
+      <Halo className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] opacity-30" />
+      <div className="relative max-w-5xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <p className="text-xs font-mono font-medium text-[#7a7a85] dark:text-[#8a8a9e] uppercase tracking-wider mb-2">
-            {t.preview.eyebrow}
-          </p>
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-[#121217] dark:text-[#f3f3f6]">
+        <Reveal className="text-center max-w-2xl mx-auto mb-10">
+          <Eyebrow className="mb-2">{t.preview.eyebrow}</Eyebrow>
+          <h2 className="font-display font-bold text-3xl sm:text-4xl tracking-tight text-[var(--text-primary)]">
             {t.preview.title}
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-[#5a5a68] dark:text-[#9e9eb0] leading-relaxed">
+          <p className="mt-3 text-sm sm:text-base text-[var(--text-secondary)] leading-relaxed">
             {t.preview.subtitle}
           </p>
-        </div>
+        </Reveal>
 
         {/* Tab switch */}
-        <div className="flex justify-center mb-6">
-          <div className="inline-flex p-1 rounded-lg bg-black/[0.04] dark:bg-white/[0.06] text-xs font-medium">
+        <Reveal className="flex justify-center mb-6">
+          <div className="inline-flex p-1 rounded-lg bg-[var(--bg-surface)] border border-[var(--border-subtle)] text-xs font-medium">
             <button
               onClick={() => setActiveTab('screenshot')}
               className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-md transition-colors ${
                 activeTab === 'screenshot'
-                  ? 'bg-white dark:bg-[#181820] text-[#121217] dark:text-white shadow-xs'
-                  : 'text-[#5a5a68] dark:text-[#9e9eb0] hover:text-[#121217] dark:hover:text-white'
+                  ? 'bg-accent text-ink font-semibold'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
               }`}
             >
               <Monitor className="w-3.5 h-3.5" />
@@ -193,35 +193,35 @@ export const StudioPreview: React.FC = () => {
               onClick={() => setActiveTab('simulator')}
               className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-md transition-colors ${
                 activeTab === 'simulator'
-                  ? 'bg-white dark:bg-[#181820] text-[#121217] dark:text-white shadow-xs'
-                  : 'text-[#5a5a68] dark:text-[#9e9eb0] hover:text-[#121217] dark:hover:text-white'
+                  ? 'bg-accent text-ink font-semibold'
+                  : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
               }`}
             >
               <PlayCircle className="w-3.5 h-3.5" />
               <span>{t.preview.tabSimulator}</span>
             </button>
           </div>
-        </div>
+        </Reveal>
 
         {/* Display Container */}
         {activeTab === 'screenshot' ? (
-          <div>
-            <div className="rounded-xl overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-black/[0.02] dark:bg-black/40 shadow-sm">
+          <Reveal>
+            <div className="rounded-2xl overflow-hidden border border-[var(--border-strong)] bg-ink shadow-[0_0_60px_-20px_rgba(255,176,32,0.4)]">
               <img
                 src={isDark ? '/assets/dubinstante-studio-real.png' : '/assets/dubinstante-studio-white.png'}
                 alt="DubInstante Studio Screenshot"
                 className="w-full h-auto block"
               />
             </div>
-            <p className="mt-3 text-center text-xs font-mono text-[#7a7a85] dark:text-[#8a8a9e]">
+            <p className="mt-3 text-center text-xs font-mono text-[var(--text-muted)]">
               {t.preview.screenshotCaption}
             </p>
-          </div>
+          </Reveal>
         ) : (
           <div
             tabIndex={0}
             onKeyDown={handleKeyDown}
-            className="rounded-xl overflow-hidden border border-black/[0.08] dark:border-white/[0.08] bg-black focus:outline-none focus:ring-1 focus:ring-[#8250df]/50 shadow-sm"
+            className="rounded-2xl overflow-hidden border border-[var(--border-strong)] bg-ink focus:outline-none focus:ring-1 focus:ring-accent/50 shadow-[0_0_60px_-20px_rgba(255,176,32,0.4)] animate-fade-up"
           >
             {/* Video Stage */}
             <div className="relative aspect-[16/9] max-h-[380px] w-full flex flex-col justify-end overflow-hidden bg-[#060608]">
@@ -230,10 +230,10 @@ export const StudioPreview: React.FC = () => {
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
                   <button
                     onClick={togglePlay}
-                    className="pointer-events-auto w-14 h-14 rounded-full bg-[#8250df] hover:bg-[#7239ea] text-white flex items-center justify-center transition-transform hover:scale-105 active:scale-95"
+                    className="pointer-events-auto w-14 h-14 rounded-full bg-[#FFB020] hover:bg-[#FFC24A] text-ink flex items-center justify-center transition-transform hover:scale-105 active:scale-95"
                     aria-label="Lancer la lecture"
                   >
-                    <Play className="w-6 h-6 fill-white translate-x-0.5" />
+                    <Play className="w-6 h-6 fill-ink translate-x-0.5" />
                   </button>
                 </div>
               )}
@@ -244,17 +244,17 @@ export const StudioPreview: React.FC = () => {
               </div>
 
               {/* The Rythmo Band at bottom */}
-              <div className="relative w-full h-12 bg-[#121218] border-t border-[#8250df] overflow-hidden select-none">
+              <div className="relative w-full h-12 bg-[#121218] border-t border-[#FFB020] overflow-hidden select-none">
                 {/* Violet sync cursor at 20% width (matches app exactly) */}
-                <div className="absolute top-0 bottom-0 left-[20%] w-[2px] bg-[#8250df] z-30 pointer-events-none">
-                  <div className="absolute -top-[1px] left-1/2 -translate-x-1/2 border-solid border-t-[7px] border-t-[#8250df] border-x-[4px] border-x-transparent"></div>
+                <div className="absolute top-0 bottom-0 left-[20%] w-[2px] bg-[#FF3B3B] z-30 pointer-events-none">
+                  <div className="absolute -top-[1px] left-1/2 -translate-x-1/2 border-solid border-t-[7px] border-t-[#FF3B3B] border-x-[4px] border-x-transparent"></div>
                   <div className="absolute -top-6 left-1/2 -translate-x-1/2 px-1.5 py-0.5 rounded bg-black/90 text-[9px] font-mono text-white font-bold whitespace-nowrap">
                     <span ref={timecodePillRef}>00:00.000</span>
                   </div>
                 </div>
 
                 {/* Horizontal middle line */}
-                <div className="absolute top-1/2 left-0 right-0 h-px bg-[#8250df]/25 pointer-events-none"></div>
+                <div className="absolute top-1/2 left-0 right-0 h-px bg-[#FF3B3B] pointer-events-none"></div>
 
                 {/* Scrolling syllables */}
                 <div
@@ -286,7 +286,7 @@ export const StudioPreview: React.FC = () => {
                 max={TOTAL_TRACK_WIDTH}
                 defaultValue={0}
                 onChange={handleScrub}
-                className="w-full h-1 bg-[#22222e] rounded-lg appearance-none cursor-pointer accent-[#8250df]"
+                className="w-full h-1 bg-[#22222e] rounded-lg appearance-none cursor-pointer accent-[#FFB020]"
                 aria-label="Position dans la session"
               />
             </div>
@@ -304,7 +304,7 @@ export const StudioPreview: React.FC = () => {
 
                 <button
                   onClick={togglePlay}
-                  className="flex items-center gap-1.5 px-3 py-1 rounded bg-[#8250df] hover:bg-[#7239ea] text-white font-bold tracking-wider uppercase transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-1 rounded bg-[#FFB020] hover:bg-[#FFC24A] text-ink font-bold tracking-wider uppercase transition-colors"
                 >
                   {isPlaying ? (
                     <>

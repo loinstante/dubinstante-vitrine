@@ -6,9 +6,9 @@ export const Footer: React.FC = () => {
   const { t } = useLanguage();
 
   return (
-    <footer className="border-t border-black/[0.06] dark:border-white/[0.08] py-14 text-sm text-[#7a7a85] dark:text-[#8a8a9e]">
+    <footer className="border-t border-[var(--border-subtle)] py-14 text-sm text-[var(--text-muted)]">
       <div className="max-w-5xl mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10 border-b border-black/[0.06] dark:border-white/[0.06]">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10 border-b border-[var(--border-subtle)]">
           {/* Brand Col */}
           <div className="md:col-span-2">
             <div className="flex items-center gap-2.5 mb-3">
@@ -17,21 +17,21 @@ export const Footer: React.FC = () => {
                 alt="DubInstante"
                 className="w-6 h-6 object-contain rounded"
               />
-              <span className="text-base font-bold tracking-tight text-[#121217] dark:text-[#f3f3f6]">
+              <span className="text-base font-bold tracking-tight text-[var(--text-primary)]">
                 DubInstante
               </span>
-              <span className="text-xs font-mono text-[#7a7a85] dark:text-[#8a8a9e]">
+              <span className="text-xs font-mono text-[var(--text-muted)]">
                 {CURRENT_VERSION}
               </span>
             </div>
-            <p className="text-xs sm:text-sm text-[#5a5a68] dark:text-[#9e9eb0] leading-relaxed max-w-sm">
+            <p className="text-xs sm:text-sm text-[var(--text-secondary)] leading-relaxed max-w-sm">
               {t.footer.brandDesc}
             </p>
           </div>
 
           {/* Ecosystem Links */}
           <div>
-            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[#121217] dark:text-[#f3f3f6] mb-3">
+            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-primary)] mb-3">
               {t.footer.ecosystem}
             </h4>
             <ul className="space-y-2 text-xs">
@@ -40,7 +40,7 @@ export const Footer: React.FC = () => {
                   href={GITHUB_REPO_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#121217] dark:hover:text-[#f3f3f6] transition-colors"
+                  className="hover:text-[var(--text-primary)] transition-colors"
                 >
                   DubInstante (Studio)
                 </a>
@@ -50,7 +50,7 @@ export const Footer: React.FC = () => {
                   href="https://github.com/loimathos/DubWritter"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#121217] dark:hover:text-[#f3f3f6] transition-colors"
+                  className="hover:text-[var(--text-primary)] transition-colors"
                 >
                   DubWritter (Texte rythmo)
                 </a>
@@ -60,7 +60,7 @@ export const Footer: React.FC = () => {
                   href="https://github.com/loimathos/InstanTexte"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#121217] dark:hover:text-[#f3f3f6] transition-colors"
+                  className="hover:text-[var(--text-primary)] transition-colors"
                 >
                   InstanTexte (Bureautique libre)
                 </a>
@@ -70,7 +70,7 @@ export const Footer: React.FC = () => {
                   href="https://github.com/loimathos"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#121217] dark:hover:text-[#f3f3f6] transition-colors"
+                  className="hover:text-[var(--text-primary)] transition-colors"
                 >
                   GitHub L'Oinstante
                 </a>
@@ -80,7 +80,7 @@ export const Footer: React.FC = () => {
 
           {/* Resources */}
           <div>
-            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[#121217] dark:text-[#f3f3f6] mb-3">
+            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-primary)] mb-3">
               GitHub
             </h4>
             <ul className="space-y-2 text-xs">
@@ -89,7 +89,7 @@ export const Footer: React.FC = () => {
                   href={`${GITHUB_REPO_URL}/issues`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#121217] dark:hover:text-[#f3f3f6] transition-colors"
+                  className="hover:text-[var(--text-primary)] transition-colors"
                 >
                   {t.footer.reportBug}
                 </a>
@@ -99,7 +99,7 @@ export const Footer: React.FC = () => {
                   href={`${GITHUB_REPO_URL}#-roadmap`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#121217] dark:hover:text-[#f3f3f6] transition-colors"
+                  className="hover:text-[var(--text-primary)] transition-colors"
                 >
                   {t.footer.roadmap}
                 </a>
@@ -109,7 +109,7 @@ export const Footer: React.FC = () => {
                   href={`${GITHUB_REPO_URL}/releases`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-[#121217] dark:hover:text-[#f3f3f6] transition-colors"
+                  className="hover:text-[var(--text-primary)] transition-colors"
                 >
                   {t.footer.releases}
                 </a>
@@ -119,7 +119,7 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom copyright row */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[#7a7a85] dark:text-[#8a8a9e]">
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-[var(--text-muted)]">
           <div>© 2026 DubInstante · {t.footer.madeBy}</div>
           <div>{t.footer.license}</div>
         </div>
