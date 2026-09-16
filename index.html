@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="fr" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="/assets/DubInstante.png" />
+    <title>DubInstante — Le Studio Libre de Bande Rythmo et de Doublage</title>
+    <meta
+      name="description"
+      content="DubInstante est un logiciel de post-production libre et gratuit pour le doublage vidéo et la bande rythmo. 100% hors-ligne, écrit en C++17 et Qt 6."
+    />
+    <meta
+      name="keywords"
+      content="doublage vidéo, bande rythmo, logiciel libre doublage, open-source ADR, post-production audio, comédien voix-off, studio doublage local, synchronisation labiale, C++ Qt6 dubbing"
+    />
+
+    <!-- Open Graph / Facebook / Discord -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://dubinstante.vercel.app/" />
+    <meta property="og:title" content="DubInstante — Studio Libre de Doublage & Bande Rythmo" />
+    <meta
+      property="og:description"
+      content="Bande rythmo 60 FPS, enregistrement WAV multipiste et moteur C++/OpenGL. 100% gratuit, 100% local, sans abonnement."
+    />
+    <meta property="og:image" content="https://dubinstante.vercel.app/assets/dubinstante-studio-real.png" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="DubInstante — Studio Libre de Doublage & Bande Rythmo" />
+    <meta
+      name="twitter:description"
+      content="Studio de doublage vidéo et bande rythmo open-source (GPLv3). Performance native C++17 et Qt 6."
+    />
+    <meta name="twitter:image" content="https://dubinstante.vercel.app/assets/dubinstante-studio-real.png" />
+
+    <!-- Fonts preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Schema.org SoftwareApplication structured data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "DubInstante",
+        "operatingSystem": "Windows, Linux, macOS, Android",
+        "applicationCategory": "MultimediaApplication",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "EUR"
+        },
+        "description": "Studio de doublage vidéo open-source avec bande rythmo dynamique, enregistrement multipiste et export FFmpeg.",
+        "softwareVersion": "0.11.0",
+        "downloadUrl": "https://github.com/loimathos/DubInstante/releases/latest"
+      }
+    </script>
+  </head>
+  <body class="bg-[#fafafb] dark:bg-[#0a0a0c] text-[#121217] dark:text-[#f3f3f6] antialiased min-h-screen overflow-x-hidden">
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
