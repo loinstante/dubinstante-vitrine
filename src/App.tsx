@@ -6,6 +6,8 @@ import { Layout } from './pages/Layout';
 import { Landing } from './pages/Landing';
 import { DownloadPage } from './pages/DownloadPage';
 import { DocsPage } from './pages/DocsPage';
+import { TechPage } from './pages/TechPage';
+import { FeaturesPage } from './pages/FeaturesPage';
 import { RoadmapPage } from './pages/RoadmapPage';
 
 const ScrollToTop: React.FC = () => {
@@ -26,7 +28,9 @@ export const App: React.FC = () => {
             <Route element={<Layout />}>
               <Route path="/" element={<Landing />} />
               <Route path="/download" element={<DownloadPage />} />
-              <Route path="/docs" element={<DocsPage />} />
+              <Route path="/documentation" element={<DocsPage />} />
+              <Route path="/tech" element={<TechPage />} />
+              <Route path="/features" element={<FeaturesPage />} />
               <Route path="/roadmap" element={<RoadmapPage />} />
               <Route path="*" element={<Landing />} />
             </Route>

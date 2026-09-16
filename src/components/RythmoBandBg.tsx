@@ -36,8 +36,8 @@ export const RythmoBandBg: React.FC<{ className?: string }> = ({ className = '' 
       aria-hidden
       className={`absolute inset-0 overflow-hidden ${className}`}
     >
-      {/* Faded video stage look */}
-      <div className="absolute inset-0 bg-gradient-to-b from-ink-deep via-ink to-ink-deep" />
+      {/* Faded video stage look — adapts to theme */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg-sunk)] via-[var(--bg-main)] to-[var(--bg-sunk)]" />
 
       {/* Subtle scanlines */}
       <div
@@ -55,14 +55,14 @@ export const RythmoBandBg: React.FC<{ className?: string }> = ({ className = '' 
         <div className="absolute top-0 bottom-0 left-[22%] w-px bg-accent/40 z-20" />
         <div
           ref={trackRef}
-          className="absolute left-[22%] top-0 bottom-0 flex items-center will-change-transform font-mono font-bold text-sm tracking-wider text-white/15"
+          className="absolute left-[22%] top-0 bottom-0 flex items-center will-change-transform font-mono font-bold text-sm tracking-wider text-[var(--text-muted)]"
           style={{ transform: 'translate3d(0px, 0, 0)' }}
         >
           {SAMPLE_TEXT.map((syl, idx) => (
             <span
               key={idx}
               className={`inline-block whitespace-nowrap px-1.5 ${
-                syl === '[pause]' ? 'italic text-white/10 font-normal' : 'text-white/15'
+                syl === '[pause]' ? 'italic text-[var(--text-muted)]/60 font-normal' : 'text-[var(--text-muted)]'
               }`}
             >
               {syl}
@@ -72,8 +72,8 @@ export const RythmoBandBg: React.FC<{ className?: string }> = ({ className = '' 
       </div>
 
       {/* Center fade mask for readability */}
-      <div className="absolute inset-0 bg-gradient-to-r from-ink via-transparent to-ink" />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-main)] via-transparent to-[var(--bg-main)]" />
+      <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg-main)] via-[var(--bg-main)]/40 to-[var(--bg-main)]" />
     </div>
   );
 };

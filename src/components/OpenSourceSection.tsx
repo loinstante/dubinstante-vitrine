@@ -30,7 +30,7 @@ export const OpenSourceSection: React.FC = () => {
                 href={GITHUB_REPO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold bg-ink dark:bg-[var(--text-primary)] text-white dark:text-[var(--text-primary)] hover:bg-[var(--surface-hover)] dark:hover:bg-[var(--warm-100)] transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold bg-[var(--text-primary)] text-[var(--bg-main)] hover:opacity-90 transition-opacity"
               >
                 <GithubIcon className="w-3.5 h-3.5" />
                 <span>{t.opensource.contributeBtn}</span>
@@ -40,7 +40,7 @@ export const OpenSourceSection: React.FC = () => {
                 href={`${GITHUB_REPO_URL}/issues`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-white bg-[var(--bg-surface)] transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-[var(--bg-surface)] transition-colors"
               >
                 <Bug className="w-3.5 h-3.5" />
                 <span>{t.opensource.issuesBtn}</span>
@@ -50,7 +50,7 @@ export const OpenSourceSection: React.FC = () => {
                 href={`${GITHUB_REPO_URL}#-roadmap`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-white bg-[var(--bg-surface)] transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-[var(--bg-surface)] transition-colors"
               >
                 <Compass className="w-3.5 h-3.5" />
                 <span>{t.opensource.roadmapBtn}</span>
