@@ -1,33 +1,40 @@
-import React from "react";
-import { LanguageProvider } from "./context/LanguageContext";
-import { ThemeProvider } from "./context/ThemeContext";
-import { Navbar } from "./components/Navbar";
-import { Hero } from "./components/Hero";
-import { StudioPreview } from "./components/StudioPreview";
-import { Features } from "./components/Features";
-import { OpenSourceSection } from "./components/OpenSourceSection";
-import { DownloadHub } from "./components/DownloadHub";
-import { Footer } from "./components/Footer";
+import React, { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { LanguageProvider } from './context/LanguageContext';
+import { ThemeProvider } from './context/ThemeContext';
+import { Layout } from './pages/Layout';
+import { Landing } from './pages/Landing';
+import { DownloadPage } from './pages/DownloadPage';
+import { DocsPage } from './pages/DocsPage';
+import { RoadmapPage } from './pages/RoadmapPage';
+
+const ScrollToTop: React.FC = () => {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+};
 
 export const App: React.FC = () => {
   return (
     <ThemeProvider>
       <LanguageProvider>
-        <div className="min-h-screen bg-[#fafafb] dark:bg-[#0a0a0c] text-[#121217] dark:text-[#f3f3f6] flex flex-col font-sans transition-colors duration-200">
-          <Navbar />
-          <main className="flex-1">
-            <Hero />
-            <StudioPreview />
-            <Features />
-            <OpenSourceSection />
-            <DownloadHub />
-          </main>
-          <Footer />
-        </div>
+        <BrowserRouter>
+          <ScrollToTop />
+          <Routes>
+            <Route element={<Layout />}>
+              <Route path="/" element={<Landing />} />
+              <Route path="/download" element={<DownloadPage />} />
+              <Route path="/docs" element={<DocsPage />} />
+              <Route path="/roadmap" element={<RoadmapPage />} />
+              <Route path="*" element={<Landing />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
       </LanguageProvider>
     </ThemeProvider>
   );
 };
 
 export default App;
-
