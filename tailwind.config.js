@@ -8,34 +8,34 @@ export default {
   theme: {
     extend: {
       colors: {
-        // "Régie" palette — warm cinema studio
+        // Cinema Studio palette — sober carbon, zinc, white & REC scarlet
         ink: {
-          DEFAULT: '#0B0A08',
-          deep: '#070605',
+          DEFAULT: '#09090B',
+          deep: '#050506',
         },
         surface: {
-          dark: '#15130F',
-          sunk: '#1E1A14',
-          hover: '#28231B',
+          dark: '#121215',
+          sunk: '#18181B',
+          hover: '#27272A',
         },
         border: {
-          subtle: '#2A241C',
-          strong: '#3A3228',
+          subtle: '#27272A',
+          strong: '#3F3F46',
         },
         accent: {
-          DEFAULT: '#FFB020',
-          hover: '#FFC24A',
-          soft: '#FFB020',
-          deep: '#C8821A',
+          DEFAULT: '#E50914',
+          hover: '#EF4444',
+          soft: '#F87171',
+          deep: '#B91C1C',
         },
         rec: {
-          DEFAULT: '#FF3B3B',
-          dim: '#B82828',
+          DEFAULT: '#E50914',
+          dim: '#991B1B',
         },
         audio: {
-          green: '#12c582',
-          amber: '#FFB020',
-          red: '#FF3B3B',
+          green: '#10B981',
+          amber: '#F59E0B',
+          red: '#EF4444',
         },
         warm: {
           50: '#FAF7F0',

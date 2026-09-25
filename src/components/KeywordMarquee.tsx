@@ -1,23 +1,16 @@
 import React from 'react';
-
-const KEYWORDS = [
-  'BANDE RYTHMO',
-  'ENREGISTREMENT MULTIPISTE',
-  'DOUBLAGE VIDÉO',
-  'FICHIERS 50 Go+',
-  'IMAGE PAR IMAGE',
-  'OPEN SOURCE',
-  '100% LOCAL',
-  'EXPORT FFMPEG',
-];
+import { useLanguage } from '../context/LanguageContext';
 
 export const KeywordMarquee: React.FC = () => {
+  const { t } = useLanguage();
+  const keywords = t.marquee;
+
   return (
     <section aria-hidden className="relative overflow-hidden border-y border-[var(--border-subtle)] bg-[var(--bg-surface)]/40 py-5">
       <div className="flex w-max animate-scroll-x whitespace-nowrap">
         {[0, 1].map((dup) => (
           <div key={dup} className="flex shrink-0 items-center" aria-hidden={dup === 1}>
-            {KEYWORDS.map((kw, i) => (
+            {keywords.map((kw, i) => (
               <React.Fragment key={`${dup}-${i}`}>
                 <span className="px-6 font-mono text-sm font-medium uppercase tracking-wider text-[var(--text-secondary)]">
                   {kw}

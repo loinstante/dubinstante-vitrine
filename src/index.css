@@ -10,35 +10,40 @@
     --bg-sunk: #F2EDE2;
     --text-primary: #1A1612;
     --text-secondary: #5A5247;
-    --text-muted: #8A7E6E;
+    --text-muted: #675C4E; /* Raised contrast for WCAG AA (5.4:1 on #FAF7F0) */
     --border-subtle: #E4DCC8;
     --border-strong: #C9BFA6;
-    --accent: #C8821A;
-    --accent-hover: #A66E14;
-    --accent-soft: #C8821A;
-    --rec: #E02828;
-    --halo: 255, 176, 32;
+    --accent: #E50914;
+    --accent-hover: #DC2626;
+    --accent-soft: #EF4444;
+    --accent-text: #B91C1C; /* High contrast text accent (> 5.5:1 on #FAF7F0) */
+    --rec: #E50914;
+    --spotlight: 255, 255, 255;
+    --halo: 255, 255, 255;
   }
 
   .dark {
     color-scheme: dark;
-    --bg-main: #0B0A08;
-    --bg-surface: #15130F;
-    --bg-sunk: #1E1A14;
-    --text-primary: #F5F1EA;
-    --text-secondary: #A89E8E;
-    --text-muted: #6B6356;
-    --border-subtle: #2A241C;
-    --border-strong: #3A3228;
-    --accent: #FFB020;
-    --accent-hover: #FFC24A;
-    --accent-soft: #FFB020;
-    --rec: #FF3B3B;
-    --halo: 255, 176, 32;
+    --bg-main: #09090B;
+    --bg-surface: #121215;
+    --bg-sunk: #18181B;
+    --text-primary: #FAFAFA;
+    --text-secondary: #A1A1AA;
+    --text-muted: #9E9EA8; /* Raised contrast for WCAG AA (6.8:1 on #09090B) */
+    --border-subtle: #27272A;
+    --border-strong: #3F3F46;
+    --accent: #E50914;
+    --accent-hover: #EF4444;
+    --accent-soft: #F87171;
+    --accent-text: #FF4D57; /* High contrast text accent (> 5.5:1 on #09090B) */
+    --rec: #E50914;
+    --spotlight: 255, 255, 255;
+    --halo: 255, 255, 255;
   }
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 
   body {
@@ -46,6 +51,11 @@
     color: var(--text-primary);
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
   }
 
   h1, h2, h3, h4 {
@@ -87,14 +97,41 @@
     box-shadow: inset 0 0 220px 60px rgba(0, 0, 0, 0.7);
   }
 
-  /* Amber radial halo — "regie lamp" glow behind key blocks */
+  /* Studio Spotlight — "you are in the light, you are the one performing" */
+  .spotlight-performer {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 9999px;
+    background: radial-gradient(ellipse 65% 55% at 50% 0%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 45%, transparent 75%);
+    filter: blur(50px);
+    animation: halo-breathe 7s ease-in-out infinite;
+  }
+  .spotlight-soft {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 9999px;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.015) 40%, transparent 70%);
+    filter: blur(60px);
+    animation: halo-breathe 8s ease-in-out infinite;
+  }
+  :root:not(.dark) .spotlight-performer,
+  :root:not(.dark) .spotlight-soft,
+  :root:not(.dark) .halo-amber {
+    display: none !important;
+  }
+  html:not(.dark) .spotlight-performer,
+  html:not(.dark) .spotlight-soft,
+  html:not(.dark) .halo-amber {
+    display: none !important;
+  }
+  /* Backward-compatible alias for existing components */
   .halo-amber {
     position: absolute;
     pointer-events: none;
     border-radius: 9999px;
-    background: radial-gradient(circle at center, rgba(var(--halo), 0.35) 0%, rgba(var(--halo), 0.12) 35%, transparent 70%);
-    filter: blur(40px);
-    animation: halo-breathe 6s ease-in-out infinite;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.015) 35%, transparent 70%);
+    filter: blur(45px);
+    animation: halo-breathe 7s ease-in-out infinite;
   }
 
   /* Reveal-on-scroll base state (toggled by useInView via data-revealed) */
@@ -111,7 +148,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     [data-reveal] { opacity: 1 !important; transform: none !important; transition: none; }
-    .grain-overlay, .halo-amber, .animate-glow-pulse, .animate-rec-blink { animation: none !important; }
+    .grain-overlay, .spotlight-performer, .spotlight-soft, .halo-amber, .animate-glow-pulse, .animate-rec-blink { animation: none !important; }
   }
 
   /* Timeline rule separator — tick marks like an editing ruler */
@@ -128,7 +165,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, transparent 0%, rgba(var(--halo), 0.10) 48%, rgba(var(--halo), 0.18) 50%, rgba(var(--halo), 0.10) 52%, transparent 100%);
+    background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.03) 48%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.03) 52%, transparent 100%);
     transform: translateY(-100%);
     transition: transform 0.7s ease;
     pointer-events: none;
@@ -158,9 +195,9 @@
 ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 5px; border: 2px solid var(--bg-main); }
 ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
 
-/* Selection — amber signature everywhere */
-::selection { background-color: #C8821A; color: #ffffff; }
-.dark ::selection { background-color: #FFB020; color: #0B0A08; }
+/* Selection — Cinema Red signature */
+::selection { background-color: #E50914; color: #ffffff; }
+.dark ::selection { background-color: #E50914; color: #ffffff; }
 
 /* Range input — accent the scrub sliders */
 input[type="range"] { accent-color: var(--accent); }

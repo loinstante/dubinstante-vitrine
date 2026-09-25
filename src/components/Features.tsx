@@ -44,7 +44,7 @@ export const Features: React.FC = () => {
                     {item.num}
                   </span>
                   <span className="h-px flex-1 bg-[var(--border-subtle)]" />
-                  <span className="w-9 h-9 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-ink transition-colors">
+                  <span className="w-9 h-9 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent group-hover:bg-accent group-hover:text-white transition-colors">
                     <Icon className="w-4 h-4" />
                   </span>
                 </div>

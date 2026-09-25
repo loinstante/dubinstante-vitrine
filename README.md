@@ -50,6 +50,9 @@ npm install
 # Lancer le serveur de développement local
 npm run dev
 
+# Vérifier le typage TypeScript
+npm run typecheck
+
 # Compiler pour la production
 npm run build
 
@@ -59,27 +62,12 @@ npm run preview
 
 ---
 
-## ⚙️ Configuration du Bucket S3 / Téléchargements
+## ⚙️ Configuration des Téléchargements
 
-Pour faire pointer les boutons de téléchargement vers votre propre bucket **S3** ou CDN, modifiez simplement les URLs dans `src/config/downloads.ts` :
-
-```typescript
-// src/config/downloads.ts
-export const DOWNLOAD_PLATFORMS = {
-  mac: {
-    url: 'https://votre-bucket.s3.amazonaws.com/releases/DubInstante-0.11.0-macOS.dmg',
-    // ...
-  },
-  windows: {
-    url: 'https://votre-bucket.s3.amazonaws.com/releases/DubInstante-0.11.0-Setup.exe',
-    // ...
-  },
-  // ...
-};
-```
+Les URLs de téléchargement et tags GitHub Release sont centralisés dans `src/config/downloads.ts`.
 
 ---
 
 ## 📜 Licence
 
-Sous licence open-source GPLv3 — Développé par passion pour la communauté audiovisuelle et du doublage par [L'Oinstante](https://github.com/loimathos).
+Sous licence open-source EUPL 1.2 — Développé pour la communauté audiovisuelle et du doublage par [LOINSTANTE](https://github.com/loinstante).

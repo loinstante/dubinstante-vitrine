@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import {
   CURRENT_VERSION,
@@ -9,10 +10,10 @@ import {
 import { GithubIcon } from './GithubIcon';
 import { Download, ArrowDown } from 'lucide-react';
 import { RythmoBandBg } from './RythmoBandBg';
-import { Halo } from './ui/Primitives';
+import { SpotlightStage, Spotlight } from './ui/Primitives';
 
 export const Hero: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const detectedOS = detectClientOS();
   const platform = DOWNLOAD_PLATFORMS[detectedOS];
 
@@ -21,9 +22,9 @@ export const Hero: React.FC = () => {
       {/* Rythmo band background */}
       <RythmoBandBg className="z-0" />
 
-      {/* Amber halos */}
-      <Halo className="top-[-10rem] left-1/2 -translate-x-1/2 w-[42rem] h-[42rem] z-0" />
-      <Halo className="bottom-[-8rem] right-[-6rem] w-[26rem] h-[26rem] z-0 opacity-60" />
+      {/* Studio Spotlight — "you are in the light, you are the one performing" */}
+      <SpotlightStage className="top-[-12rem] left-1/2 -translate-x-1/2 w-[54rem] h-[34rem] z-0" />
+      <Spotlight className="top-[2rem] left-1/2 -translate-x-1/2 w-[34rem] h-[26rem] z-0 opacity-70" />
 
       <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 text-center">
         {/* Eyebrow with live REC dot */}
@@ -37,26 +38,21 @@ export const Hero: React.FC = () => {
           </p>
         </div>
 
-        {/* Headline — word-by-word reveal */}
-        <h1 className="font-display font-bold tracking-tightest text-balance text-[2.6rem] sm:text-6xl md:text-7xl leading-[1.05] text-[var(--text-primary)]">
-          {'Le studio libre de'.split(' ').map((w, i) => (
-            <span
-              key={i}
-              className="inline-block animate-headline-reveal opacity-0"
-              style={{ animationDelay: `${i * 90}ms` }}
-            >
-              {w}&nbsp;
-            </span>
-          ))}
-          <span className="inline-block animate-headline-reveal opacity-0 bg-gradient-to-br from-accent via-accent to-[#E8A05C] bg-clip-text text-transparent" style={{ animationDelay: '270ms' }}>
-            bande&nbsp;rythmo
-          </span>
-          <span className="inline-block animate-headline-reveal opacity-0" style={{ animationDelay: '360ms' }}>
-            &nbsp;et&nbsp;
-          </span>
-          <span className="inline-block animate-headline-reveal opacity-0 bg-gradient-to-br from-accent via-accent to-[#E8A05C] bg-clip-text text-transparent" style={{ animationDelay: '450ms' }}>
-            doublage.
-          </span>
+        {/* Headline */}
+        <h1 className="font-display font-bold tracking-tight text-balance text-4xl sm:text-6xl md:text-7xl leading-[1.1] text-[var(--text-primary)] animate-fade-in">
+          {language === 'fr' ? (
+            <>
+              Le studio libre de{' '}
+              <span className="text-accent">bande&nbsp;rythmo</span> et{' '}
+              <span className="text-accent">doublage</span>.
+            </>
+          ) : (
+            <>
+              The open studio for{' '}
+              <span className="text-accent">rythmo&nbsp;bands</span> and{' '}
+              <span className="text-accent">dubbing</span>.
+            </>
+          )}
         </h1>
 
         {/* Subtitle */}
@@ -67,14 +63,25 @@ export const Hero: React.FC = () => {
           {t.hero.subtitle}
         </p>
 
+        {/* Rythmo explanation callout for newcomers */}
+        <div
+          className="mt-5 max-w-xl mx-auto px-4 py-2.5 rounded-xl bg-[var(--bg-surface)]/60 border border-[var(--border-subtle)] text-xs text-[var(--text-secondary)] text-center animate-fade-up opacity-0 backdrop-blur-sm"
+          style={{ animationDelay: '660ms' }}
+        >
+          <span className="font-semibold text-[var(--text-primary)] mr-1">
+            {t.hero.whatIsRythmoTitle}
+          </span>
+          <span>{t.hero.whatIsRythmoDesc}</span>
+        </div>
+
         {/* Actions */}
         <div
-          className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3 animate-fade-up opacity-0"
-          style={{ animationDelay: '720ms' }}
+          className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 animate-fade-up opacity-0"
+          style={{ animationDelay: '740ms' }}
         >
           <a
             href={platform.url}
-            className="group w-full sm:w-auto relative flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-bold text-ink bg-accent hover:bg-accent-hover rounded-xl transition-all shadow-[0_0_30px_-8px_rgba(255,176,32,0.6)] hover:shadow-[0_0_40px_-6px_rgba(255,176,32,0.8)] hover:-translate-y-0.5"
+            className="group w-full sm:w-auto relative flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-bold text-white bg-accent hover:bg-accent-hover rounded-xl transition-all shadow-[0_0_30px_-8px_rgba(229,9,20,0.5)] hover:shadow-[0_0_40px_-6px_rgba(229,9,20,0.7)] hover:-translate-y-0.5"
           >
             <Download className="w-4 h-4" />
             <span>
@@ -98,13 +105,13 @@ export const Hero: React.FC = () => {
           className="mt-5 animate-fade-in opacity-0"
           style={{ animationDelay: '820ms' }}
         >
-          <a
-            href="#download"
+          <Link
+            to="/download"
             className="inline-flex items-center gap-1.5 text-xs text-[var(--text-muted)] hover:text-accent transition-colors font-mono"
           >
             <span>Windows · macOS · Linux · Android</span>
             <ArrowDown className="w-3 h-3" />
-          </a>
+          </Link>
         </div>
 
         {/* Specs metadata line */}

@@ -9,71 +9,98 @@ export interface DownloadPlatform {
   id: 'windows' | 'mac' | 'linux' | 'android';
   name: string;
   osName: string;
+  osNameEn: string;
   filename: string;
   fileExt: string;
   size: string;
+  sizeEn: string;
   badge: string;
+  badgeEn: string;
   requirements: string;
+  requirementsEn: string;
   url: string;
   instructions?: string;
+  instructionsEn?: string;
 }
 
 export const CURRENT_VERSION = 'v0.11.0';
 export const RELEASE_DATE = 'Septembre 2026';
-export const GITHUB_REPO_URL = 'https://github.com/loimathos/DubInstante';
-export const GITHUB_RELEASES_URL = 'https://github.com/loimathos/DubInstante/releases/latest';
+export const GITHUB_REPO_URL = 'https://github.com/loinstante/DubInstante';
+export const GITHUB_RELEASES_URL = 'https://github.com/loinstante/DubInstante/releases';
+export const CURRENT_RELEASE_TAG = 'V0.11.0_FOUR_BUD';
+export const CURRENT_RELEASE_URL = `${GITHUB_RELEASES_URL}/tag/${CURRENT_RELEASE_TAG}`;
 
-// S3 or GitHub Releases Base URL (can be customized here)
-const S3_OR_CDN_BASE = 'https://github.com/loimathos/DubInstante/releases/download/' + CURRENT_VERSION;
+// Official GitHub Release assets base for v0.11.0
+const GITHUB_ASSET_BASE = `${GITHUB_RELEASES_URL}/download/${CURRENT_RELEASE_TAG}`;
 
 export const DOWNLOAD_PLATFORMS: Record<DownloadPlatform['id'], DownloadPlatform> = {
   mac: {
     id: 'mac',
     name: 'macOS',
     osName: 'Apple Silicon & Intel',
-    filename: `DubInstante-${CURRENT_VERSION}-macOS.dmg`,
-    fileExt: '.dmg',
-    size: '52 Mo',
+    osNameEn: 'Apple Silicon & Intel',
+    filename: 'DubInstante_macos_0.11.0.zip',
+    fileExt: '.zip',
+    size: '42 Mo',
+    sizeEn: '42 MB',
     badge: 'Universel',
+    badgeEn: 'Universal',
     requirements: 'macOS 12.0 Monterey ou supérieur',
-    url: `${S3_OR_CDN_BASE}/DubInstante-macOS.dmg`,
-    instructions: 'Sur macOS, faites un Clic droit > Ouvrir lors du premier lancement (version Bêta non notarisée).',
+    requirementsEn: 'macOS 12.0 Monterey or higher',
+    url: `${GITHUB_ASSET_BASE}/DubInstante_macos_0.11.0.zip`,
+    instructions: 'Décompressez l\'archive ZIP. Sur macOS, faites Clic droit > Ouvrir lors du premier lancement (version Bêta non notarisée).',
+    instructionsEn: 'Extract the ZIP archive. On macOS, right-click > Open on first launch (non-notarized Beta release).',
   },
   windows: {
     id: 'windows',
     name: 'Windows',
     osName: 'Windows 10 & 11',
-    filename: `DubInstante-${CURRENT_VERSION}-Setup.exe`,
-    fileExt: '.exe',
-    size: '46 Mo',
+    osNameEn: 'Windows 10 & 11',
+    filename: 'DubInstante_windows_0.11.0.zip',
+    fileExt: '.zip',
+    size: '55 Mo',
+    sizeEn: '55 MB',
     badge: '64-bit',
+    badgeEn: '64-bit',
     requirements: 'Windows 10 / 11 (64-bit)',
-    url: `${S3_OR_CDN_BASE}/DubInstante-Setup.exe`,
-    instructions: 'Exécutez l\'installateur. Si Windows SmartScreen apparaît, cliquez sur "Informations complémentaires" puis "Exécuter quand même".',
+    requirementsEn: 'Windows 10 / 11 (64-bit)',
+    url: `${GITHUB_ASSET_BASE}/DubInstante_windows_0.11.0.zip`,
+    instructions: 'Décompressez l\'archive ZIP et lancez DubInstante.exe. Si Windows SmartScreen apparaît, cliquez sur "Informations complémentaires" puis "Exécuter quand même".',
+    instructionsEn: 'Extract the ZIP archive and launch DubInstante.exe. If Windows SmartScreen appears, click "More info" then "Run anyway".',
   },
   linux: {
     id: 'linux',
     name: 'Linux',
-    osName: 'Toutes distributions',
-    filename: `DubInstante-${CURRENT_VERSION}-x86_64.AppImage`,
-    fileExt: '.AppImage',
-    size: '49 Mo',
+    osName: 'Toutes distributions x86_64',
+    osNameEn: 'All x86_64 distributions',
+    filename: 'DubInstante_linux_0.11.0.zip',
+    fileExt: '.zip',
+    size: '29 Mo',
+    sizeEn: '29 MB',
     badge: 'Portable',
+    badgeEn: 'Portable',
     requirements: 'glibc 2.31+ (Ubuntu 20.04+, Debian 11+, Fedora, Arch)',
-    url: `${S3_OR_CDN_BASE}/DubInstante-x86_64.AppImage`,
-    instructions: 'Rendez le fichier exécutable (chmod +x DubInstante-x86_64.AppImage) et double-cliquez dessus.',
+    requirementsEn: 'glibc 2.31+ (Ubuntu 20.04+, Debian 11+, Fedora, Arch)',
+    url: `${GITHUB_ASSET_BASE}/DubInstante_linux_0.11.0.zip`,
+    instructions: 'Décompressez l\'archive ZIP, rendez le binaire exécutable (chmod +x DubInstante) et lancez-le.',
+    instructionsEn: 'Extract the ZIP archive, make the binary executable (chmod +x DubInstante) and run it.',
   },
   android: {
     id: 'android',
     name: 'Android',
     osName: 'Tablette & Mobile',
-    filename: `DubInstante-${CURRENT_VERSION}-arm64.apk`,
+    osNameEn: 'Tablet & Mobile',
+    filename: 'DubInstante_installer.apk',
     fileExt: '.apk',
-    size: '29 Mo',
+    size: '105 Mo',
+    sizeEn: '105 MB',
     badge: 'Beta Native',
+    badgeEn: 'Native Beta',
     requirements: 'Android 9.0 (Pie) ou supérieur',
-    url: `${S3_OR_CDN_BASE}/DubInstante-arm64.apk`,
+    requirementsEn: 'Android 9.0 (Pie) or higher',
+    url: `${GITHUB_RELEASES_URL}/download/V0.6.0_Android/DubInstante_installer.apk`,
     instructions: 'Téléchargez l\'APK et autorisez l\'installation de sources inconnues pour installer la Bêta.',
+    instructionsEn: 'Download the APK and allow installation from unknown sources to install the Beta.',
   },
 };
 
