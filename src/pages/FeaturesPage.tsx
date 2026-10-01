@@ -36,7 +36,7 @@ const FEATURES_FR = [
       'Capture simultanée 4 micros — Enregistrez jusqu\'à 4 pistes vocales distinctes en direct',
       'Paramètres indépendants par piste — Assignez un micro physique, un gain, un style visuel et une couleur d\'apparence propre à chaque piste',
       'Monitoring temps réel — Vumètres dB réactifs et sliders de gain ergonomiques par piste',
-      'Qualité Broadcast WAV — Capture non compressée 24-bit 48 kHz prête pour le mixage pro',
+      'Qualité Broadcast WAV — Capture WAV non compressée prête pour le mixage pro',
       'Mode plein écran sans distraction — Immersion visuelle totale pour les comédiens au micro',
     ],
   },
@@ -82,7 +82,7 @@ const FEATURES_EN = [
       'Simultaneous 4-mic capture — Record up to 4 distinct vocal takes simultaneously',
       'Independent track parameters — Assign dedicated physical microphones, volume, and visual styling/colors per track',
       'Live visual monitoring — Real-time reactive dB meters and studio gain sliders per track',
-      'Broadcast WAV fidelity — Uncompressed 24-bit 48 kHz capture ready for final mixing',
+      'Broadcast WAV fidelity — Uncompressed WAV capture ready for final mixing',
       'Distraction-free fullscreen — Total visual immersion for the voice talents at the mic',
     ],
   },
@@ -118,7 +118,7 @@ const MODULES_FR = [
   'Moteur de Lecture — Décodage optimisé Qt 6 Multimedia pour une synchronisation millimétrique',
   'Canvas OpenGL — Rendu accéléré par la carte graphique, même en défilement rapide image par image (← / →)',
   'Virtualisation Rythmo — Gestion de dizaines de milliers de syllabes sans pic mémoire ni ralentissement',
-  'Moteur Audio Multipiste — Prise de son 24-bit 48 kHz à faible latence depuis vos interfaces audio studio',
+  'Moteur Audio Multipiste — Prise de son WAV non compressée à faible latence depuis vos interfaces audio studio',
   'Pipeline d\'Export FFmpeg — Copie de flux direct (bitstream pass-through) sans perte de qualité',
   'Format Local .dbi — Conteneur de projet binaire autonome intégrant la compression ZIP',
 ];
@@ -127,7 +127,7 @@ const MODULES_EN = [
   'Playback Engine — Qt 6 multimedia decoding for microsecond audio-video frame locking',
   'Hardware Accelerated Canvas — Smooth OpenGL rendering even during fast frame scrubbing (← / →)',
   'Rythmo Band Virtualization — Render tens of thousands of syllables with zero memory spikes',
-  'Multi-track Audio Engine — Low-latency 24-bit 48 kHz capture straight from studio audio interfaces',
+  'Multi-track Audio Engine — Low-latency uncompressed WAV capture straight from studio audio interfaces',
   'Export Pipeline — Fast FFmpeg pass-through multiplexing (bitstream copy without re-encoding loss)',
   'Local Container Format — Self-contained .dbi binary projects with built-in ZIP compression',
 ];
@@ -135,29 +135,29 @@ const MODULES_EN = [
 const PLATFORMS_FR = [
   { os: 'Windows 10 / 11', detail: 'Archive ZIP portable (.zip), exécutable DubInstante, FFmpeg inclus' },
   { os: 'macOS (Intel & Apple Silicon)', detail: 'Archive ZIP (.zip) avec application autonome native' },
-  { os: 'Linux (Toutes distributions x86_64)', detail: 'Archive ZIP (.zip) avec binaire natif, portable et immédiat' },
-  { os: 'Android (Bêta)', detail: 'Paquet APK natif (.apk) pour tablettes et répétitions nomades' },
+  { os: 'Linux (Debian & Arch)', detail: 'Archive ZIP (.zip) avec binaire natif, portable et immédiat' },
+  { os: 'Android (en pause)', detail: 'Version test limitée (bande rythmo & enregistrement) disponible sur GitHub' },
 ];
 
 const PLATFORMS_EN = [
   { os: 'Windows 10 / 11', detail: 'Portable ZIP package (.zip), DubInstante binary, FFmpeg included' },
   { os: 'macOS (Intel & Apple Silicon)', detail: 'ZIP archive (.zip) with standalone native application' },
-  { os: 'Linux (All x86_64 distributions)', detail: 'ZIP archive (.zip) with native standalone binary' },
-  { os: 'Android (Beta)', detail: 'Native APK package (.apk) for mobile rehearsing and tablets' },
+  { os: 'Linux (Debian & Arch)', detail: 'ZIP archive (.zip) with native standalone binary' },
+  { os: 'Android (on hold)', detail: 'Limited test build (rythmo band & recording) available on GitHub' },
 ];
 
 const PREREQ_FR = [
   { os: 'Windows', items: ['Windows 10 ou 11 (64-bit)', 'FFmpeg (embarqué automatiquement)'] },
   { os: 'macOS', items: ['macOS 12+ Monterey ou ultérieur', 'Architecture Apple Silicon ou Intel'] },
-  { os: 'Linux', items: ['Qt 6.5+ ou binaire autonome', 'Codecs GStreamer / FFmpeg'] },
-  { os: 'Android', items: ['Android 9+ (API 28)', 'Bêta publique ouverte'] },
+  { os: 'Linux', items: ['Debian 11+, Ubuntu 20.04+, Mint (glibc 2.31+)', 'Arch, Manjaro, Fedora (glibc récente)'] },
+  { os: 'Android', items: ['Android 9+ (API 28)', 'Portage en pause — version test sur GitHub'] },
 ];
 
 const PREREQ_EN = [
   { os: 'Windows', items: ['Windows 10 or 11 (64-bit)', 'FFmpeg (pre-bundled in package)'] },
   { os: 'macOS', items: ['macOS 12+ Monterey or newer', 'Apple Silicon and Intel architectures'] },
-  { os: 'Linux', items: ['Qt 6.5+ or standalone binary', 'GStreamer / FFmpeg multimedia codecs'] },
-  { os: 'Android', items: ['Android 9+ (API 28)', 'Open public testing beta'] },
+  { os: 'Linux', items: ['Debian 11+, Ubuntu 20.04+, Mint (glibc 2.31+)', 'Arch, Manjaro, Fedora (recent glibc)'] },
+  { os: 'Android', items: ['Android 9+ (API 28)', 'Port on hold — test build on GitHub'] },
 ];
 
 export const FeaturesPage: React.FC = () => {
