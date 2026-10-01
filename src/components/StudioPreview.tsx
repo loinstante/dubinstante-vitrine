@@ -248,7 +248,7 @@ export const StudioPreview: React.FC = () => {
         {/* Display Container */}
         {activeTab === 'screenshot' ? (
           <Reveal id="panel-screenshot" role="tabpanel" aria-labelledby="tab-screenshot">
-            <div className="rounded-2xl overflow-hidden border border-[var(--border-strong)] bg-ink shadow-2xl shadow-black/80">
+            <div className="rounded-2xl overflow-hidden border border-[var(--border-strong)] bg-ink shadow-2xl shadow-black/25 dark:shadow-black/70">
               <img
                 src={isDark ? '/assets/dubinstante-studio-real.png' : '/assets/dubinstante-studio-white.png'}
                 alt={language === 'en' ? 'DubInstante Studio native interface with video player, 60 FPS rythmo band and 4-track discrete microphone meters' : 'Interface native de DubInstante avec lecteur vidéo, bande rythmo 60 FPS et vumètres 4 micros distincts'}
@@ -265,16 +265,16 @@ export const StudioPreview: React.FC = () => {
               tabIndex={0}
               onKeyDown={handleKeyDown}
               aria-label={language === 'en' ? 'Interactive Rythmo Band Simulator. Press Space to play/pause, left and right arrows to step frame by frame.' : 'Simulateur interactif de bande rythmo. Appuyez sur Espace pour lancer/pause, flèches gauche et droite pour avancer image par image.'}
-              className="rounded-2xl overflow-hidden border border-[var(--border-strong)] bg-ink focus:outline-none focus:ring-1 focus:ring-accent/50 shadow-2xl shadow-black/80 animate-fade-up"
+              className="rounded-2xl overflow-hidden border border-[var(--border-strong)] bg-ink focus:outline-none focus:ring-1 focus:ring-accent/50 shadow-2xl shadow-black/25 dark:shadow-black/70 animate-fade-up"
             >
               {/* Video Stage */}
-              <div className="relative aspect-[16/9] max-h-[380px] w-full flex flex-col justify-end overflow-hidden bg-[#060608]">
+              <div className="relative aspect-[16/9] max-h-[380px] w-full flex flex-col justify-end overflow-hidden bg-black">
                 {/* Play overlay if paused */}
                 {!isPlaying && (
                   <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
                     <button
                       onClick={togglePlay}
-                      className="pointer-events-auto w-14 h-14 rounded-full bg-accent hover:bg-accent-hover text-white flex items-center justify-center transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-red-600/40"
+                      className="pointer-events-auto w-14 h-14 rounded-full bg-accent hover:bg-accent-hover text-white flex items-center justify-center transition-transform hover:scale-105 active:scale-95 shadow-lg shadow-accent/40"
                       aria-label={t.preview.play}
                     >
                       <Play className="w-6 h-6 fill-white translate-x-0.5" />
@@ -288,17 +288,17 @@ export const StudioPreview: React.FC = () => {
                 </div>
 
                 {/* The Rythmo Band at bottom */}
-                <div className="relative w-full h-12 bg-[#121215] border-t border-accent/40 overflow-hidden select-none">
+                <div className="relative w-full h-12 bg-[#141416] border-t border-accent/40 overflow-hidden select-none">
                   {/* Red sync cursor at 20% width (matches app exactly) */}
-                  <div className="absolute top-0 bottom-0 left-[20%] w-[2px] bg-[#FF3B3B] z-30 pointer-events-none">
-                    <div className="absolute -top-[1px] left-1/2 -translate-x-1/2 border-solid border-t-[7px] border-t-[#FF3B3B] border-x-[4px] border-x-transparent"></div>
+                  <div className="absolute top-0 bottom-0 left-[20%] w-[2px] bg-rec z-30 pointer-events-none">
+                    <div className="absolute -top-[1px] left-1/2 -translate-x-1/2 border-solid border-t-[7px] border-t-rec border-x-[4px] border-x-transparent"></div>
                     <div className="absolute -top-6 left-1/2 -translate-x-1/2 px-1.5 py-0.5 rounded bg-black/90 text-[9px] font-mono text-white font-bold whitespace-nowrap">
                       <span ref={timecodePillRef}>00:00.000</span>
                     </div>
                   </div>
 
                   {/* Horizontal middle line */}
-                  <div className="absolute top-1/2 left-0 right-0 h-px bg-[#FF3B3B] pointer-events-none"></div>
+                  <div className="absolute top-1/2 left-0 right-0 h-px bg-rec/70 pointer-events-none"></div>
 
                   {/* Scrolling syllables */}
                   <div
@@ -311,7 +311,7 @@ export const StudioPreview: React.FC = () => {
                         key={idx}
                         style={{ width: `${syl.width}px` }}
                         className={`inline-block text-center whitespace-nowrap ${
-                          syl.text === '[pause]' ? 'text-[#6a6a7c] font-normal italic text-xs' : 'text-white'
+                          syl.text === '[pause]' ? 'text-[#8a8a9a] font-normal italic text-xs' : 'text-white'
                         }`}
                       >
                         {syl.text}
@@ -322,7 +322,7 @@ export const StudioPreview: React.FC = () => {
               </div>
 
               {/* Timeline Scrub Slider */}
-              <div className="bg-[#121215] px-4 py-1.5 border-t border-white/[0.08]">
+              <div className="bg-[var(--bg-sunk)] px-4 py-1.5 border-t border-[var(--border-subtle)]">
                 <input
                   ref={scrubSliderRef}
                   type="range"
@@ -330,17 +330,17 @@ export const StudioPreview: React.FC = () => {
                   max={TOTAL_TRACK_WIDTH}
                   defaultValue={0}
                   onChange={handleScrub}
-                  className="w-full h-1 bg-[#27272A] rounded-lg appearance-none cursor-pointer accent-[#E50914]"
+                  className="w-full h-1 bg-[var(--border-strong)] rounded-lg appearance-none cursor-pointer accent-[var(--accent)]"
                   aria-label={t.preview.scrubLabel}
                 />
               </div>
 
-              {/* Clean Minimal Controls Bar - wrapping on narrow mobile screens */}
-              <div className="bg-[#18181B] text-[#f3f3f6] px-4 py-3 flex flex-wrap items-center justify-between gap-3 text-xs font-mono border-t border-[var(--border-subtle)]">
+              {/* Clean Minimal Controls Bar - matches QSS controlBar */}
+              <div className="bg-[var(--bg-surface)] text-[var(--text-primary)] px-4 py-3 flex flex-wrap items-center justify-between gap-3 text-xs font-mono border-t border-[var(--border-subtle)]">
                 <div className="flex items-center gap-2">
                   <button
                     onClick={() => stepFrame(-10)}
-                    className="p-1.5 rounded bg-white/[0.06] hover:bg-white/[0.1] text-white transition-colors"
+                    className="p-1.5 rounded bg-[var(--bg-sunk)] hover:bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:border-[var(--border-strong)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
                     title={t.preview.prevFrame}
                     aria-label={t.preview.prevFrame}
                   >
@@ -349,7 +349,7 @@ export const StudioPreview: React.FC = () => {
 
                   <button
                     onClick={togglePlay}
-                    className="flex items-center gap-1.5 px-3 py-1 rounded bg-accent hover:bg-accent-hover text-white font-bold tracking-wider uppercase transition-colors"
+                    className="flex items-center gap-1.5 px-3 py-1 rounded bg-accent hover:bg-accent-hover text-white font-bold tracking-wider uppercase transition-colors shadow-sm"
                     aria-label={isPlaying ? t.preview.pause : t.preview.play}
                   >
                     {isPlaying ? (
@@ -367,30 +367,30 @@ export const StudioPreview: React.FC = () => {
 
                   <button
                     onClick={() => stepFrame(10)}
-                    className="p-1.5 rounded bg-white/[0.06] hover:bg-white/[0.1] text-white transition-colors"
+                    className="p-1.5 rounded bg-[var(--bg-sunk)] hover:bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] hover:border-[var(--border-strong)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
                     title={t.preview.nextFrame}
                     aria-label={t.preview.nextFrame}
                   >
                     <ChevronRight className="w-3.5 h-3.5" />
                   </button>
 
-                  <span ref={timecodeCounterRef} className="ml-2 text-white/70">
+                  <span ref={timecodeCounterRef} className="ml-2 text-[var(--text-secondary)] font-bold">
                     00:00 / 00:20
                   </span>
                 </div>
 
-                <div className="flex items-center gap-2 text-[11px] text-white/60">
+                <div className="flex items-center gap-2 text-[11px] text-[var(--text-muted)]">
                   <span>{speedPercent}%</span>
                   <button
                     onClick={() => setSpeedPercent((p) => Math.max(50, p - 10))}
-                    className="px-2 py-0.5 rounded bg-white/[0.06] hover:bg-white/[0.1] text-white"
+                    className="px-2 py-0.5 rounded bg-[var(--bg-sunk)] hover:bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] text-[var(--text-primary)] transition-colors"
                     aria-label={t.preview.slowerSpeed}
                   >
                     -
                   </button>
                   <button
                     onClick={() => setSpeedPercent((p) => Math.min(150, p + 10))}
-                    className="px-2 py-0.5 rounded bg-white/[0.06] hover:bg-white/[0.1] text-white"
+                    className="px-2 py-0.5 rounded bg-[var(--bg-sunk)] hover:bg-[var(--bg-surface-hover)] border border-[var(--border-subtle)] text-[var(--text-primary)] transition-colors"
                     aria-label={t.preview.fasterSpeed}
                   >
                     +
@@ -398,7 +398,7 @@ export const StudioPreview: React.FC = () => {
                 </div>
               </div>
 
-              <div className="bg-[#121218] px-4 py-2 border-t border-white/[0.06] text-center text-[11px] font-mono text-[#7a7a85]">
+              <div className="bg-[var(--bg-sunk)] px-4 py-2 border-t border-[var(--border-subtle)] text-center text-[11px] font-mono text-[var(--text-muted)]">
                 {t.preview.shortcutHint}
               </div>
             </div>

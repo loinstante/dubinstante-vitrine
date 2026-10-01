@@ -8,45 +8,45 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Cinema Studio palette — sober carbon, zinc, white & REC scarlet
+        // DubInstante QSS Palette — dynamic tokens adapting to light and dark themes
         ink: {
-          DEFAULT: '#09090B',
-          deep: '#050506',
+          DEFAULT: 'rgb(var(--bg-main-rgb) / <alpha-value>)',
+          deep: 'var(--bg-deep)',
         },
         surface: {
-          dark: '#121215',
-          sunk: '#18181B',
-          hover: '#27272A',
+          DEFAULT: 'rgb(var(--bg-surface-rgb) / <alpha-value>)',
+          dark: 'rgb(var(--bg-surface-rgb) / <alpha-value>)',
+          sunk: 'rgb(var(--bg-sunk-rgb) / <alpha-value>)',
+          hover: 'rgb(var(--bg-surface-hover-rgb) / <alpha-value>)',
         },
         border: {
-          subtle: '#27272A',
-          strong: '#3F3F46',
+          DEFAULT: 'rgb(var(--border-subtle-rgb) / <alpha-value>)',
+          subtle: 'rgb(var(--border-subtle-rgb) / <alpha-value>)',
+          strong: 'rgb(var(--border-strong-rgb) / <alpha-value>)',
+          focus: 'rgb(var(--border-focus-rgb) / <alpha-value>)',
         },
         accent: {
-          DEFAULT: '#E50914',
-          hover: '#EF4444',
-          soft: '#F87171',
-          deep: '#B91C1C',
+          DEFAULT: 'rgb(var(--accent-rgb) / <alpha-value>)',
+          hover: 'rgb(var(--accent-hover-rgb) / <alpha-value>)',
+          press: 'rgb(var(--accent-press-rgb) / <alpha-value>)',
+          soft: 'var(--accent-soft)',
+          text: 'var(--accent-text)',
         },
         rec: {
-          DEFAULT: '#E50914',
-          dim: '#991B1B',
+          DEFAULT: 'rgb(var(--rec-rgb) / <alpha-value>)',
+          dim: 'var(--rec-dim)',
+          bg: 'var(--rec-bg)',
         },
         audio: {
-          green: '#10B981',
-          amber: '#F59E0B',
-          red: '#EF4444',
-        },
-        warm: {
-          50: '#FAF7F0',
-          100: '#F2EDE2',
-          200: '#E4DCC8',
+          green: 'rgb(var(--success-rgb) / <alpha-value>)',
+          amber: 'rgb(var(--warning-rgb) / <alpha-value>)',
+          red: 'rgb(var(--danger-rgb) / <alpha-value>)',
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['"Space Grotesk"', 'Inter', 'system-ui', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'Fira Code', 'monospace'],
+        sans: ['"Inter Tight"', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['"Space Grotesk"', '"Inter Tight"', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'Consolas', 'Fira Code', 'monospace'],
       },
       letterSpacing: {
         tightest: '-0.04em',

@@ -38,7 +38,7 @@ export const BetaCTA: React.FC = () => {
         <Reveal delay={150} className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
             href={platform ? platform.url : GITHUB_RELEASES_URL}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-bold text-white bg-accent hover:bg-accent-hover rounded-xl transition-all shadow-[0_0_30px_-8px_rgba(229,9,20,0.5)] hover:shadow-[0_0_40px_-6px_rgba(229,9,20,0.7)] hover:-translate-y-0.5"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-bold text-white bg-accent hover:bg-accent-hover rounded-xl transition-all shadow-[0_0_30px_-8px_rgb(var(--accent-rgb)/0.4)] hover:shadow-[0_0_40px_-6px_rgb(var(--accent-rgb)/0.6)] hover:-translate-y-0.5"
           >
             <DownloadIcon className="w-4 h-4" />
             <span>
