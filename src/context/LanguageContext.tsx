@@ -105,7 +105,7 @@ export interface Translations {
     title: string;
     desc1: string;
     desc2: string;
-    gplPill: string;
+    licensePill: string;
     gplDesc: string;
     localPill: string;
     localDesc: string;
@@ -128,6 +128,9 @@ export interface Translations {
     gatekeeperNote: string;
     smartScreenNote: string;
     linuxNote: string;
+    androidTitle: string;
+    androidDesc: string;
+    androidLink: string;
   };
   footer: {
     brandDesc: string;
@@ -190,10 +193,10 @@ const translations: Record<Language, Translations> = {
       eyebrow: "Studio libre de doublage et de bande rythmo",
       title: "Le studio libre de bande rythmo et de doublage.",
       subtitle:
-        "DubInstante est un logiciel de post-production gratuit et open source (EUPL 1.2). 100% hors-ligne, écrit en C++17 et Qt 6, sans compte, sans cloud et sans abonnement.",
+        "DubInstante est un logiciel de post-production gratuit et open source (EUPL-1.2). 100% hors-ligne, écrit en C++17 et Qt 6, sans compte, sans cloud et sans abonnement.",
       downloadFor: "Télécharger pour",
       viewGithub: "Code source sur GitHub",
-      metaSpecs: "EUPL 1.2 · C++17 & Qt 6 · Rendu OpenGL · FFmpeg natif · 100% Hors-ligne",
+      metaSpecs: "EUPL-1.2 · C++17 & Qt 6 · Rendu OpenGL · FFmpeg natif · 100% Hors-ligne",
       whatIsRythmoTitle: "Qu'est-ce qu'une bande rythmo ?",
       whatIsRythmoDesc:
         "C'est le bandeau de texte défilant synchronisé avec l'image, utilisé en studio pour caler précisément la voix des comédiens sur le mouvement des lèvres.",
@@ -234,7 +237,7 @@ const translations: Record<Language, Translations> = {
       f1Tag: "Synchronisation labiale",
       f2Title: "Enregistrement multipiste (jusqu'à 4 micros)",
       f2Desc:
-        "Prise de son directe jusqu'à 4 micros et pistes distinctes en WAV 24-bit 48 kHz. Sélection d'entrée micro, gain et style d'apparence personnalisables par piste.",
+        "Prise de son directe jusqu'à 4 micros et pistes distinctes en WAV non compressé. Sélection d'entrée micro, gain et style d'apparence personnalisables par piste.",
       f2Tag: "Audio Broadcast",
       f3Title: "Moteur natif C++17 & OpenGL",
       f3Desc:
@@ -249,10 +252,10 @@ const translations: Record<Language, Translations> = {
       eyebrow: "Philosophie & Indépendance",
       title: "Un bien commun pour le doublage.",
       desc1:
-        "Les outils professionnels de doublage ne devraient pas dépendre de licences à plusieurs milliers d'euros, de dongles USB ou d'abonnements captifs. DubInstante est un logiciel libre sous licence EUPL 1.2 : vous pouvez l'utiliser, l'étudier, le modifier et le redistribuer librement selon ses termes copyleft transparents.",
+        "Les outils professionnels de doublage ne devraient pas dépendre de licences à plusieurs milliers d'euros, de dongles USB ou d'abonnements captifs. DubInstante est un logiciel libre sous licence EUPL-1.2 : vous pouvez l'utiliser, l'étudier, le modifier et le redistribuer librement selon ses termes copyleft transparents.",
       desc2:
         "100% local-first. Aucune connexion requise, aucun compte, aucune télémétrie. Vos projets, voix et rushs vidéo restent strictement sur votre machine.",
-      gplPill: "Licence EUPL 1.2",
+      licensePill: "Licence EUPL-1.2",
       gplDesc:
         "Le code appartient à la communauté. Aucun brevet restrictif, aucune fonctionnalité bloquée derrière un paywall.",
       localPill: "100% Local-First",
@@ -269,21 +272,25 @@ const translations: Record<Language, Translations> = {
       eyebrow: "Téléchargements",
       title: "Télécharger DubInstante.",
       subtitle:
-        "Disponible gratuitement pour macOS, Windows, Linux et Android. Sans inscription ni carte bancaire.",
+        "Disponible gratuitement pour macOS, Windows et Linux (Debian, Arch). Sans inscription ni carte bancaire.",
       yourOs: "Votre OS",
       fileLabel: "Fichier :",
       installNotes: "Notes d'installation :",
       btnDownload: "Télécharger",
       allReleases: "Toutes les versions et binaires sur GitHub Releases",
       sourceCode: "Dépôt de code source",
-      gatekeeperNote: "macOS : décompressez le ZIP. Clic droit > Ouvrir si Gatekeeper demande une confirmation lors du premier lancement.",
-      smartScreenNote: "Windows : décompressez le ZIP. Cliquez sur 'Informations complémentaires' puis 'Exécuter quand même' si SmartScreen apparaît.",
-      linuxNote: "Linux : décompressez le ZIP, rendez le binaire exécutable (chmod +x) et lancez-le directement.",
+      gatekeeperNote: "macOS : décompressez l'archive .zip, puis faites Clic droit > Ouvrir si Gatekeeper demande une confirmation lors du premier lancement.",
+      smartScreenNote: "Windows : décompressez l'archive .zip. Si SmartScreen apparaît au lancement, cliquez sur 'Informations complémentaires' puis 'Exécuter quand même'.",
+      linuxNote: "Linux : décompressez l'archive .zip, rendez le binaire exécutable (chmod +x) et lancez-le directement.",
+      androidTitle: "Android — en pause",
+      androidDesc:
+        "Le portage Android est en pause. Une version test limitée au cœur du logiciel (bande rythmo et enregistrement) reste disponible sur GitHub, sans les autres fonctions du studio. Une version tablette quasi complète est prévue avec la v0.13.",
+      androidLink: "Voir la version test sur GitHub",
     },
     footer: {
       brandDesc:
         "DubInstante est un logiciel libre et gratuit de bande rythmo et de doublage vidéo. Conçu pour les comédiens, adaptateurs et créateurs indépendants.",
-      license: "Licence libre EUPL 1.2 · Vos données restent sur votre ordinateur.",
+      license: "Licence libre EUPL-1.2 · Vos données restent sur votre ordinateur.",
       ecosystem: "Écosystème LOINSTANTE",
       madeBy: "Projet libre développé par LOINSTANTE",
       reportBug: "Signaler un bug",
@@ -365,10 +372,10 @@ const translations: Record<Language, Translations> = {
       eyebrow: "Free & Open-Source Dubbing and Rythmo Band Studio",
       title: "The open studio for rythmo bands and dubbing.",
       subtitle:
-        "DubInstante is a free and open-source post-production tool (EUPL 1.2). 100% offline, engineered in C++17 and Qt 6, zero accounts, zero cloud, and zero subscriptions.",
+        "DubInstante is a free and open-source post-production tool (EUPL-1.2). 100% offline, engineered in C++17 and Qt 6, zero accounts, zero cloud, and zero subscriptions.",
       downloadFor: "Download for",
       viewGithub: "Source code on GitHub",
-      metaSpecs: "EUPL 1.2 · C++17 & Qt 6 · OpenGL rendering · Native FFmpeg · 100% Offline",
+      metaSpecs: "EUPL-1.2 · C++17 & Qt 6 · OpenGL rendering · Native FFmpeg · 100% Offline",
       whatIsRythmoTitle: "What is a rythmo band?",
       whatIsRythmoDesc:
         "It's the scrolling text band synchronized with video, used by voice actors in studios to match lip movements frame by frame.",
@@ -409,7 +416,7 @@ const translations: Record<Language, Translations> = {
       f1Tag: "Lip synchronization",
       f2Title: "Direct Multi-track Recording (up to 4 mics)",
       f2Desc:
-        "Simultaneous capture of up to 4 microphones and tracks in uncompressed 24-bit 48 kHz WAV. Independent audio input routing, gain calibration, and visual styling per track.",
+        "Simultaneous capture of up to 4 microphones and tracks in uncompressed WAV. Independent audio input routing, gain calibration, and visual styling per track.",
       f2Tag: "Broadcast Audio",
       f3Title: "Native C++17 & OpenGL Engine",
       f3Desc:
@@ -424,10 +431,10 @@ const translations: Record<Language, Translations> = {
       eyebrow: "Philosophy & Independence",
       title: "A common good for the dubbing community.",
       desc1:
-        "Professional dubbing tools shouldn't be locked behind multi-thousand dollar licenses, hardware dongles, or vendor lock-in subscriptions. DubInstante is free software under the EUPL 1.2 license: use it, inspect it, adapt it, and share it freely under European copyleft terms.",
+        "Professional dubbing tools shouldn't be locked behind multi-thousand dollar licenses, hardware dongles, or vendor lock-in subscriptions. DubInstante is free software under the EUPL-1.2 license: use it, inspect it, adapt it, and share it freely under European copyleft terms.",
       desc2:
         "100% local-first. No internet required, no sign-up, zero telemetry. Your projects, voices, and video footage never leave your hard drive.",
-      gplPill: "EUPL 1.2 Licensed",
+      licensePill: "EUPL-1.2 Licensed",
       gplDesc:
         "The code belongs to the community. No restrictive patents, zero features locked behind paywalls.",
       localPill: "100% Local-First",
@@ -444,21 +451,25 @@ const translations: Record<Language, Translations> = {
       eyebrow: "Downloads",
       title: "Download DubInstante.",
       subtitle:
-        "Freely available for macOS, Windows, Linux, and Android. No credit card, no registration.",
+        "Freely available for macOS, Windows, and Linux (Debian, Arch). No credit card, no registration.",
       yourOs: "Your OS",
       fileLabel: "File:",
       installNotes: "Installation notes:",
       btnDownload: "Download",
       allReleases: "All releases and binaries on GitHub Releases",
       sourceCode: "Source code repository",
-      gatekeeperNote: "macOS: Extract the ZIP archive. Right-click > Open if Gatekeeper asks for confirmation on first launch.",
-      smartScreenNote: "Windows: Extract the ZIP archive. Click 'More info' then 'Run anyway' if SmartScreen pops up.",
-      linuxNote: "Linux: Extract the ZIP archive, make the binary executable (chmod +x DubInstante) and launch directly.",
+      gatekeeperNote: "macOS: Unzip the archive, then Right-click > Open if Gatekeeper asks for confirmation on first launch.",
+      smartScreenNote: "Windows: Unzip the archive. If SmartScreen pops up at launch, click 'More info' then 'Run anyway'.",
+      linuxNote: "Linux: Unzip the archive, make the binary executable (chmod +x), and launch directly.",
+      androidTitle: "Android — on hold",
+      androidDesc:
+        "The Android port is currently on hold. A limited test build — the core of the software only (rythmo band and recording), without the other studio features — remains available on GitHub. A near-complete tablet version is planned for v0.13.",
+      androidLink: "See the test build on GitHub",
     },
     footer: {
       brandDesc:
         "DubInstante is a free and open-source video dubbing and rythmo band studio. Built with craft for actors, adapters, and independent creators.",
-      license: "EUPL 1.2 Free Software · All data remains on your machine.",
+      license: "EUPL-1.2 Free Software · All data remains on your machine.",
       ecosystem: "LOINSTANTE Ecosystem",
       madeBy: "Open-source project created by LOINSTANTE",
       reportBug: "Report a bug",

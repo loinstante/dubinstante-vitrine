@@ -36,7 +36,7 @@ const FEATURES_FR = [
     'Enregistrement simultané jusqu\'à 4 pistes vocales distinctes',
     'Sélection de micro physique indépendante par piste',
     'Paramètres distincts par piste : gain, monitoring et style d\'apparence',
-    'Capture WAV 24-bit 48 kHz haute fidélité synchronisée au timecode',
+    'Capture WAV non compressé haute fidélité synchronisée au timecode',
   ]},
   { emoji: '📦', title: 'Export & Intégration', items: [
     'Intégration FFmpeg pour fusion vidéo/audio pro',
@@ -63,7 +63,7 @@ const FEATURES_EN = [
     'Simultaneous capture of up to 4 discrete vocal tracks and microphones',
     'Discrete audio interface hardware input selection per track',
     'Independent track parameters: gain, monitoring, and visual appearance/styling',
-    'Lossless 24-bit 48 kHz uncompressed WAV broadcast audio storage locked to timecode',
+    'Lossless uncompressed WAV broadcast audio storage locked to timecode',
   ]},
   { emoji: '📦', title: 'Export & Studio Workflows', items: [
     'Embedded FFmpeg engine for lossless audio/video muxing',

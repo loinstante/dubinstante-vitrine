@@ -6,6 +6,7 @@ import {
   CURRENT_RELEASE_URL,
   detectClientOS,
   DOWNLOAD_PLATFORMS,
+  GITHUB_ANDROID_RELEASE_URL,
   GITHUB_RELEASES_URL,
   GITHUB_REPO_URL,
 } from '../config/downloads';
@@ -28,10 +29,9 @@ export const DownloadHub: React.FC<DownloadHubProps> = ({ showHeader = true }) =
         return <Apple className="w-5 h-5" />;
       case 'windows':
         return <Monitor className="w-5 h-5" />;
-      case 'linux':
+      case 'debian':
+      case 'arch':
         return <Terminal className="w-5 h-5" />;
-      case 'android':
-        return <Smartphone className="w-5 h-5" />;
       default:
         return <Download className="w-5 h-5" />;
     }
@@ -93,7 +93,7 @@ export const DownloadHub: React.FC<DownloadHubProps> = ({ showHeader = true }) =
                   }`}
                 >
                   <Download className="w-3.5 h-3.5" />
-                  <span>{t.download.btnDownload} ({p.id === 'android' ? 'v0.6.0' : CURRENT_VERSION})</span>
+                  <span>{t.download.btnDownload} ({CURRENT_VERSION})</span>
                 </a>
               </div>
             </div>
@@ -110,6 +110,24 @@ export const DownloadHub: React.FC<DownloadHubProps> = ({ showHeader = true }) =
         <div>• {t.download.gatekeeperNote}</div>
         <div>• {t.download.smartScreenNote}</div>
         <div>• {t.download.linuxNote}</div>
+      </div>
+
+      {/* Android — on hold, honest note */}
+      <div className="mt-8 p-5 rounded-xl border border-dashed border-[var(--border-subtle)] bg-[var(--bg-surface)]/30 text-xs text-[var(--text-secondary)]">
+        <div className="flex items-center gap-2.5 font-semibold text-sm text-[var(--text-primary)] mb-2">
+          <Smartphone className="w-4 h-4 text-[var(--text-muted)]" />
+          <span>{t.download.androidTitle}</span>
+        </div>
+        <p className="leading-relaxed">{t.download.androidDesc}</p>
+        <a
+          href={GITHUB_ANDROID_RELEASE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="mt-3 inline-flex items-center gap-1.5 text-[var(--text-muted)] hover:text-accent transition-colors font-mono"
+        >
+          <span>{t.download.androidLink}</span>
+          <ExternalLink className="w-3 h-3" />
+        </a>
       </div>
 
       {/* Release notes & Source code row */}

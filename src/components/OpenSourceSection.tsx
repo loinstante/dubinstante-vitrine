@@ -62,7 +62,7 @@ export const OpenSourceSection: React.FC = () => {
             <div className="p-4 rounded-xl bg-[var(--bg-surface)]/50 border border-[var(--border-subtle)]">
               <div className="flex items-center gap-2.5 font-semibold text-sm text-[var(--text-primary)] mb-1">
                 <Code className="w-4 h-4 text-accent dark:text-accent" />
-                <span>{t.opensource.gplPill}</span>
+                <span>{t.opensource.licensePill}</span>
               </div>
               <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
                 {t.opensource.gplDesc}

@@ -5,6 +5,7 @@ import {
   CURRENT_VERSION,
   detectClientOS,
   DOWNLOAD_PLATFORMS,
+  GITHUB_RELEASES_URL,
   GITHUB_REPO_URL,
 } from '../config/downloads';
 import { GithubIcon } from './GithubIcon';
@@ -15,7 +16,7 @@ import { SpotlightStage, Spotlight } from './ui/Primitives';
 export const Hero: React.FC = () => {
   const { t, language } = useLanguage();
   const detectedOS = detectClientOS();
-  const platform = DOWNLOAD_PLATFORMS[detectedOS];
+  const platform = detectedOS ? DOWNLOAD_PLATFORMS[detectedOS] : null;
 
   return (
     <section className="relative overflow-hidden pt-32 pb-20 md:pt-44 md:pb-28">
@@ -80,12 +81,14 @@ export const Hero: React.FC = () => {
           style={{ animationDelay: '740ms' }}
         >
           <a
-            href={platform.url}
+            href={platform ? platform.url : GITHUB_RELEASES_URL}
             className="group w-full sm:w-auto relative flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-bold text-white bg-accent hover:bg-accent-hover rounded-xl transition-all shadow-[0_0_30px_-8px_rgba(229,9,20,0.5)] hover:shadow-[0_0_40px_-6px_rgba(229,9,20,0.7)] hover:-translate-y-0.5"
           >
             <Download className="w-4 h-4" />
             <span>
-              {t.hero.downloadFor} {platform.name} ({CURRENT_VERSION})
+              {platform
+                ? `${t.hero.downloadFor} ${platform.name} (${CURRENT_VERSION})`
+                : t.footer.releases}
             </span>
           </a>
 
@@ -109,7 +112,7 @@ export const Hero: React.FC = () => {
             to="/download"
             className="inline-flex items-center gap-1.5 text-xs text-[var(--text-muted)] hover:text-accent transition-colors font-mono"
           >
-            <span>Windows · macOS · Linux · Android</span>
+            <span>Windows · macOS · Linux (Debian · Arch)</span>
             <ArrowDown className="w-3 h-3" />
           </Link>
         </div>

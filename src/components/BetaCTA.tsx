@@ -1,14 +1,15 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { Reveal, Eyebrow, Halo } from './ui/Primitives';
-import { CURRENT_VERSION, GITHUB_REPO_URL, detectClientOS, DOWNLOAD_PLATFORMS } from '../config/downloads';
+import { CURRENT_VERSION, GITHUB_RELEASES_URL, GITHUB_REPO_URL, detectClientOS, DOWNLOAD_PLATFORMS } from '../config/downloads';
 import { GithubIcon } from './GithubIcon';
 import { Download as DownloadIcon } from 'lucide-react';
 
 export const BetaCTA: React.FC = () => {
   const { language } = useLanguage();
   const isEn = language === 'en';
-  const platform = DOWNLOAD_PLATFORMS[detectClientOS()];
+  const detectedOS = detectClientOS();
+  const platform = detectedOS ? DOWNLOAD_PLATFORMS[detectedOS] : null;
 
   return (
     <section className="relative py-28 md:py-36 border-t border-[var(--border-subtle)] overflow-hidden">
@@ -36,7 +37,7 @@ export const BetaCTA: React.FC = () => {
 
         <Reveal delay={150} className="mt-9 flex flex-col sm:flex-row items-center justify-center gap-3">
           <a
-            href={platform.url}
+            href={platform ? platform.url : GITHUB_RELEASES_URL}
             className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-bold text-white bg-accent hover:bg-accent-hover rounded-xl transition-all shadow-[0_0_30px_-8px_rgba(229,9,20,0.5)] hover:shadow-[0_0_40px_-6px_rgba(229,9,20,0.7)] hover:-translate-y-0.5"
           >
             <DownloadIcon className="w-4 h-4" />

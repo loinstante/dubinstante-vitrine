@@ -19,6 +19,12 @@ const PHASES_FR = [
     items: ['Multipiste audio robuste', 'Préréglages rythmo', 'Optimisation 4K'],
   },
   {
+    phase: 'v0.13',
+    status: 'next',
+    title: 'Retour d\u2019Android',
+    items: ['Version tablette Android quasi complète', 'Fonctions du studio au-delà du cœur'],
+  },
+  {
     phase: 'v1.0',
     status: 'next',
     title: 'Release finale',

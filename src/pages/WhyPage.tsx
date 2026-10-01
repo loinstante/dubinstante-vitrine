@@ -2,7 +2,7 @@ import React from 'react';
 import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useLanguage } from '../context/LanguageContext';
 import { Reveal, Eyebrow, Spotlight } from '../components/ui/Primitives';
-import { CURRENT_VERSION, DOWNLOAD_PLATFORMS, detectClientOS } from '../config/downloads';
+import { CURRENT_VERSION, DOWNLOAD_PLATFORMS, GITHUB_RELEASES_URL, detectClientOS } from '../config/downloads';
 import { Link } from 'react-router-dom';
 import {
   Download,
@@ -21,7 +21,7 @@ export const WhyPage: React.FC = () => {
   useDocumentTitle(isEn ? 'Why DubInstante? — The Unfiltered Comparison' : 'Pourquoi DubInstante ? — Le comparatif sans filtre');
 
   const detectedOS = detectClientOS();
-  const platform = DOWNLOAD_PLATFORMS[detectedOS];
+  const platform = detectedOS ? DOWNLOAD_PLATFORMS[detectedOS] : null;
 
   const comparisonRows = isEn
     ? [
@@ -487,12 +487,14 @@ export const WhyPage: React.FC = () => {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
             <a
-              href={platform.url}
+              href={platform ? platform.url : GITHUB_RELEASES_URL}
               className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-bold text-white bg-accent hover:bg-accent-hover rounded-xl transition-all shadow-[0_0_30px_-8px_rgba(229,9,20,0.5)] hover:shadow-[0_0_40px_-6px_rgba(229,9,20,0.7)] hover:-translate-y-0.5"
             >
               <Download className="w-4 h-4" />
               <span>
-                {t.why.ctaBtn} ({platform.name} · {CURRENT_VERSION})
+                {platform
+                  ? `${t.why.ctaBtn} (${platform.name} · ${CURRENT_VERSION})`
+                  : `${t.why.ctaBtn} (${CURRENT_VERSION})`}
               </span>
             </a>
             <Link
