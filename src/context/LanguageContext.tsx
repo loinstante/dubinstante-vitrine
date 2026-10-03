@@ -282,10 +282,10 @@ const translations: Record<Language, Translations> = {
       gatekeeperNote: "macOS : décompressez l'archive .zip, puis faites Clic droit > Ouvrir si Gatekeeper demande une confirmation lors du premier lancement.",
       smartScreenNote: "Windows : décompressez l'archive .zip. Si SmartScreen apparaît au lancement, cliquez sur 'Informations complémentaires' puis 'Exécuter quand même'.",
       linuxNote: "Linux : décompressez l'archive .zip, rendez le binaire exécutable (chmod +x) et lancez-le directement.",
-      androidTitle: "Android — en pause",
+      androidTitle: "Android — refonte en cours",
       androidDesc:
-        "Le portage Android est en pause. Une version test limitée au cœur du logiciel (bande rythmo et enregistrement) reste disponible sur GitHub, sans les autres fonctions du studio. Une version tablette quasi complète est prévue avec la v0.13.",
-      androidLink: "Voir la version test sur GitHub",
+        "L\u2019application Android est réécrite de zéro pour les tablettes, avec environ 95 % des fonctions du studio (hors enregistrement multi-micro). Elle arrive avec la v0.13. La v0.6 sur GitHub n\u2019était qu\u2019un test de découverte, à ne pas prendre pour le résultat final.",
+      androidLink: "Voir l\u2019ancien test v0.6 sur GitHub",
     },
     footer: {
       brandDesc:
@@ -461,10 +461,10 @@ const translations: Record<Language, Translations> = {
       gatekeeperNote: "macOS: Unzip the archive, then Right-click > Open if Gatekeeper asks for confirmation on first launch.",
       smartScreenNote: "Windows: Unzip the archive. If SmartScreen pops up at launch, click 'More info' then 'Run anyway'.",
       linuxNote: "Linux: Unzip the archive, make the binary executable (chmod +x), and launch directly.",
-      androidTitle: "Android — on hold",
+      androidTitle: "Android — being rebuilt",
       androidDesc:
-        "The Android port is currently on hold. A limited test build — the core of the software only (rythmo band and recording), without the other studio features — remains available on GitHub. A near-complete tablet version is planned for v0.13.",
-      androidLink: "See the test build on GitHub",
+        "The Android app is being rewritten from scratch for tablets, with about 95% of the studio features (minus multi-microphone recording). It arrives with v0.13. The v0.6 build on GitHub was only a discovery experiment, not representative of the final app.",
+      androidLink: "See the old v0.6 experiment on GitHub",
     },
     footer: {
       brandDesc:

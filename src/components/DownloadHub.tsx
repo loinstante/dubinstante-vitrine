@@ -112,7 +112,7 @@ export const DownloadHub: React.FC<DownloadHubProps> = ({ showHeader = true }) =
         <div>• {t.download.linuxNote}</div>
       </div>
 
-      {/* Android — on hold, honest note */}
+      {/* Android — rewrite in progress, link points to the old v0.6 experiment */}
       <div className="mt-8 p-5 rounded-xl border border-dashed border-[var(--border-subtle)] bg-[var(--bg-surface)]/30 text-xs text-[var(--text-secondary)]">
         <div className="flex items-center gap-2.5 font-semibold text-sm text-[var(--text-primary)] mb-2">
           <Smartphone className="w-4 h-4 text-[var(--text-muted)]" />

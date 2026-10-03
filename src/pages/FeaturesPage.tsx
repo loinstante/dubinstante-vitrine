@@ -136,28 +136,28 @@ const PLATFORMS_FR = [
   { os: 'Windows 10 / 11', detail: 'Archive ZIP portable (.zip), exécutable DubInstante, FFmpeg inclus' },
   { os: 'macOS (Intel & Apple Silicon)', detail: 'Archive ZIP (.zip) avec application autonome native' },
   { os: 'Linux (Debian & Arch)', detail: 'Archive ZIP (.zip) avec binaire natif, portable et immédiat' },
-  { os: 'Android (en pause)', detail: 'Version test limitée (bande rythmo & enregistrement) disponible sur GitHub' },
+  { os: 'Android (tablette, v0.13)', detail: 'Application réécrite de zéro, environ 95 % des fonctions du studio, hors multi-micro' },
 ];
 
 const PLATFORMS_EN = [
   { os: 'Windows 10 / 11', detail: 'Portable ZIP package (.zip), DubInstante binary, FFmpeg included' },
   { os: 'macOS (Intel & Apple Silicon)', detail: 'ZIP archive (.zip) with standalone native application' },
   { os: 'Linux (Debian & Arch)', detail: 'ZIP archive (.zip) with native standalone binary' },
-  { os: 'Android (on hold)', detail: 'Limited test build (rythmo band & recording) available on GitHub' },
+  { os: 'Android (tablet, v0.13)', detail: 'App rebuilt from scratch, about 95% of the studio features, minus multi-microphone' },
 ];
 
 const PREREQ_FR = [
   { os: 'Windows', items: ['Windows 10 ou 11 (64-bit)', 'FFmpeg (embarqué automatiquement)'] },
   { os: 'macOS', items: ['macOS 12+ Monterey ou ultérieur', 'Architecture Apple Silicon ou Intel'] },
   { os: 'Linux', items: ['Debian 11+, Ubuntu 20.04+, Mint (glibc 2.31+)', 'Arch, Manjaro, Fedora (glibc récente)'] },
-  { os: 'Android', items: ['Android 9+ (API 28)', 'Portage en pause — version test sur GitHub'] },
+  { os: 'Android', items: ['Tablettes Android', 'En développement pour la v0.13 — réécriture complète'] },
 ];
 
 const PREREQ_EN = [
   { os: 'Windows', items: ['Windows 10 or 11 (64-bit)', 'FFmpeg (pre-bundled in package)'] },
   { os: 'macOS', items: ['macOS 12+ Monterey or newer', 'Apple Silicon and Intel architectures'] },
   { os: 'Linux', items: ['Debian 11+, Ubuntu 20.04+, Mint (glibc 2.31+)', 'Arch, Manjaro, Fedora (recent glibc)'] },
-  { os: 'Android', items: ['Android 9+ (API 28)', 'Port on hold — test build on GitHub'] },
+  { os: 'Android', items: ['Android tablets', 'In development for v0.13 — full rewrite'] },
 ];
 
 export const FeaturesPage: React.FC = () => {
