@@ -1,5 +1,6 @@
 import React from "react";
 import { createRoot, hydrateRoot } from "react-dom/client";
+import { Analytics } from "@vercel/analytics/react";
 import App from "./App";
 import "@fontsource-variable/inter";
 import "@fontsource-variable/inter/wght-italic.css";
@@ -11,6 +12,7 @@ const container = document.getElementById("root")!;
 const app = (
   <React.StrictMode>
     <App />
+    <Analytics />
   </React.StrictMode>
 );
 
