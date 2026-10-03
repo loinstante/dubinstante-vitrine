@@ -39,7 +39,7 @@ const DATA_FR: ComparisonData = {
   corpo: {
     badge: '39 $ à 279 $ / mois',
     title: 'Suites Big Corpo',
-    examples: 'VoiceQ Pro · Noblurway Mosaic · Synchronos',
+    examples: 'VoiceQ Pro · Mosaic · Synchronos',
     price: '39 $ – 279 $',
     pricePeriod: '/ mois',
     priceSub: 'ou jusqu\'à 3 650 € HT d\'achat + dongle',
@@ -105,7 +105,7 @@ const DATA_FR: ComparisonData = {
   free: {
     badge: '« Gratuit » mais laborieux',
     title: 'Freewares Délaissés & Hacks',
-    examples: 'Voxdub · Cappella · Détours Aegisub · VLC',
+    examples: 'Voxdub · Cappella · Aegisub · VLC',
     price: '0 €',
     pricePeriod: 'en apparence',
     priceSub: 'mais payé cher en temps perdu et frustration',
@@ -135,7 +135,7 @@ const DATA_FR: ComparisonData = {
   },
   linkText: 'Consulter les deux grands tableaux comparatifs →',
   disclaimer:
-    'Tarifs et fonctionnalités constatés en 2026 à titre indicatif (VoiceQ Pro, Noblurway Mosaic Studio, Synchronos).',
+    'Tarifs et fonctionnalités constatés en 2026 à titre indicatif (VoiceQ Pro, Mosaic Studio, Synchronos).',
 };
 
 const DATA_EN: ComparisonData = {
@@ -146,7 +146,7 @@ const DATA_EN: ComparisonData = {
   corpo: {
     badge: '$39 to $279 / month',
     title: 'Big Corpo Suites',
-    examples: 'VoiceQ Pro · Noblurway Mosaic · Synchronos',
+    examples: 'VoiceQ Pro · Mosaic · Synchronos',
     price: '$39 – $279',
     pricePeriod: '/ month',
     priceSub: 'or up to €3,650 excl. VAT upfront + dongle',
@@ -212,7 +212,7 @@ const DATA_EN: ComparisonData = {
   free: {
     badge: 'Free but Painful',
     title: 'Broken Freeware & Hacks',
-    examples: 'Voxdub · Cappella · Aegisub Hacks · VLC',
+    examples: 'Voxdub · Cappella · Aegisub · VLC',
     price: '$0',
     pricePeriod: 'upfront',
     priceSub: 'heavy cost in wasted time and vocal desync',
@@ -242,7 +242,7 @@ const DATA_EN: ComparisonData = {
   },
   linkText: 'View the full dual comparison tables →',
   disclaimer:
-    'Prices and features verified in 2026 for indicative comparison (VoiceQ Pro, Noblurway Mosaic Studio, Synchronos).',
+    'Prices and features verified in 2026 for indicative comparison (VoiceQ Pro, Mosaic Studio, Synchronos).',
 };
 
 export const Comparison: React.FC = () => {

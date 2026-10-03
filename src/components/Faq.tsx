@@ -39,7 +39,7 @@ export const FAQ: Record<Language, { q: string; a: string }[]> = {
     },
     {
       q: "Quelle différence avec VoiceQ, Mosaic ou Synchronos ?",
-      a: "VoiceQ, Mosaic et Synchronos sont des logiciels propriétaires payants (de 96 € à 279 $ par mois, ou 3 650 € HT à l’achat pour Mosaic Studio), liés à macOS ou à Windows. DubInstante est gratuit, open source et fonctionne sous Windows et Linux. En revanche, il ne s’intègre pas à Pro Tools ni au matériel broadcast (SDI, LTC, RS422).",
+      a: "VoiceQ, Mosaic et Synchronos sont des logiciels propriétaires payants (de 39 $ à 279 $ par mois, ou 3 650 € HT à l’achat pour Mosaic Studio), liés à macOS ou à Windows. DubInstante est gratuit, open source et fonctionne sous Windows et Linux. En revanche, il ne s’intègre pas à Pro Tools ni au matériel broadcast (SDI, LTC, RS422).",
     },
     {
       q: "À qui s’adresse DubInstante ?",
@@ -77,7 +77,7 @@ export const FAQ: Record<Language, { q: string; a: string }[]> = {
     },
     {
       q: "How does DubInstante compare with VoiceQ, Mosaic or Synchronos?",
-      a: "VoiceQ, Mosaic and Synchronos are paid proprietary products (from €96 to $279 per month, or €3,650 excl. VAT to buy Mosaic Studio), tied to macOS or to Windows. DubInstante is free, open source and runs on Windows and Linux. On the other hand, it does not integrate with Pro Tools or broadcast hardware (SDI, LTC, RS422).",
+      a: "VoiceQ, Mosaic and Synchronos are paid proprietary products (from $39 to $279 per month, or €3,650 excl. VAT to buy Mosaic Studio), tied to macOS or to Windows. DubInstante is free, open source and runs on Windows and Linux. On the other hand, it does not integrate with Pro Tools or broadcast hardware (SDI, LTC, RS422).",
     },
     {
       q: "Who is DubInstante for?",
