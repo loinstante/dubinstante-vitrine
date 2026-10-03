@@ -186,7 +186,7 @@
   body {
     background-color: var(--bg-main);
     color: var(--text-primary);
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-family: 'Inter Variable', 'Inter', system-ui, -apple-system, sans-serif;
     transition: background-color 0.2s ease, color 0.2s ease;
   }
 
@@ -196,7 +196,7 @@
   }
 
   h1, h2, h3, h4 {
-    font-family: 'Manrope', Inter, system-ui, sans-serif;
+    font-family: 'Manrope Variable', 'Manrope', Inter, system-ui, sans-serif;
     letter-spacing: -0.02em;
   }
 
@@ -311,7 +311,7 @@
 
   /* Ghost timecode watermark */
   .timecode-watermark {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: 'JetBrains Mono Variable', 'JetBrains Mono', monospace;
     font-variant-numeric: tabular-nums;
     color: var(--text-muted);
     opacity: 0.08;
