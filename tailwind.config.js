@@ -8,51 +8,62 @@ export default {
   theme: {
     extend: {
       colors: {
-        // "Régie" palette — warm cinema studio
+        // DubInstante QSS Palette — dynamic tokens adapting to light and dark themes
         ink: {
-          DEFAULT: '#0B0A08',
-          deep: '#070605',
+          DEFAULT: 'rgb(var(--bg-main-rgb) / <alpha-value>)',
+          deep: 'var(--bg-deep)',
         },
         surface: {
-          dark: '#15130F',
-          sunk: '#1E1A14',
-          hover: '#28231B',
+          DEFAULT: 'rgb(var(--bg-surface-rgb) / <alpha-value>)',
+          dark: 'rgb(var(--bg-surface-rgb) / <alpha-value>)',
+          sunk: 'rgb(var(--bg-sunk-rgb) / <alpha-value>)',
+          hover: 'rgb(var(--bg-surface-hover-rgb) / <alpha-value>)',
         },
         border: {
-          subtle: '#2A241C',
-          strong: '#3A3228',
+          DEFAULT: 'rgb(var(--border-subtle-rgb) / <alpha-value>)',
+          subtle: 'rgb(var(--border-subtle-rgb) / <alpha-value>)',
+          strong: 'rgb(var(--border-strong-rgb) / <alpha-value>)',
+          focus: 'rgb(var(--border-focus-rgb) / <alpha-value>)',
         },
         accent: {
-          DEFAULT: '#FFB020',
-          hover: '#FFC24A',
-          soft: '#FFB020',
-          deep: '#C8821A',
+          DEFAULT: 'rgb(var(--accent-rgb) / <alpha-value>)',
+          hover: 'rgb(var(--accent-hover-rgb) / <alpha-value>)',
+          press: 'rgb(var(--accent-press-rgb) / <alpha-value>)',
+          soft: 'var(--accent-soft)',
+          text: 'var(--accent-text)',
         },
         rec: {
-          DEFAULT: '#FF3B3B',
-          dim: '#B82828',
+          DEFAULT: 'rgb(var(--rec-rgb) / <alpha-value>)',
+          dim: 'var(--rec-dim)',
+          bg: 'var(--rec-bg)',
         },
         audio: {
-          green: '#12c582',
-          amber: '#FFB020',
-          red: '#FF3B3B',
+          green: 'rgb(var(--success-rgb) / <alpha-value>)',
+          amber: 'rgb(var(--warning-rgb) / <alpha-value>)',
+          red: 'rgb(var(--danger-rgb) / <alpha-value>)',
         },
-        warm: {
-          50: '#FAF7F0',
-          100: '#F2EDE2',
-          200: '#E4DCC8',
+      },
+      // Variantes "texte" des couleurs vives : mêmes classes (text-accent, text-rec…),
+      // mais teintes qui passent WCAG AA sur les fonds du site. bg-/border- gardent la teinte d'origine.
+      textColor: {
+        accent: { DEFAULT: 'rgb(var(--accent-text-rgb) / <alpha-value>)' },
+        rec: { DEFAULT: 'rgb(var(--rec-text-rgb) / <alpha-value>)' },
+        audio: {
+          green: 'rgb(var(--success-text-rgb) / <alpha-value>)',
+          amber: 'rgb(var(--warning-text-rgb) / <alpha-value>)',
         },
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['"Space Grotesk"', 'Inter', 'system-ui', 'sans-serif'],
-        mono: ['"JetBrains Mono"', 'Fira Code', 'monospace'],
+        display: ['Manrope', 'Inter', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'Consolas', 'Fira Code', 'monospace'],
       },
       letterSpacing: {
-        tightest: '-0.04em',
+        tightest: '-0.03em',
       },
       maxWidth: {
         '7xl': '80rem',
+        '8xl': '85rem',
       },
       keyframes: {
         'fade-up': {

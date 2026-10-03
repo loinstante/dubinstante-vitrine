@@ -1,13 +1,14 @@
-import React from 'react';
-import { useLanguage } from '../context/LanguageContext';
-import { GITHUB_REPO_URL, CURRENT_VERSION } from '../config/downloads';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useLanguage } from "../context/LanguageContext";
+import { GITHUB_REPO_URL, CURRENT_VERSION } from "../config/downloads";
 
 export const Footer: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   return (
-    <footer className="border-t border-[var(--border-subtle)] py-14 text-sm text-[var(--text-muted)]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+    <footer className="dark:relative dark:z-10 border-t border-[var(--border-subtle)] py-14 text-sm text-[var(--text-muted)]">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10 border-b border-[var(--border-subtle)]">
           {/* Brand Col */}
           <div className="md:col-span-2">
@@ -31,9 +32,39 @@ export const Footer: React.FC = () => {
 
           {/* Ecosystem Links */}
           <div>
-            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-primary)] mb-3">
+            <h2 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-primary)] mb-3">
               {t.footer.ecosystem}
-            </h4>
+            </h2>
+            <ul className="space-y-2 text-xs">
+              <li>
+                <Link
+                  to="/"
+                  onClick={() =>
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
+                  className="hover:text-[var(--text-primary)] transition-colors"
+                >
+                  DubInstante
+                </Link>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/loinstante"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[var(--text-primary)] transition-colors"
+                >
+                  GitHub LOINSTANTE
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          {/* Resources */}
+          <div>
+            <h2 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-primary)] mb-3">
+              GitHub & Documentation
+            </h2>
             <ul className="space-y-2 text-xs">
               <li>
                 <a
@@ -42,48 +73,11 @@ export const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   className="hover:text-[var(--text-primary)] transition-colors"
                 >
-                  DubInstante (Studio)
+                  {language === "en"
+                    ? "Source Code (GitHub)"
+                    : "Code source (GitHub)"}
                 </a>
               </li>
-              <li>
-                <a
-                  href="https://github.com/loimathos/DubWritter"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[var(--text-primary)] transition-colors"
-                >
-                  DubWritter (Texte rythmo)
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/loimathos/InstanTexte"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[var(--text-primary)] transition-colors"
-                >
-                  InstanTexte (Bureautique libre)
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://github.com/loimathos"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-[var(--text-primary)] transition-colors"
-                >
-                  GitHub L'Oinstante
-                </a>
-              </li>
-            </ul>
-          </div>
-
-          {/* Resources */}
-          <div>
-            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-primary)] mb-3">
-              GitHub
-            </h4>
-            <ul className="space-y-2 text-xs">
               <li>
                 <a
                   href={`${GITHUB_REPO_URL}/issues`}
@@ -95,14 +89,42 @@ export const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a
-                  href={`${GITHUB_REPO_URL}#-roadmap`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  to="/features"
+                  className="hover:text-[var(--text-primary)] transition-colors"
+                >
+                  {language === "en"
+                    ? "Features & Engine"
+                    : "Fonctionnalités & Moteur"}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/documentation"
+                  className="hover:text-[var(--text-primary)] transition-colors"
+                >
+                  {language === "en"
+                    ? "Documentation & Shortcuts"
+                    : "Documentation & Raccourcis"}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/pourquoi"
+                  className="hover:text-[var(--text-primary)] transition-colors"
+                >
+                  {language === "en"
+                    ? "Why DubInstante?"
+                    : "Pourquoi DubInstante ?"}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  to="/roadmap"
                   className="hover:text-[var(--text-primary)] transition-colors"
                 >
                   {t.footer.roadmap}
-                </a>
+                </Link>
               </li>
               <li>
                 <a
@@ -123,8 +145,10 @@ export const Footer: React.FC = () => {
           <div>© 2026 DubInstante · {t.footer.madeBy}</div>
           <div>{t.footer.license}</div>
         </div>
+        <p className="mt-3 text-[11px] text-[var(--text-muted)] text-center sm:text-left">
+          {t.footer.siteNote}
+        </p>
       </div>
     </footer>
   );
 };
-

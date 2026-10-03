@@ -5,40 +5,182 @@
 @layer base {
   :root {
     color-scheme: light;
-    --bg-main: #FAF7F0;
-    --bg-surface: #FFFFFF;
-    --bg-sunk: #F2EDE2;
-    --text-primary: #1A1612;
-    --text-secondary: #5A5247;
-    --text-muted: #8A7E6E;
-    --border-subtle: #E4DCC8;
-    --border-strong: #C9BFA6;
-    --accent: #C8821A;
-    --accent-hover: #A66E14;
-    --accent-soft: #C8821A;
-    --rec: #E02828;
-    --halo: 255, 176, 32;
+
+    /* DubInstante 2026 Light UI — Neutral grays, red accent (from style.qss) */
+    --bg-main-rgb: 236 234 230;
+    --bg-main: #eceae6;
+
+    --bg-surface-rgb: 247 246 243;
+    --bg-surface: #f7f6f3;
+
+    --bg-sunk-rgb: 227 225 221;
+    --bg-sunk: #e3e1dd;
+
+    --bg-surface-hover-rgb: 227 225 221;
+    --bg-surface-hover: #e3e1dd;
+
+    --bg-deep: #dedcd7;
+
+    /* Typography */
+    --text-primary-rgb: 29 29 29;
+    --text-primary: #1d1d1d; /* fg1 */
+
+    --text-secondary-rgb: 61 60 58;
+    --text-secondary: #3d3c3a; /* fg2 */
+
+    --text-muted-rgb: 100 98 94;
+    --text-muted: #64625e; /* fg3 */
+
+    --text-disabled-rgb: 156 154 149;
+    --text-disabled: #9c9a95; /* fg4 */
+
+    /* Borders */
+    --border-subtle-rgb: 217 215 210;
+    --border-subtle: #d9d7d2; /* border */
+
+    --border-strong-rgb: 194 192 186;
+    --border-strong: #c2c0ba; /* border-strong */
+
+    --border-focus-rgb: 163 69 74;
+    --border-focus: #a3454a;
+
+    /* Accent & Action */
+    --accent-rgb: 163 69 74;
+    --accent: #a3454a;
+
+    --accent-hover-rgb: 140 58 62;
+    --accent-hover: #8c3a3e;
+
+    --accent-press-rgb: 118 47 50;
+    --accent-press: #762f32;
+
+    --accent-soft: rgba(163, 69, 74, 0.12);
+    --accent-text-rgb: 140 58 62;
+    --accent-text: #8c3a3e;
+    --on-accent: #ffffff;
+
+    /* Text-safe variants (WCAG AA on light surfaces) */
+    --rec-text-rgb: 184 45 23; /* = rec-dim */
+    --success-text-rgb: 8 114 74;
+    --warning-text-rgb: 133 85 0;
+
+    /* Record / Danger */
+    --rec-rgb: 217 56 30;
+    --rec: #d9381e;
+    --rec-dim: #b82d17;
+    --rec-bg: #fbe9e4;
+
+    --danger-rgb: 217 56 30;
+    --danger: #d9381e;
+    --danger-bg: #fbe9e4;
+
+    /* Semantic Status */
+    --success-rgb: 14 166 107;
+    --success: #0ea66b;
+
+    --warning-rgb: 217 139 0;
+    --warning: #d98b00;
+
+    /* Scrollbars */
+    --scrollbar-track: #eceae6;
+    --scrollbar-thumb: #c2c0ba;
+    --scrollbar-thumb-hover: #9c9a95;
+
+    --spotlight: 255, 255, 255;
+    --halo: 255, 255, 255;
   }
 
   .dark {
     color-scheme: dark;
-    --bg-main: #0B0A08;
-    --bg-surface: #15130F;
-    --bg-sunk: #1E1A14;
-    --text-primary: #F5F1EA;
-    --text-secondary: #A89E8E;
-    --text-muted: #6B6356;
-    --border-subtle: #2A241C;
-    --border-strong: #3A3228;
-    --accent: #FFB020;
-    --accent-hover: #FFC24A;
-    --accent-soft: #FFB020;
-    --rec: #FF3B3B;
-    --halo: 255, 176, 32;
+
+    /* DubInstante 2026 Dark UI — Neutral grays, red accent (from style_dark.qss) */
+    --bg-main-rgb: 27 27 27;
+    --bg-main: #1b1b1b;
+
+    --bg-surface-rgb: 36 36 36;
+    --bg-surface: #242424;
+
+    --bg-sunk-rgb: 45 45 45;
+    --bg-sunk: #2d2d2d;
+
+    --bg-surface-hover-rgb: 45 45 45;
+    --bg-surface-hover: #2d2d2d;
+
+    --bg-deep: #141414;
+
+    /* Typography */
+    --text-primary-rgb: 232 230 225;
+    --text-primary: #e8e6e1; /* fg1 */
+
+    --text-secondary-rgb: 179 177 172;
+    --text-secondary: #b3b1ac; /* fg2 */
+
+    --text-muted-rgb: 151 149 144;
+    --text-muted: #979590; /* fg3 */
+
+    --text-disabled-rgb: 92 91 88;
+    --text-disabled: #5c5b58; /* fg4 */
+
+    /* Borders */
+    --border-subtle-rgb: 47 47 47;
+    --border-subtle: #2f2f2f; /* border */
+
+    --border-strong-rgb: 67 67 67;
+    --border-strong: #434343; /* border-strong */
+
+    --border-focus-rgb: 196 102 107;
+    --border-focus: #c4666b;
+
+    /* Accent & Action */
+    --accent-rgb: 182 90 95;
+    --accent: #b65a5f;
+
+    /* Deliberately darker than style_dark.qss (#c4666b): white text only reaches 3.85:1 on it */
+    --accent-hover-rgb: 166 79 84;
+    --accent-hover: #a64f54;
+
+    --accent-press-rgb: 155 74 79;
+    --accent-press: #9b4a4f;
+
+    --accent-soft: rgba(182, 90, 95, 0.15);
+    --accent-text-rgb: 212 119 125;
+    --accent-text: #d4777d;
+    --on-accent: #ffffff;
+
+    /* Text-safe variants (WCAG AA on dark surfaces) */
+    --rec-text-rgb: 255 106 77; /* = danger */
+    --success-text-rgb: 18 197 130;
+    --warning-text-rgb: 243 164 0;
+
+    /* Record / Danger */
+    --rec-rgb: 217 56 30;
+    --rec: #d9381e;
+    --rec-dim: #991b1b;
+    --rec-bg: #2c1a16;
+
+    --danger-rgb: 255 106 77;
+    --danger: #ff6a4d;
+    --danger-bg: #2c1a16;
+
+    /* Semantic Status */
+    --success-rgb: 18 197 130;
+    --success: #12c582;
+
+    --warning-rgb: 243 164 0;
+    --warning: #f3a400;
+
+    /* Scrollbars */
+    --scrollbar-track: #1b1b1b;
+    --scrollbar-thumb: #3a3a3a;
+    --scrollbar-thumb-hover: #5c5b58;
+
+    --spotlight: 255, 255, 255;
+    --halo: 255, 255, 255;
   }
 
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 
   body {
@@ -48,9 +190,14 @@
     transition: background-color 0.2s ease, color 0.2s ease;
   }
 
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
   h1, h2, h3, h4 {
-    font-family: 'Space Grotesk', Inter, system-ui, sans-serif;
-    letter-spacing: -0.03em;
+    font-family: 'Manrope', Inter, system-ui, sans-serif;
+    letter-spacing: -0.02em;
   }
 
   .font-mono, .tabular {
@@ -72,27 +219,56 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     animation: grain-shift 8s steps(4) infinite;
   }
+  /* In light mode the grain is nearly invisible — only meaningful on dark */
+  :root .grain-overlay { opacity: 0.015; }
 
-  /* Viewfinder vignette — darken edges like a camera viewfinder */
+  /* Viewfinder vignette — only meaningful on dark; nearly absent in light */
   .vignette-overlay {
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 2;
-    box-shadow: inset 0 0 180px 40px rgba(0, 0, 0, 0.55);
+    box-shadow: inset 0 0 120px 20px rgba(0, 0, 0, 0.12);
   }
   .dark .vignette-overlay {
     box-shadow: inset 0 0 220px 60px rgba(0, 0, 0, 0.7);
   }
 
-  /* Amber radial halo — "regie lamp" glow behind key blocks */
+  /* Studio Spotlight — "you are in the light, you are the one performing" */
+  .spotlight-performer {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 9999px;
+    background: radial-gradient(ellipse 65% 55% at 50% 0%, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 45%, transparent 75%);
+    filter: blur(50px);
+    animation: halo-breathe 7s ease-in-out infinite;
+  }
+  .spotlight-soft {
+    position: absolute;
+    pointer-events: none;
+    border-radius: 9999px;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.015) 40%, transparent 70%);
+    filter: blur(60px);
+    animation: halo-breathe 8s ease-in-out infinite;
+  }
+  :root:not(.dark) .spotlight-performer,
+  :root:not(.dark) .spotlight-soft,
+  :root:not(.dark) .halo-amber {
+    display: none !important;
+  }
+  html:not(.dark) .spotlight-performer,
+  html:not(.dark) .spotlight-soft,
+  html:not(.dark) .halo-amber {
+    display: none !important;
+  }
+  /* Backward-compatible alias for existing components */
   .halo-amber {
     position: absolute;
     pointer-events: none;
     border-radius: 9999px;
-    background: radial-gradient(circle at center, rgba(var(--halo), 0.35) 0%, rgba(var(--halo), 0.12) 35%, transparent 70%);
-    filter: blur(40px);
-    animation: halo-breathe 6s ease-in-out infinite;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.015) 35%, transparent 70%);
+    filter: blur(45px);
+    animation: halo-breathe 7s ease-in-out infinite;
   }
 
   /* Reveal-on-scroll base state (toggled by useInView via data-revealed) */
@@ -109,7 +285,7 @@
   }
   @media (prefers-reduced-motion: reduce) {
     [data-reveal] { opacity: 1 !important; transform: none !important; transition: none; }
-    .grain-overlay, .halo-amber, .animate-glow-pulse, .animate-rec-blink { animation: none !important; }
+    .grain-overlay, .spotlight-performer, .spotlight-soft, .halo-amber, .animate-glow-pulse, .animate-rec-blink { animation: none !important; }
   }
 
   /* Timeline rule separator — tick marks like an editing ruler */
@@ -126,7 +302,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, transparent 0%, rgba(var(--halo), 0.10) 48%, rgba(var(--halo), 0.18) 50%, rgba(var(--halo), 0.10) 52%, transparent 100%);
+    background: linear-gradient(to bottom, transparent 0%, rgba(255, 255, 255, 0.03) 48%, rgba(255, 255, 255, 0.08) 50%, rgba(255, 255, 255, 0.03) 52%, transparent 100%);
     transform: translateY(-100%);
     transition: transform 0.7s ease;
     pointer-events: none;
@@ -150,15 +326,20 @@
   .tabular-nums { font-variant-numeric: tabular-nums; }
 }
 
-/* Custom scrollbars */
-::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: var(--bg-main); }
-::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 5px; border: 2px solid var(--bg-main); }
-::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+/* Custom scrollbars matching DubInstante QSS minimalist style */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: var(--scrollbar-track); }
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
 
-/* Selection — amber signature everywhere */
-::selection { background-color: #C8821A; color: #ffffff; }
-.dark ::selection { background-color: #FFB020; color: #0B0A08; }
+/* Selection — DubInstante signature */
+::selection { background-color: var(--accent); color: var(--on-accent); }
+.dark ::selection { background-color: var(--accent); color: var(--on-accent); }
 
 /* Range input — accent the scrub sliders */
 input[type="range"] { accent-color: var(--accent); }

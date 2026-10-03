@@ -3,64 +3,64 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1b1b1b" />
     <link rel="icon" type="image/png" href="/assets/DubInstante.png" />
-    <title>DubInstante — Le Studio Libre de Bande Rythmo et de Doublage</title>
+    <link rel="apple-touch-icon" href="/assets/DubInstante.png" />
+
+    <!-- Page-specific tags. This block is only the dev-server default: the build replaces
+         it for every page and language (scripts/prerender.mjs, texts in src/seo.ts). -->
+    <!--seo:start-->
+    <title>DubInstante — Logiciel libre de bande rythmo et doublage</title>
     <meta
       name="description"
-      content="DubInstante est un logiciel de post-production libre et gratuit pour le doublage vidéo et la bande rythmo. 100% hors-ligne, écrit en C++17 et Qt 6."
+      content="Logiciel gratuit et open source de doublage vidéo : bande rythmo défilante, enregistrement jusqu'à 4 micros, export FFmpeg. Windows et Linux, hors-ligne."
     />
-    <meta
-      name="keywords"
-      content="doublage vidéo, bande rythmo, logiciel libre doublage, open-source ADR, post-production audio, comédien voix-off, studio doublage local, synchronisation labiale, C++ Qt6 dubbing"
-    />
-
-    <!-- Open Graph / Facebook / Discord -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://dubinstante.vercel.app/" />
-    <meta property="og:title" content="DubInstante — Studio Libre de Doublage & Bande Rythmo" />
-    <meta
-      property="og:description"
-      content="Bande rythmo 60 FPS, enregistrement WAV multipiste et moteur C++/OpenGL. 100% gratuit, 100% local, sans abonnement."
-    />
+    <meta property="og:title" content="DubInstante — Logiciel libre de bande rythmo et doublage" />
+    <meta property="og:description" content="Logiciel gratuit et open source de doublage vidéo." />
     <meta property="og:image" content="https://dubinstante.vercel.app/assets/dubinstante-studio-real.png" />
-
-    <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="DubInstante — Studio Libre de Doublage & Bande Rythmo" />
-    <meta
-      name="twitter:description"
-      content="Studio de doublage vidéo et bande rythmo open-source (GPLv3). Performance native C++17 et Qt 6."
-    />
+    <meta name="twitter:title" content="DubInstante — Logiciel libre de bande rythmo et doublage" />
+    <meta name="twitter:description" content="Logiciel gratuit et open source de doublage vidéo." />
     <meta name="twitter:image" content="https://dubinstante.vercel.app/assets/dubinstante-studio-real.png" />
+    <!--seo:end-->
 
     <!-- Fonts preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
 
-    <!-- Schema.org SoftwareApplication structured data -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "DubInstante",
-        "operatingSystem": "Windows, Linux, macOS, Android",
-        "applicationCategory": "MultimediaApplication",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "EUR"
-        },
-        "description": "Studio de doublage vidéo open-source avec bande rythmo dynamique, enregistrement multipiste et export FFmpeg.",
-        "softwareVersion": "0.11.0",
-        "downloadUrl": "https://github.com/loimathos/DubInstante/releases/latest"
-      }
+    <!-- Immediate theme initialization to prevent FOUC -->
+    <script>
+      (function() {
+        try {
+          var saved = localStorage.getItem('dubinstante_theme');
+          var isDark = saved ? saved === 'dark' : true;
+          if (isDark) {
+            document.documentElement.classList.add('dark');
+            document.documentElement.classList.remove('light');
+            document.documentElement.style.colorScheme = 'dark';
+          } else {
+            document.documentElement.classList.remove('dark');
+            document.documentElement.classList.add('light');
+            document.documentElement.style.colorScheme = 'light';
+          }
+        } catch (e) {}
+      })();
     </script>
+
+    <!-- Scroll-reveal starts hidden and is shown by JavaScript: keep the content visible without it -->
+    <noscript>
+      <style>
+        [data-reveal] { opacity: 1 !important; transform: none !important; }
+      </style>
+    </noscript>
   </head>
-  <body class="bg-[#FAF7F0] dark:bg-[#0B0A08] text-[#1A1612] dark:text-[#F5F1EA] antialiased min-h-screen overflow-x-hidden">
+  <body class="bg-[var(--bg-main)] text-[var(--text-primary)] antialiased min-h-screen overflow-x-hidden">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

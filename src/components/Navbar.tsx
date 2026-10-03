@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
-import { CURRENT_VERSION, GITHUB_REPO_URL } from '../config/downloads';
+import { GITHUB_REPO_URL } from '../config/downloads';
+import { localizedPath } from '../seo';
 import { GithubIcon } from './GithubIcon';
 import { Download, Menu, X, Sun, Moon } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
-  const { language, setLanguage, t } = useLanguage();
+  const { language, t } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const location = useLocation();
   const isLanding = location.pathname === '/';
 
@@ -22,16 +24,45 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleLanguage = () => {
-    setLanguage(language === 'fr' ? 'en' : 'fr');
-  };
+  // Handle ESC key and body scroll lock for mobile menu
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileMenuOpen) {
+        setMobileMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+      window.addEventListener('keydown', handleKeyDown);
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [mobileMenuOpen]);
+
+  // A real link to the same page in the other language: crawlable, and each URL keeps a single language.
+  const otherLanguage = language === 'fr' ? 'en' : 'fr';
+  const otherLanguageHref = localizedPath(location.pathname, otherLanguage) + location.hash;
+  const otherLanguageLabel = otherLanguage === 'en' ? 'English version' : 'Version française';
 
   const navLinks = [
     { to: '/', label: t.nav.preview, anchor: '#preview' },
-    { to: '/', label: t.nav.features, anchor: '#features' },
-    { to: '/', label: t.nav.opensource, anchor: '#opensource' },
-    { to: '/download', label: t.nav.download },
+    { to: '/features', label: t.nav.features },
+    { to: '/pourquoi', label: t.nav.why },
+    { to: '/documentation', label: t.nav.docs },
+    { to: '/roadmap', label: t.nav.roadmap },
   ];
+
+  const isLinkActive = (link: { to: string; anchor?: string }) => {
+    if (link.anchor) {
+      return isLanding && location.hash === link.anchor;
+    }
+    return location.pathname === link.to;
+  };
 
   return (
     <header
@@ -41,7 +72,7 @@ export const Navbar: React.FC = () => {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-6xl mx-auto h-16 px-4 sm:px-6 flex items-center justify-between gap-4">
+      <div className="max-w-8xl mx-auto h-16 px-4 sm:px-6 flex items-center justify-between gap-4">
         {/* Brand identity */}
         <Link to="/" className="flex items-center gap-2.5 group">
           <img
@@ -49,59 +80,71 @@ export const Navbar: React.FC = () => {
             alt="DubInstante"
             className="w-7 h-7 object-contain rounded-md"
           />
-          <div className="flex items-center gap-2">
-            <span className="text-base font-bold tracking-tight text-[var(--text-primary)] font-display">
-              DubInstante
-            </span>
-            <span className="text-[11px] font-mono font-medium text-[var(--text-muted)]">
-              {CURRENT_VERSION}
-            </span>
-          </div>
+          <span className="text-base font-bold tracking-tight text-[var(--text-primary)] font-display">
+            DubInstante
+          </span>
         </Link>
 
-        {/* Desktop links */}
-        <nav className="hidden md:flex items-center gap-6">
-          {navLinks.map((link) =>
-            link.anchor ? (
-              <a
-                key={link.anchor}
-                href={isLanding ? link.anchor : `/${link.anchor}`}
-                className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
-              >
-                {link.label}
-              </a>
+        {/* Desktop links - shown on lg and up to avoid tablet cramping */}
+        <nav className="hidden lg:flex items-center gap-6" aria-label={language === 'en' ? 'Main navigation' : 'Navigation principale'}>
+          {navLinks.map((link) => {
+            const active = isLinkActive(link);
+            const activeClass = active ? 'text-[var(--text-primary)] font-semibold' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]';
+            return link.anchor ? (
+              isLanding ? (
+                <a
+                  key={link.anchor}
+                  href={link.anchor}
+                  aria-current={active ? 'page' : undefined}
+                  className={`text-sm font-medium transition-colors ${activeClass}`}
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.anchor}
+                  to={`/${link.anchor}`}
+                  aria-current={active ? 'page' : undefined}
+                  className={`text-sm font-medium transition-colors ${activeClass}`}
+                >
+                  {link.label}
+                </Link>
+              )
             ) : (
               <Link
                 key={link.to}
                 to={link.to}
-                className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                aria-current={active ? 'page' : undefined}
+                className={`text-sm font-medium transition-colors ${activeClass}`}
               >
                 {link.label}
               </Link>
-            ),
-          )}
+            );
+          })}
         </nav>
 
-        {/* Desktop actions */}
-        <div className="hidden md:flex items-center gap-3">
+        {/* Desktop actions - shown on lg and up */}
+        <div className="hidden lg:flex items-center gap-3">
           <div className="flex items-center gap-1 text-[var(--text-secondary)]">
             <button
               onClick={toggleTheme}
               className="w-8 h-8 flex items-center justify-center rounded-md hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)] transition-colors"
-              title={theme === 'dark' ? 'Passer au thème clair' : 'Passer au thème sombre'}
-              aria-label="Changer de thème"
+              title={theme === 'dark' ? t.navbar.themeLight : t.navbar.themeDark}
+              aria-label={t.navbar.toggleTheme}
             >
               {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
 
-            <button
-              onClick={toggleLanguage}
+            <a
+              href={otherLanguageHref}
+              hrefLang={otherLanguage}
+              lang={otherLanguage}
               className="h-8 px-2 flex items-center text-xs font-mono font-semibold rounded-md hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)] transition-colors"
-              title="Changer de langue"
-              aria-label="Changer de langue"
+              title={otherLanguageLabel}
+              aria-label={otherLanguageLabel}
             >
-              {language.toUpperCase()}
-            </button>
+              {otherLanguage.toUpperCase()}
+            </a>
           </div>
 
           <div className="h-4 w-px bg-[var(--border-subtle)]"></div>
@@ -111,7 +154,7 @@ export const Navbar: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-1.5 text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors px-2 py-1.5"
-            aria-label="Code source GitHub"
+            aria-label={t.navbar.sourceCode}
           >
             <GithubIcon className="w-4 h-4" />
             <span>GitHub</span>
@@ -119,33 +162,38 @@ export const Navbar: React.FC = () => {
 
           <Link
             to="/download"
-            className="flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-lg bg-accent text-ink hover:bg-accent-hover transition-colors"
+            className="flex items-center gap-1.5 text-xs font-semibold px-3.5 py-1.5 rounded-lg bg-accent text-white hover:bg-accent-hover transition-colors shadow-sm"
           >
             <Download className="w-3.5 h-3.5" />
             <span>{t.nav.download}</span>
           </Link>
         </div>
 
-        {/* Mobile controls */}
-        <div className="flex md:hidden items-center gap-1.5">
+        {/* Mobile controls - shown below lg */}
+        <div className="flex lg:hidden items-center gap-1.5">
           <button
             onClick={toggleTheme}
             className="w-8 h-8 flex items-center justify-center text-[var(--text-secondary)]"
-            aria-label="Changer de thème"
+            aria-label={t.navbar.toggleTheme}
           >
             {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
-          <button
-            onClick={toggleLanguage}
-            className="h-8 px-1.5 text-xs font-mono font-semibold text-[var(--text-secondary)]"
-            aria-label="Changer de langue"
+          <a
+            href={otherLanguageHref}
+            hrefLang={otherLanguage}
+            lang={otherLanguage}
+            className="h-8 px-1.5 flex items-center text-xs font-mono font-semibold text-[var(--text-secondary)]"
+            aria-label={otherLanguageLabel}
           >
-            {language.toUpperCase()}
-          </button>
+            {otherLanguage.toUpperCase()}
+          </a>
           <button
+            ref={menuButtonRef}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="w-8 h-8 flex items-center justify-center text-[var(--text-primary)] ml-1"
-            aria-label="Menu"
+            aria-label={t.navbar.menu}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-nav-drawer"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
@@ -154,29 +202,48 @@ export const Navbar: React.FC = () => {
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[var(--bg-main)] border-b border-[var(--border-subtle)] px-4 py-5">
+        <div
+          id="mobile-nav-drawer"
+          className="lg:hidden bg-[var(--bg-main)] border-b border-[var(--border-subtle)] px-4 py-5 shadow-xl"
+        >
           <div className="flex flex-col gap-3">
-            {navLinks.map((link) =>
-              link.anchor ? (
-                <a
-                  key={link.anchor}
-                  href={isLanding ? link.anchor : `/${link.anchor}`}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-1"
-                >
-                  {link.label}
-                </a>
+            {navLinks.map((link) => {
+              const active = isLinkActive(link);
+              const activeClass = active ? 'text-[var(--text-primary)] font-semibold' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]';
+              return link.anchor ? (
+                isLanding ? (
+                  <a
+                    key={link.anchor}
+                    href={link.anchor}
+                    onClick={() => setMobileMenuOpen(false)}
+                    aria-current={active ? 'page' : undefined}
+                    className={`text-sm font-medium py-1 ${activeClass}`}
+                  >
+                    {link.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={link.anchor}
+                    to={`/${link.anchor}`}
+                    onClick={() => setMobileMenuOpen(false)}
+                    aria-current={active ? 'page' : undefined}
+                    className={`text-sm font-medium py-1 ${activeClass}`}
+                  >
+                    {link.label}
+                  </Link>
+                )
               ) : (
                 <Link
                   key={link.to}
                   to={link.to}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="text-sm font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] py-1"
+                  aria-current={active ? 'page' : undefined}
+                  className={`text-sm font-medium py-1 ${activeClass}`}
                 >
                   {link.label}
                 </Link>
-              ),
-            )}
+              );
+            })}
             <div className="pt-3 mt-1 border-t border-[var(--border-subtle)] flex items-center justify-between">
               <a
                 href={GITHUB_REPO_URL}
@@ -190,7 +257,7 @@ export const Navbar: React.FC = () => {
               <Link
                 to="/download"
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-accent text-ink"
+                className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-accent text-white"
               >
                 <Download className="w-3.5 h-3.5" />
                 <span>{t.nav.download}</span>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { GITHUB_REPO_URL } from '../config/downloads';
 import { GithubIcon } from './GithubIcon';
@@ -9,7 +10,7 @@ export const OpenSourceSection: React.FC = () => {
 
   return (
     <section id="opensource" className="py-20 md:py-28 border-t border-[var(--border-subtle)]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left / Main text */}
           <div className="lg:col-span-7">
@@ -30,7 +31,7 @@ export const OpenSourceSection: React.FC = () => {
                 href={GITHUB_REPO_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold bg-ink dark:bg-[var(--text-primary)] text-white dark:text-[var(--text-primary)] hover:bg-[var(--surface-hover)] dark:hover:bg-[var(--warm-100)] transition-colors"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-semibold bg-[var(--text-primary)] text-[var(--bg-main)] hover:opacity-90 transition-opacity"
               >
                 <GithubIcon className="w-3.5 h-3.5" />
                 <span>{t.opensource.contributeBtn}</span>
@@ -40,21 +41,19 @@ export const OpenSourceSection: React.FC = () => {
                 href={`${GITHUB_REPO_URL}/issues`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-white bg-[var(--bg-surface)] transition-colors"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-[var(--bg-surface)] transition-colors"
               >
                 <Bug className="w-3.5 h-3.5" />
                 <span>{t.opensource.issuesBtn}</span>
               </a>
 
-              <a
-                href={`${GITHUB_REPO_URL}#-roadmap`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] dark:hover:text-white bg-[var(--bg-surface)] transition-colors"
+              <Link
+                to="/roadmap"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-primary)] bg-[var(--bg-surface)] transition-colors"
               >
                 <Compass className="w-3.5 h-3.5" />
                 <span>{t.opensource.roadmapBtn}</span>
-              </a>
+              </Link>
             </div>
           </div>
 
@@ -63,30 +62,30 @@ export const OpenSourceSection: React.FC = () => {
             <div className="p-4 rounded-xl bg-[var(--bg-surface)]/50 border border-[var(--border-subtle)]">
               <div className="flex items-center gap-2.5 font-semibold text-sm text-[var(--text-primary)] mb-1">
                 <Code className="w-4 h-4 text-accent dark:text-accent" />
-                <span>Licence GNU GPLv3</span>
+                <span>{t.opensource.licensePill}</span>
               </div>
               <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-                Le code appartient à la communauté. Aucun brevet restrictif, aucune fonctionnalité bloquée derrière un paywall.
+                {t.opensource.gplDesc}
               </p>
             </div>
 
             <div className="p-4 rounded-xl bg-[var(--bg-surface)]/50 border border-[var(--border-subtle)]">
               <div className="flex items-center gap-2.5 font-semibold text-sm text-[var(--text-primary)] mb-1">
                 <Shield className="w-4 h-4 text-audio-green" />
-                <span>100% Local-First</span>
+                <span>{t.opensource.localPill}</span>
               </div>
               <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-                Fonctionne sans connexion. Vos rushs vidéo et enregistrements restent sur votre stockage local.
+                {t.opensource.localDesc}
               </p>
             </div>
 
             <div className="p-4 rounded-xl bg-[var(--bg-surface)]/50 border border-[var(--border-subtle)]">
               <div className="flex items-center gap-2.5 font-semibold text-sm text-[var(--text-primary)] mb-1">
                 <EyeOff className="w-4 h-4 text-accent" />
-                <span>Zéro Télémétrie</span>
+                <span>{t.opensource.noCloudPill}</span>
               </div>
               <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
-                Aucun tracker, aucun cookie, aucun rapport d'usage discret. Respect absolu de votre vie privée.
+                {t.opensource.noCloudDesc}
               </p>
             </div>
           </div>

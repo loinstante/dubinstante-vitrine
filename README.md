@@ -30,7 +30,7 @@ Déployé sur : [dubinstante.vercel.app](https://dubinstante.vercel.app/)
 2. **Grand Comparatif 3 Voies** :
    - DubInstante vs. Logiciels studio propriétaires (VoiceQ à 999€–3999€, Nuendo ADR, Stellar) vs. Outils obsolètes des années 2000.
 3. **Hub de Téléchargement Multiplateforme** :
-   - Détection automatique de l'OS de l'utilisateur (macOS, Windows, Linux, Android APK).
+   - Détection automatique de l'OS de l'utilisateur (macOS, Windows, Linux Debian, Linux Arch).
    - Configuration centralisée des liens dans `src/config/downloads.ts` (prêt pour un bucket S3, CDN ou GitHub Releases).
 4. **Table de Mixage & Vumètres Audio Interactifs** :
    - Simulation du moteur N-pistes avec contrôle de gain en direct et visualisation sonore.
@@ -50,6 +50,9 @@ npm install
 # Lancer le serveur de développement local
 npm run dev
 
+# Vérifier le typage TypeScript
+npm run typecheck
+
 # Compiler pour la production
 npm run build
 
@@ -59,7 +62,7 @@ npm run preview
 
 ---
 
-## ⚙️ Configuration du Bucket S3 / Téléchargements
+## ⚙️ Configuration des Téléchargements
 
 Pour faire pointer les boutons de téléchargement vers votre propre bucket **S3** ou CDN, modifiez simplement les URLs dans `src/config/downloads.ts` :
 
@@ -67,11 +70,11 @@ Pour faire pointer les boutons de téléchargement vers votre propre bucket **S3
 // src/config/downloads.ts
 export const DOWNLOAD_PLATFORMS = {
   mac: {
-    url: 'https://votre-bucket.s3.amazonaws.com/releases/DubInstante-0.11.0-macOS.dmg',
+    url: 'https://votre-bucket.s3.amazonaws.com/releases/DubInstante_macos_0.12.0.zip',
     // ...
   },
   windows: {
-    url: 'https://votre-bucket.s3.amazonaws.com/releases/DubInstante-0.11.0-Setup.exe',
+    url: 'https://votre-bucket.s3.amazonaws.com/releases/DubInstante_windows_0.12.0.zip',
     // ...
   },
   // ...
@@ -82,4 +85,4 @@ export const DOWNLOAD_PLATFORMS = {
 
 ## 📜 Licence
 
-Sous licence open-source GPLv3 — Développé par passion pour la communauté audiovisuelle et du doublage par [L'Oinstante](https://github.com/loimathos).
+Sous licence open-source EUPL-1.2 — Développé par passion pour la communauté audiovisuelle et du doublage par [L'Oinstante](https://github.com/loinstante).

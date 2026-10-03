@@ -23,11 +23,22 @@ export const Reveal: React.FC<{
   );
 };
 
-export const Halo: React.FC<{ className?: string }> = ({ className = '' }) => (
+export const SpotlightStage: React.FC<{ className?: string }> = ({ className = '' }) => (
   <div
     aria-hidden
-    className={`halo-amber ${className}`}
+    className={`spotlight-performer ${className}`}
   />
+);
+
+export const Spotlight: React.FC<{ className?: string }> = ({ className = '' }) => (
+  <div
+    aria-hidden
+    className={`spotlight-soft ${className}`}
+  />
+);
+
+export const Halo: React.FC<{ className?: string }> = ({ className = '' }) => (
+  <Spotlight className={className} />
 );
 
 export const SectionRule: React.FC<{ className?: string }> = ({ className = '' }) => (
