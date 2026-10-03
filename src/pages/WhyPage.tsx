@@ -1,8 +1,8 @@
 import React from 'react';
-import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useLanguage } from '../context/LanguageContext';
 import { Reveal, Eyebrow, Spotlight } from '../components/ui/Primitives';
-import { CURRENT_VERSION, DOWNLOAD_PLATFORMS, GITHUB_RELEASES_URL, detectClientOS } from '../config/downloads';
+import { CURRENT_VERSION } from '../config/downloads';
+import { DownloadLink } from '../components/DownloadLink';
 import { Link } from 'react-router-dom';
 import {
   Download,
@@ -39,6 +39,16 @@ interface AmateurRow {
 
 type Status = 'g' | 'm' | 'b';
 
+// Pages officielles où les tarifs et prérequis du comparatif ont été relevés
+const SOURCES = [
+  { name: 'VoiceQ', url: 'https://www.voiceq.com/products' },
+  { name: 'Noblurway Mosaic', url: 'https://www.noblurway.com/fr/acheter-louer-mosaic/options-achat-et-tarifs' },
+  { name: 'Synchronos', url: 'https://www.synchronos.fr/acheter_synchronos.html' },
+  { name: 'Voxdub', url: 'https://voxdub.com/fr' },
+  { name: 'Cappella', url: 'https://www.cappella.app/historique.html' },
+  { name: 'Adobe Premiere', url: 'https://www.adobe.com/fr/products/premiere/plans.html' },
+];
+
 // Statuts par ligne, dans l'ordre des lignes de données — g: avantage, m: nuancé, b: limitant
 const PRO_STATUS: Status[][] = [
   ['b', 'b', 'b'], ['b', 'b', 'b'], ['b', 'b', 'b'], ['g', 'g', 'g'], ['g', 'g', 'g'],
@@ -53,11 +63,11 @@ const AMATEUR_STATUS: Status[][] = [
 ];
 
 const AMATEUR_TOOLS: { key: Exclude<keyof AmateurRow, 'label' | 'dub'>; name: string; subFr: string; subEn: string }[] = [
-  { key: 'voxdub', name: 'Voxdub', subFr: 'Site Web (Filigrane)', subEn: 'Watermarked Web' },
+  { key: 'voxdub', name: 'Voxdub', subFr: 'Service web (cloud)', subEn: 'Cloud web service' },
   { key: 'vlc', name: 'VLC + Audacity', subFr: 'Double écran', subEn: 'Split-screen' },
   { key: 'aegisub', name: 'Aegisub', subFr: 'Détour fansub', subEn: 'Fansub detour' },
   { key: 'premiere', name: 'Premiere / DaVinci', subFr: 'Keyframes manuelles', subEn: 'Manual keyframes' },
-  { key: 'cappella', name: 'Cappella', subFr: 'Abandonware XP/7', subEn: '2000s Abandonware' },
+  { key: 'cappella', name: 'Cappella', subFr: 'Dernière version : 2008', subEn: 'Last release: 2008' },
 ];
 
 const Verdict: React.FC<{ s: Status }> = ({ s }) =>
@@ -90,7 +100,7 @@ const CompareTable: React.FC<{
             <th className="w-[20%] py-4 px-5 text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">{criteriaLabel}</th>
             <th className="w-[26%] py-4 px-5 bg-accent/[0.07] border-x border-accent/25">
               <div className="font-display font-bold text-accent text-base">{dub.name}</div>
-              <div className="text-[11px] font-semibold text-accent/80">{dub.sub}</div>
+              <div className="text-[11px] font-semibold text-accent">{dub.sub}</div>
             </th>
             {cols.map((c) => (
               <th key={c.name} className="py-4 px-5">
@@ -149,17 +159,14 @@ const CompareTable: React.FC<{
 export const WhyPage: React.FC = () => {
   const { language, t } = useLanguage();
   const isEn = language === 'en';
-  useDocumentTitle(isEn ? 'Why DubInstante? — The Two Truth Tables' : 'Pourquoi DubInstante ? — Les deux grands comparatifs');
 
-  const detectedOS = detectClientOS();
-  const platform = detectedOS ? DOWNLOAD_PLATFORMS[detectedOS] : null;
 
   // TABLE 1 DATA: DubInstante vs Top 3 Studio Suites (VoiceQ, Mosaic, Synchronos)
   const proRowsFR: ProRow[] = [
     {
       label: 'Prix & Modèle économique',
       dub: '0 € (Gratuit & Libre à vie)',
-      voiceq: '279 $/mois (Studio) ou 39 $/m (Writer)',
+      voiceq: '279 $/mois (Pro) ou 39 $/mois (Writer)',
       mosaic: '200 € HT/mois ou 3 650 € perpétuel',
       synchronos: '96 € TTC/mois ou 564 €/an',
       dubHighlight: true,
@@ -175,8 +182,8 @@ export const WhyPage: React.FC = () => {
     {
       label: 'Protection DRM & Matériel',
       dub: 'Zéro DRM, 100% hors-ligne sans compte',
-      voiceq: 'Clé iLok ou compte cloud permanent',
-      mosaic: 'Dongle USB Noblurway obligatoire',
+      voiceq: 'Licence iLok (clé USB ou iLok Cloud connecté)',
+      mosaic: 'Dongle Noblurway obligatoire (logiciel ou USB)',
       synchronos: 'Dongle USB (105 €) ou connexion active',
       dubHighlight: true,
     },
@@ -190,7 +197,7 @@ export const WhyPage: React.FC = () => {
     },
     {
       label: 'Prise de voix multipiste synchro',
-      dub: 'Jusqu\'à 4 micros sans dérive audio',
+      dub: 'Jusqu\'à 4 micros simultanés',
       voiceq: 'Oui (Multipiste DAW)',
       mosaic: 'Oui (Multipiste broadcast)',
       synchronos: 'Oui (Multipiste studio)',
@@ -198,7 +205,7 @@ export const WhyPage: React.FC = () => {
     },
     {
       label: 'Systèmes d\'exploitation supportés',
-      dub: 'Linux, Windows, macOS, Android',
+      dub: 'Linux et Windows (macOS en attente, Android en réécriture)',
       voiceq: 'macOS uniquement',
       mosaic: 'Windows uniquement',
       synchronos: 'Windows uniquement',
@@ -223,9 +230,9 @@ export const WhyPage: React.FC = () => {
     {
       label: 'Format de fichier & Pérennité',
       dub: 'Format ouvert .dbi (lisible à vie)',
-      voiceq: 'Format propriétaire .vqprj (captif)',
+      voiceq: 'Format propriétaire (captif)',
       mosaic: 'Format propriétaire captif',
-      synchronos: 'Format propriétaire .syn (captif)',
+      synchronos: 'Format propriétaire (captif)',
       dubHighlight: true,
     },
   ];
@@ -234,7 +241,7 @@ export const WhyPage: React.FC = () => {
     {
       label: 'Price & Billing Model',
       dub: '$0 (Free & Open-Source forever)',
-      voiceq: '$279/mo (Studio) or $39/mo (Writer)',
+      voiceq: '$279/mo (Pro) or $39/mo (Writer)',
       mosaic: '200 €/mo or 3,650 € perpetual license',
       synchronos: '96 €/mo or 564 €/yr',
       dubHighlight: true,
@@ -250,8 +257,8 @@ export const WhyPage: React.FC = () => {
     {
       label: 'DRM & Hardware Protection',
       dub: 'Zero DRM, 100% offline, no account required',
-      voiceq: 'iLok key or mandatory cloud check-in',
-      mosaic: 'Mandatory Noblurway USB dongle',
+      voiceq: 'iLok license (USB key or always-online iLok Cloud)',
+      mosaic: 'Mandatory Noblurway dongle (software or USB)',
       synchronos: 'USB dongle (€105) or active connection',
       dubHighlight: true,
     },
@@ -265,7 +272,7 @@ export const WhyPage: React.FC = () => {
     },
     {
       label: 'Synchronized Multi-track Takes',
-      dub: 'Up to 4 studio mics with zero drift',
+      dub: 'Up to 4 microphones at once',
       voiceq: 'Yes (DAW multi-track)',
       mosaic: 'Yes (Broadcast multi-track)',
       synchronos: 'Yes (Studio multi-track)',
@@ -273,7 +280,7 @@ export const WhyPage: React.FC = () => {
     },
     {
       label: 'Supported Operating Systems',
-      dub: 'Linux, Windows, macOS, Android',
+      dub: 'Linux and Windows (macOS on hold, Android being rebuilt)',
       voiceq: 'macOS only',
       mosaic: 'Windows only',
       synchronos: 'Windows only',
@@ -298,9 +305,9 @@ export const WhyPage: React.FC = () => {
     {
       label: 'File Format & Session Longevity',
       dub: 'Open .dbi format (accessible forever)',
-      voiceq: 'Proprietary locked .vqprj format',
+      voiceq: 'Proprietary locked format',
       mosaic: 'Proprietary locked format',
-      synchronos: 'Proprietary locked .syn format',
+      synchronos: 'Proprietary locked format',
       dubHighlight: true,
     },
   ];
@@ -310,7 +317,7 @@ export const WhyPage: React.FC = () => {
     {
       label: 'Filigrane imposé sur la vidéo',
       dub: 'Zéro filigrane (Export 100% propre)',
-      voxdub: 'Gros filigrane imposé en version gratuite',
+      voxdub: 'Sans filigrane uniquement en offre Pro',
       vlc: 'Aucun (mais pas de vidéo rythmo)',
       aegisub: 'Aucun (fichier sous-titres seul)',
       premiere: 'Aucun filigrane',
@@ -319,11 +326,11 @@ export const WhyPage: React.FC = () => {
     {
       label: 'Coût financier réel',
       dub: '0 € (Gratuit & Libre à vie)',
-      voxdub: 'Gratuit bridé (ou 99 €/an sans filigrane)',
+      voxdub: 'Essai 7 jours, puis 99 €/an',
       vlc: '0 € (Freeware)',
       aegisub: '0 € (Open-source sous-titres)',
-      premiere: '26 € à 65 €/mois (ou DaVinci Free)',
-      cappella: '0 € (Abandonware délaissé)',
+      premiere: 'À partir de 26 €/mois (ou DaVinci Free)',
+      cappella: '0 € (plus mis à jour depuis 2008)',
     },
     {
       label: 'Véritable bande rythmo défilante',
@@ -345,7 +352,7 @@ export const WhyPage: React.FC = () => {
     },
     {
       label: 'Synchronisation audio & Dérive',
-      dub: 'Zéro dérive (horloge unique C++)',
+      dub: 'Prises calées sur le timecode vidéo',
       voxdub: 'Correcte mais tributaire du navigateur',
       vlc: 'Dérive inévitable au bout de 2 min',
       aegisub: 'Pas de moteur de prise son',
@@ -394,7 +401,7 @@ export const WhyPage: React.FC = () => {
     {
       label: 'Watermark on Video Export',
       dub: 'Zero watermark (100% clean video)',
-      voxdub: 'Prominent watermark on free tier',
+      voxdub: 'Watermark-free on the Pro plan only',
       vlc: 'None (no video rythmo generated)',
       aegisub: 'None (subtitle file only)',
       premiere: 'None',
@@ -403,11 +410,11 @@ export const WhyPage: React.FC = () => {
     {
       label: 'Real Financial Cost',
       dub: '$0 (Free & Open-Source forever)',
-      voxdub: 'Free with watermark (or $99/yr to remove)',
+      voxdub: '7-day trial, then €99/yr',
       vlc: '$0 (Freeware)',
       aegisub: '$0 (Open-source subtitler)',
-      premiere: '$24 to $60/mo (or DaVinci Free)',
-      cappella: '$0 (Abandoned abandonware)',
+      premiere: 'From €26/mo (or DaVinci Free)',
+      cappella: '$0 (not updated since 2008)',
     },
     {
       label: 'True Scrolling Rythmo Band',
@@ -429,7 +436,7 @@ export const WhyPage: React.FC = () => {
     },
     {
       label: 'Audio Sync & Drift',
-      dub: 'Zero drift (unified audio/video clock)',
+      dub: 'Takes locked to the video timecode',
       voxdub: 'Good, but subject to browser latency',
       vlc: 'Severe drift after 2 minutes',
       aegisub: 'No built-in voice recording',
@@ -514,7 +521,7 @@ export const WhyPage: React.FC = () => {
           tag: 'Bricolage n°1',
           title: 'Le mirage VLC + Audacity',
           desc: 'Tenter d\'appuyer sur Espace dans VLC et sur Enregistrer dans Audacity à la même milliseconde. Au bout de deux minutes, le son dérive inévitablement et vous n\'avez aucun repère visuel de jeu.',
-          fix: 'Dans DubInstante, la lecture vidéo, le texte défilant et la prise micro sont asservis à la même horloge interne au centième de frame près.',
+          fix: 'Dans DubInstante, la lecture vidéo, le texte défilant et la prise micro sont asservis à la même horloge interne.',
         },
         {
           icon: '⏱️',
@@ -528,7 +535,7 @@ export const WhyPage: React.FC = () => {
           tag: 'Bricolage n°3',
           title: 'Le détournement d\'Aegisub',
           desc: 'Idéal pour le fansub et le karaoké, mais impraticable en cabine de doublage : pas de capture voix intégrée, pas de gestion du débit d\'inspiration ni de confort visuel acteur.',
-          fix: 'Conçu sur-mesure pour le doublage : typographie rythmo claire, repères de souffle et retour micro direct sans latence.',
+          fix: 'Conçu sur-mesure pour le doublage : typographie rythmo claire, repères de souffle et retour micro direct.',
         },
         {
           icon: '📄',
@@ -590,12 +597,12 @@ export const WhyPage: React.FC = () => {
             <Eyebrow className="text-accent">{isEn ? 'THE THIRD PATH PROVEN' : 'LA 3E VOIE PROUVÉE'}</Eyebrow>
           </div>
           <h1 className="font-display font-bold text-4xl sm:text-5xl tracking-tightest text-balance text-[var(--text-primary)]">
-            {isEn ? 'Two Comparisons. One Obvious Truth.' : 'Deux Grands Tableaux. Une Vérité Indiscutable.'}
+            {isEn ? 'Rythmo band and dubbing software compared.' : 'Comparatif des logiciels de bande rythmo et de doublage.'}
           </h1>
           <p className="mt-5 text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed">
             {isEn
-              ? 'DubInstante was built because dubbing had no middle ground: either pay $300/month for corporate software, or suffer hours of audio desync on broken free tools. Here is the rigorous, unfiltered evidence.'
-              : 'DubInstante a été créé parce que le doublage manquait d\'une alternative saine : soit payer 300 € par mois pour des logiciels studio fermés, soit subir des heures de désynchronisation sur des bricolages gratuits. Voici la comparaison complète et sans filtre.'}
+              ? 'DubInstante was built because dubbing had no middle ground: either pay up to $279/month for corporate software, or suffer hours of audio desync on broken free tools. Here is the rigorous, unfiltered evidence.'
+              : 'DubInstante a été créé parce que le doublage manquait d\'une alternative saine : soit payer jusqu\'à 279 $ par mois pour des logiciels studio fermés, soit subir des heures de désynchronisation sur des bricolages gratuits. Voici la comparaison complète et sans filtre.'}
           </p>
         </Reveal>
 
@@ -621,7 +628,7 @@ export const WhyPage: React.FC = () => {
                 : 'Les studios pro dépensent des milliers d\'euros. Les suites broadcast offrent des intégrations matérielles (SDI / Pro Tools Satellite) ; DubInstante assure l\'essentiel du doublage à 60 FPS, sans frais et en toute liberté.'}
             </p>
             <div className="mt-5 inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/25 text-sm font-semibold text-accent">
-              {isEn ? '0 € vs. 96 to 279 €/month' : '0 € contre 96 à 279 €/mois'}
+              {isEn ? '0 € vs. €96 to $279 per month' : '0 € contre 96 € à 279 $ par mois'}
             </div>
           </div>
 
@@ -629,7 +636,7 @@ export const WhyPage: React.FC = () => {
             criteriaLabel={isEn ? 'Criteria' : 'Critères'}
             dub={{ name: 'DubInstante', sub: isEn ? '0 € · Free' : '0 € · Libre' }}
             cols={[
-              { name: 'VoiceQ Pro', sub: isEn ? '$279/mo Studio' : '279 $/mois Studio' },
+              { name: 'VoiceQ Pro', sub: isEn ? '$279/mo' : '279 $/mois' },
               { name: 'Noblurway Mosaic', sub: isEn ? '200 €/mo or 3,650 €' : '200 €/m ou 3 650 €' },
               { name: 'Synchronos', sub: isEn ? '96 €/mo + Dongle' : '96 €/m + Clé USB' },
             ]}
@@ -642,7 +649,15 @@ export const WhyPage: React.FC = () => {
           />
 
           <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-[11px] text-[var(--text-muted)] px-1">
-            <span>{isEn ? 'Prices verified in 2026 for indicative comparison.' : 'Tarifs et fonctionnalités constatés en 2026 à titre indicatif.'}</span>
+            <span>
+              {t.why.sourcesNote}{' '}
+              {SOURCES.map((s, i) => (
+                <React.Fragment key={s.url}>
+                  {i > 0 && ' · '}
+                  <a href={s.url} target="_blank" rel="noopener noreferrer" className="underline hover:text-[var(--text-primary)]">{s.name}</a>
+                </React.Fragment>
+              ))}
+            </span>
             <span className="text-accent font-semibold">{isEn ? 'DubInstante = 0 € forever' : 'DubInstante = 0 € à vie'}</span>
           </div>
         </Reveal>
@@ -665,8 +680,8 @@ export const WhyPage: React.FC = () => {
             </h2>
             <p className="mt-3 text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl leading-relaxed">
               {isEn
-                ? 'Popular online tools impose heavy watermarks on free tiers unless you pay $99/year, while offline workarounds cause audio desync and crashes. Why settle when DubInstante is 100% free and clean?'
-                : 'Les sites de doublage populaires imposent un filigrane en version gratuite (sauf abonnement à 99 €/an), et les bricolages entraînent désynchronisations et plantages. Pourquoi subir cela quand DubInstante est 100% propre et gratuit ?'}
+                ? 'Popular online tools keep watermark-free export for their paid plan (€99/year), while offline workarounds cause audio desync and crashes. Why settle when DubInstante is 100% free and clean?'
+                : 'Les sites de doublage populaires réservent l\'export sans filigrane à leur offre payante (99 €/an), et les bricolages entraînent désynchronisations et plantages. Pourquoi subir cela quand DubInstante est 100% propre et gratuit ?'}
             </p>
           </div>
 
@@ -828,17 +843,20 @@ export const WhyPage: React.FC = () => {
             {t.why.ctaSubtitle}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a
-              href={platform ? platform.url : GITHUB_RELEASES_URL}
+            <DownloadLink
               className="w-full sm:w-auto flex items-center justify-center gap-2 px-7 py-3.5 text-sm font-bold text-white bg-accent hover:bg-accent-hover rounded-xl transition-all shadow-[0_0_30px_-8px_rgb(var(--accent-rgb)/0.4)] hover:shadow-[0_0_40px_-6px_rgb(var(--accent-rgb)/0.6)] hover:-translate-y-0.5"
             >
-              <Download className="w-4 h-4" />
-              <span>
-                {platform
-                  ? `${t.why.ctaBtn} (${platform.name} · ${CURRENT_VERSION})`
-                  : `${t.why.ctaBtn} (${CURRENT_VERSION})`}
-              </span>
-            </a>
+              {(platform) => (
+                <>
+                  <Download className="w-4 h-4" />
+                  <span>
+                    {platform
+                      ? `${t.why.ctaBtn} (${platform.name} · ${CURRENT_VERSION})`
+                      : `${t.why.ctaBtn} (${CURRENT_VERSION})`}
+                  </span>
+                </>
+              )}
+            </DownloadLink>
             <Link
               to="/features"
               className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-medium text-[var(--text-primary)] bg-[var(--bg-surface)] hover:bg-[var(--bg-sunk)] border border-[var(--border-subtle)] rounded-xl transition-colors"

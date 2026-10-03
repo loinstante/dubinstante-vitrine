@@ -3,35 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#1b1b1b" />
     <link rel="icon" type="image/png" href="/assets/DubInstante.png" />
-    <title>DubInstante — Le Studio Libre de Bande Rythmo et de Doublage</title>
+    <link rel="apple-touch-icon" href="/assets/DubInstante.png" />
+
+    <!-- Page-specific tags. This block is only the dev-server default: the build replaces
+         it for every page and language (scripts/prerender.mjs, texts in src/seo.ts). -->
+    <!--seo:start-->
+    <title>DubInstante — Logiciel libre de bande rythmo et doublage</title>
     <meta
       name="description"
-      content="DubInstante est un logiciel de post-production libre et gratuit pour le doublage vidéo et la bande rythmo. 100% hors-ligne, écrit en C++17 et Qt 6."
+      content="Logiciel gratuit et open source de doublage vidéo : bande rythmo défilante, enregistrement jusqu'à 4 micros, export FFmpeg. Windows et Linux, hors-ligne."
     />
-    <meta
-      name="keywords"
-      content="doublage vidéo, bande rythmo, logiciel libre doublage, open-source ADR, post-production audio, comédien voix-off, studio doublage local, synchronisation labiale, C++ Qt6 dubbing"
-    />
-
-    <!-- Open Graph / Facebook / Discord -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://dubinstante.vercel.app/" />
-    <meta property="og:title" content="DubInstante — Studio Libre de Doublage & Bande Rythmo" />
-    <meta
-      property="og:description"
-      content="Bande rythmo 60 FPS, enregistrement WAV multipiste et moteur C++/OpenGL. 100% gratuit, 100% local, sans abonnement."
-    />
+    <meta property="og:title" content="DubInstante — Logiciel libre de bande rythmo et doublage" />
+    <meta property="og:description" content="Logiciel gratuit et open source de doublage vidéo." />
     <meta property="og:image" content="https://dubinstante.vercel.app/assets/dubinstante-studio-real.png" />
-
-    <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="DubInstante — Studio Libre de Doublage & Bande Rythmo" />
-    <meta
-      name="twitter:description"
-      content="Studio de doublage vidéo et bande rythmo open-source (EUPL-1.2). Performance native C++17 et Qt 6."
-    />
+    <meta name="twitter:title" content="DubInstante — Logiciel libre de bande rythmo et doublage" />
+    <meta name="twitter:description" content="Logiciel gratuit et open source de doublage vidéo." />
     <meta name="twitter:image" content="https://dubinstante.vercel.app/assets/dubinstante-studio-real.png" />
+    <!--seo:end-->
 
     <!-- Fonts preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -60,33 +53,12 @@
       })();
     </script>
 
-    <!-- Canonical & Multilingual SEO -->
-    <link rel="canonical" href="https://dubinstante.vercel.app/" />
-    <link rel="alternate" hreflang="fr" href="https://dubinstante.vercel.app/" />
-    <link rel="alternate" hreflang="en" href="https://dubinstante.vercel.app/?lang=en" />
-    <link rel="alternate" hreflang="x-default" href="https://dubinstante.vercel.app/" />
-
-    <!-- Schema.org SoftwareApplication structured data -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "DubInstante",
-        "operatingSystem": "Windows, macOS, Linux",
-        "applicationCategory": "MultimediaApplication",
-        "applicationSubCategory": "Video Dubbing, ADR & Rythmo Band Studio",
-        "operatingSystem": "Windows 10+, macOS 12+, Linux (glibc 2.31+), Android 9+",
-        "license": "https://joinup.ec.europa.eu/collection/eupl/eupl-text-eupl-12",
-        "offers": {
-          "@type": "Offer",
-          "price": "0",
-          "priceCurrency": "EUR"
-        },
-        "description": "Studio de doublage vidéo open-source avec bande rythmo dynamique, enregistrement multipiste et export FFmpeg.",
-        "softwareVersion": "0.12.0",
-        "downloadUrl": "https://github.com/loinstante/DubInstante/releases/latest"
-      }
-    </script>
+    <!-- Scroll-reveal starts hidden and is shown by JavaScript: keep the content visible without it -->
+    <noscript>
+      <style>
+        [data-reveal] { opacity: 1 !important; transform: none !important; }
+      </style>
+    </noscript>
   </head>
   <body class="bg-[var(--bg-main)] text-[var(--text-primary)] antialiased min-h-screen overflow-x-hidden">
     <div id="root"></div>

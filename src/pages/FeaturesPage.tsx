@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useLanguage } from '../context/LanguageContext';
 import { Reveal, Eyebrow, Spotlight } from '../components/ui/Primitives';
 import { CURRENT_VERSION, GITHUB_REPO_URL } from '../config/downloads';
@@ -11,11 +10,11 @@ const FEATURES_FR = [
     num: '01',
     title: 'Lecture vidéo ultra-fluide & OpenGL',
     items: [
-      'Rendu accéléré GPU — Décodage direct Qt 6 Multimedia & shaders OpenGL, zéro saccade',
+      'Rendu OpenGL — Décodage Qt 6 Multimedia (FFmpeg) affiché sur une surface OpenGL',
       'Navigation image par image — Précision chirurgicale (frame à frame) au millième de seconde',
       'Synchronisation temps réel — Audio, vidéo et bandes rythmo verrouillés sur la même horloge',
       'Contrôle de vitesse dynamique — De 1% à 400% pour la répétition et l\'analyse du débit',
-      'Footage lourd — Support sans accroc des fichiers masters 4K de plus de 50 Go',
+      'Formats vidéo — Ouvre les fichiers MP4, MKV, MOV, AVI, M4V, WebM et MXF',
     ],
   },
   {
@@ -26,7 +25,7 @@ const FEATURES_FR = [
       'Édition directe en place — Saisie de texte avec prévisualisation immédiate sur la bande',
       'Personnalisation typographique — Polices studio, couleurs de texte et 4 styles visuels',
       'Navigation tactile & clic — Sautez instantanément au timecode en cliquant sur la bande',
-      'Virtualisation de texte — Rendu fluide sans montée mémoire même sur un film entier de 3 heures',
+      'Virtualisation de texte — Seuls les caractères visibles sont dessinés, même sur un long métrage',
     ],
   },
   {
@@ -44,10 +43,10 @@ const FEATURES_FR = [
     num: '04',
     title: 'Export FFmpeg broadcast & sessions .dbi',
     items: [
-      'Muxing FFmpeg sans perte — Fusionnez voix et vidéo sans réencodage destructeur (bitstream copy)',
+      'Export FFmpeg — H.264 + AAC par défaut ; H.265, ProRes, VP9, PCM 24 bits ou copie du flux vidéo (sans réencodage) en mode expert',
       'Format conteneur .dbi — Fichiers de projet compacts, autonomes et 100% locaux',
       'Export d\'archives portables — Paquetez vos sessions en ZIP pour les partager au studio son',
-      'I/O Asynchrone — Sauvegardes en tâche de fond qui ne bloquent jamais la lecture',
+      'I/O Asynchrone — Sauvegardes en tâche de fond, sans bloquer l\'interface',
     ],
   },
 ];
@@ -57,11 +56,11 @@ const FEATURES_EN = [
     num: '01',
     title: 'Buttery-smooth OpenGL video playback',
     items: [
-      'GPU hardware acceleration — Qt 6 Multimedia & OpenGL shaders for zero dropped frames',
-      'Frame-by-frame scrubbing — Surgical microsecond accuracy using keyboard arrow keys',
+      'OpenGL rendering — Qt 6 Multimedia (FFmpeg) decoding drawn on an OpenGL surface',
+      'Frame-by-frame stepping — Millisecond-accurate positioning with the arrow keys',
       'Real-time master clock lock — Audio, video, and rythmo bands tightly locked together',
       'Dynamic speed control — 1% to 400% for line practice and fast editorial review',
-      'Heavy master footage — Seamless scrubbing of 50 GB+ raw 4K video files',
+      'Video formats — Opens MP4, MKV, MOV, AVI, M4V, WebM and MXF files',
     ],
   },
   {
@@ -72,7 +71,7 @@ const FEATURES_EN = [
       'Direct in-place typing — Enter text with immediate preview straight on the moving band',
       'Complete studio typography — Fonts, colors, and 4 high-contrast pro visual themes',
       'Click-to-scrub navigation — Jump directly to any timecode with a single click',
-      'Virtualized text rendering — Smooth 60 FPS scrolling even on 3-hour feature films',
+      'Virtualized text rendering — Only visible characters are drawn, even on a feature-length film',
     ],
   },
   {
@@ -88,29 +87,29 @@ const FEATURES_EN = [
   },
   {
     num: '04',
-    title: 'Lossless FFmpeg exports & .dbi containers',
+    title: 'FFmpeg exports & .dbi sessions',
     items: [
-      'Lossless stream muxing — Merge voice tracks and master video with zero re-encoding loss',
+      'FFmpeg export — H.264 + AAC by default; H.265, ProRes, VP9, 24-bit PCM or video stream copy (no re-encoding) in expert mode',
       'Compact .dbi format — Self-contained, lightweight binary project files',
       'Portable ZIP archives — Package entire sessions to share with audio post-production',
-      'Asynchronous I/O — Background disk saves that never freeze or interrupt playback',
+      'Asynchronous I/O — Background saves that do not block the interface',
     ],
   },
 ];
 
 const STACK_FR = [
-  { name: 'C++ 17', role: 'Vitesse & Zéro latence', desc: 'Gestion mémoire directe pour une synchronisation audio/vidéo chirurgicale.' },
-  { name: 'Qt 6.5+', role: 'Interface native multi-OS', desc: 'Widgets natifs et Qt Multimedia pour une réactivité maximale sous Windows, macOS et Linux.' },
+  { name: 'C++ 17', role: 'Code natif compilé', desc: 'Aucune couche web : le studio est une application native compilée.' },
+  { name: 'Qt 6.5+', role: 'Interface native multi-OS', desc: 'Widgets natifs et Qt Multimedia pour une réactivité maximale sous Windows et Linux.' },
   { name: 'OpenGL', role: 'Rendu GPU 60 FPS', desc: 'Fluidité totale du défilement des bandes sans charge excessive sur le processeur.' },
-  { name: 'FFmpeg', role: 'Moteur de décodage & export', desc: 'Compatibilité avec tous les conteneurs vidéo pro (MP4, ProRes, MKV, MOV, H.264, H.265).' },
+  { name: 'FFmpeg', role: 'Moteur de décodage & export', desc: 'Décodage et export des formats courants (MP4, MKV, MOV, H.264, H.265, ProRes).' },
   { name: 'I/O Asynchrone', role: 'Tâches de fond non bloquantes', desc: 'Continuez de jouer et de caler vos répliques pendant que vos projets s\'exportent.' },
 ];
 
 const STACK_EN = [
-  { name: 'C++ 17', role: 'Speed & Microsecond Precision', desc: 'Manual memory management for surgical audio/video lock and zero playback stutter.' },
-  { name: 'Qt 6.5+', role: 'Native Cross-Platform UI', desc: 'Native OS widgets and Qt Multimedia for instant responsiveness across macOS, Windows, and Linux.' },
+  { name: 'C++ 17', role: 'Compiled native code', desc: 'No web layer: the studio is a compiled native application.' },
+  { name: 'Qt 6.5+', role: 'Native Cross-Platform UI', desc: 'Native OS widgets and Qt Multimedia for instant responsiveness across Windows and Linux.' },
   { name: 'OpenGL', role: 'GPU-Accelerated 60 FPS', desc: 'Buttery-smooth rythmo scrolling without overloading your CPU.' },
-  { name: 'FFmpeg', role: 'Decoding & Lossless Muxing', desc: 'Universal support for pro video formats (MP4, ProRes, MKV, MOV, H.264, H.265).' },
+  { name: 'FFmpeg', role: 'Decoding & export', desc: 'Decoding and export of common formats (MP4, MKV, MOV, H.264, H.265, ProRes).' },
   { name: 'Async I/O', role: 'Non-Blocking Background I/O', desc: 'Keep scrubbing and editing seamlessly while sessions export in the background.' },
 ];
 
@@ -118,52 +117,51 @@ const MODULES_FR = [
   'Moteur de Lecture — Décodage optimisé Qt 6 Multimedia pour une synchronisation millimétrique',
   'Canvas OpenGL — Rendu accéléré par la carte graphique, même en défilement rapide image par image (← / →)',
   'Virtualisation Rythmo — Gestion de dizaines de milliers de syllabes sans pic mémoire ni ralentissement',
-  'Moteur Audio Multipiste — Prise de son WAV non compressée à faible latence depuis vos interfaces audio studio',
-  'Pipeline d\'Export FFmpeg — Copie de flux direct (bitstream pass-through) sans perte de qualité',
-  'Format Local .dbi — Conteneur de projet binaire autonome intégrant la compression ZIP',
+  'Moteur Audio Multipiste — Prise de son WAV non compressée depuis vos interfaces audio',
+  'Pipeline d\'Export FFmpeg — Mixage des prises (amix) puis encodage H.264/AAC, ou copie du flux vidéo en mode expert',
+  'Format Local .dbi — Projet JSON avec contrôle d\'intégrité SHA-256, archivable en ZIP',
 ];
 
 const MODULES_EN = [
-  'Playback Engine — Qt 6 multimedia decoding for microsecond audio-video frame locking',
+  'Playback Engine — Qt 6 Multimedia decoding with frame-accurate audio/video sync',
   'Hardware Accelerated Canvas — Smooth OpenGL rendering even during fast frame scrubbing (← / →)',
   'Rythmo Band Virtualization — Render tens of thousands of syllables with zero memory spikes',
-  'Multi-track Audio Engine — Low-latency uncompressed WAV capture straight from studio audio interfaces',
-  'Export Pipeline — Fast FFmpeg pass-through multiplexing (bitstream copy without re-encoding loss)',
-  'Local Container Format — Self-contained .dbi binary projects with built-in ZIP compression',
+  'Multi-track Audio Engine — Uncompressed WAV capture straight from your audio interfaces',
+  'Export Pipeline — Takes mixed with amix, then H.264/AAC encoding, or video stream copy in expert mode',
+  'Local Project Format — JSON-based .dbi projects with SHA-256 integrity check, archivable as ZIP',
 ];
 
 const PLATFORMS_FR = [
   { os: 'Windows 10 / 11', detail: 'Archive ZIP portable (.zip), exécutable DubInstante, FFmpeg inclus' },
-  { os: 'macOS (Intel & Apple Silicon)', detail: 'Archive ZIP (.zip) avec application autonome native' },
-  { os: 'Linux (Debian & Arch)', detail: 'Archive ZIP (.zip) avec binaire natif, portable et immédiat' },
+  { os: 'macOS (en attente)', detail: 'Sans licence développeur Apple, l\'application ne peut pas être autorisée à utiliser les micros : version mise de côté' },
+  { os: 'Linux (Debian & Arch)', detail: 'Archive ZIP (.zip) contenant une AppImage par famille de distribution' },
   { os: 'Android (tablette, v0.13)', detail: 'Application réécrite de zéro, environ 95 % des fonctions du studio, hors multi-micro' },
 ];
 
 const PLATFORMS_EN = [
   { os: 'Windows 10 / 11', detail: 'Portable ZIP package (.zip), DubInstante binary, FFmpeg included' },
-  { os: 'macOS (Intel & Apple Silicon)', detail: 'ZIP archive (.zip) with standalone native application' },
-  { os: 'Linux (Debian & Arch)', detail: 'ZIP archive (.zip) with native standalone binary' },
+  { os: 'macOS (on hold)', detail: 'Without an Apple developer licence, the app cannot be granted microphone access: version on hold' },
+  { os: 'Linux (Debian & Arch)', detail: 'ZIP archive (.zip) containing an AppImage per distribution family' },
   { os: 'Android (tablet, v0.13)', detail: 'App rebuilt from scratch, about 95% of the studio features, minus multi-microphone' },
 ];
 
 const PREREQ_FR = [
   { os: 'Windows', items: ['Windows 10 ou 11 (64-bit)', 'FFmpeg (embarqué automatiquement)'] },
-  { os: 'macOS', items: ['macOS 12+ Monterey ou ultérieur', 'Architecture Apple Silicon ou Intel'] },
-  { os: 'Linux', items: ['Debian 11+, Ubuntu 20.04+, Mint (glibc 2.31+)', 'Arch, Manjaro, Fedora (glibc récente)'] },
+  { os: 'macOS', items: ['Version mise de côté', 'En attente d\'une licence développeur Apple (accès aux micros)'] },
+  { os: 'Linux', items: ['Ubuntu 22.04+, Debian 12+, Mint 21+ (glibc 2.35+)', 'Arch, EndeavourOS, Manjaro (glibc récente)'] },
   { os: 'Android', items: ['Tablettes Android', 'En développement pour la v0.13 — réécriture complète'] },
 ];
 
 const PREREQ_EN = [
   { os: 'Windows', items: ['Windows 10 or 11 (64-bit)', 'FFmpeg (pre-bundled in package)'] },
-  { os: 'macOS', items: ['macOS 12+ Monterey or newer', 'Apple Silicon and Intel architectures'] },
-  { os: 'Linux', items: ['Debian 11+, Ubuntu 20.04+, Mint (glibc 2.31+)', 'Arch, Manjaro, Fedora (recent glibc)'] },
+  { os: 'macOS', items: ['Version on hold', 'Waiting for an Apple developer licence (microphone access)'] },
+  { os: 'Linux', items: ['Ubuntu 22.04+, Debian 12+, Mint 21+ (glibc 2.35+)', 'Arch, EndeavourOS, Manjaro (recent glibc)'] },
   { os: 'Android', items: ['Android tablets', 'In development for v0.13 — full rewrite'] },
 ];
 
 export const FeaturesPage: React.FC = () => {
   const { language, t } = useLanguage();
   const isEn = language === 'en';
-  useDocumentTitle(isEn ? 'Features & Engine' : 'Fonctionnalités & Moteur');
 
   const [activeTab, setActiveTab] = useState<'workflow' | 'engine'>('workflow');
 
@@ -203,7 +201,7 @@ export const FeaturesPage: React.FC = () => {
           </h1>
           <p className="mt-5 text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed">
             {isEn
-              ? 'From frame-by-frame lip sync to the low-latency C++17 and OpenGL engine under the hood. Here is everything DubInstante is capable of.'
+              ? 'From frame-by-frame lip sync to the native C++17 and OpenGL engine under the hood. Here is everything DubInstante is capable of.'
               : 'De la synchronisation labiale image par image jusqu\'au moteur C++17 et OpenGL sous le capot. Découvrez toutes les capacités de DubInstante.'}
           </p>
         </Reveal>
@@ -279,8 +277,8 @@ export const FeaturesPage: React.FC = () => {
             </h2>
             <p className="mt-3 text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
               {isEn
-                ? 'DubInstante avoids heavy Electron web wrappers. Everything is compiled natively with C++17, Qt 6, FFmpeg, and OpenGL to guarantee microsecond synchronization.'
-                : 'DubInstante refuse les surcouches web lourdes type Electron. Tout est compilé nativement en C++17, Qt 6, FFmpeg et OpenGL pour garantir une synchronisation à la microseconde.'}
+                ? 'DubInstante avoids heavy Electron web wrappers. Everything is compiled natively with C++17, Qt 6, FFmpeg, and OpenGL for frame-accurate synchronization.'
+                : 'DubInstante refuse les surcouches web lourdes type Electron. Tout est compilé nativement en C++17, Qt 6, FFmpeg et OpenGL pour une synchronisation à l\'image près.'}
             </p>
           </div>
 
@@ -371,7 +369,7 @@ cmake .. && make -j$(nproc)
               href={GITHUB_REPO_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-5 text-sm font-medium text-accent hover:text-accent-hover transition-colors"
+              className="inline-flex items-center gap-2 mt-5 text-sm font-medium text-accent hover:underline transition-colors"
             >
               {isEn ? 'View complete source code on GitHub →' : 'Explorer le code source sur GitHub →'}
             </a>

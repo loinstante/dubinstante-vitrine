@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
 import { GITHUB_REPO_URL } from '../config/downloads';
+import { localizedPath } from '../seo';
 import { GithubIcon } from './GithubIcon';
 import { Download, Menu, X, Sun, Moon } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
-  const { language, setLanguage, t } = useLanguage();
+  const { language, t } = useLanguage();
   const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
   const location = useLocation();
   const isLanding = location.pathname === '/';
 
@@ -27,6 +29,7 @@ export const Navbar: React.FC = () => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape' && mobileMenuOpen) {
         setMobileMenuOpen(false);
+        menuButtonRef.current?.focus();
       }
     };
     if (mobileMenuOpen) {
@@ -41,9 +44,10 @@ export const Navbar: React.FC = () => {
     };
   }, [mobileMenuOpen]);
 
-  const toggleLanguage = () => {
-    setLanguage(language === 'fr' ? 'en' : 'fr');
-  };
+  // A real link to the same page in the other language: crawlable, and each URL keeps a single language.
+  const otherLanguage = language === 'fr' ? 'en' : 'fr';
+  const otherLanguageHref = localizedPath(location.pathname, otherLanguage) + location.hash;
+  const otherLanguageLabel = otherLanguage === 'en' ? 'English version' : 'Version française';
 
   const navLinks = [
     { to: '/', label: t.nav.preview, anchor: '#preview' },
@@ -82,7 +86,7 @@ export const Navbar: React.FC = () => {
         </Link>
 
         {/* Desktop links - shown on lg and up to avoid tablet cramping */}
-        <nav className="hidden lg:flex items-center gap-6" aria-label="Navigation principale">
+        <nav className="hidden lg:flex items-center gap-6" aria-label={language === 'en' ? 'Main navigation' : 'Navigation principale'}>
           {navLinks.map((link) => {
             const active = isLinkActive(link);
             const activeClass = active ? 'text-[var(--text-primary)] font-semibold' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]';
@@ -131,14 +135,16 @@ export const Navbar: React.FC = () => {
               {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
 
-            <button
-              onClick={toggleLanguage}
+            <a
+              href={otherLanguageHref}
+              hrefLang={otherLanguage}
+              lang={otherLanguage}
               className="h-8 px-2 flex items-center text-xs font-mono font-semibold rounded-md hover:text-[var(--text-primary)] hover:bg-[var(--bg-surface)] transition-colors"
-              title={t.navbar.changeLang}
-              aria-label={`${t.navbar.changeLang}: ${language.toUpperCase()}`}
+              title={otherLanguageLabel}
+              aria-label={otherLanguageLabel}
             >
-              {language.toUpperCase()}
-            </button>
+              {otherLanguage.toUpperCase()}
+            </a>
           </div>
 
           <div className="h-4 w-px bg-[var(--border-subtle)]"></div>
@@ -172,14 +178,17 @@ export const Navbar: React.FC = () => {
           >
             {theme === 'dark' ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
-          <button
-            onClick={toggleLanguage}
-            className="h-8 px-1.5 text-xs font-mono font-semibold text-[var(--text-secondary)]"
-            aria-label={`${t.navbar.changeLang}: ${language.toUpperCase()}`}
+          <a
+            href={otherLanguageHref}
+            hrefLang={otherLanguage}
+            lang={otherLanguage}
+            className="h-8 px-1.5 flex items-center text-xs font-mono font-semibold text-[var(--text-secondary)]"
+            aria-label={otherLanguageLabel}
           >
-            {language.toUpperCase()}
-          </button>
+            {otherLanguage.toUpperCase()}
+          </a>
           <button
+            ref={menuButtonRef}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="w-8 h-8 flex items-center justify-center text-[var(--text-primary)] ml-1"
             aria-label={t.navbar.menu}

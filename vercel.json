@@ -1,12 +1,12 @@
 {
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
   "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
-    { "source": "/docs", "destination": "/documentation", "permanent": false }
-  ],
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
+    { "source": "/docs", "destination": "/documentation", "permanent": false },
+    { "source": "/tech", "destination": "/features", "permanent": false },
+    { "source": "/why", "destination": "/pourquoi", "permanent": false },
+    { "source": "/comparatif", "destination": "/pourquoi", "permanent": false }
   ]
 }

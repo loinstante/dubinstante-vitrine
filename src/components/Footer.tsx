@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useLanguage } from '../context/LanguageContext';
-import { GITHUB_REPO_URL, CURRENT_VERSION } from '../config/downloads';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useLanguage } from "../context/LanguageContext";
+import { GITHUB_REPO_URL, CURRENT_VERSION } from "../config/downloads";
 
 export const Footer: React.FC = () => {
   const { t, language } = useLanguage();
@@ -32,14 +32,16 @@ export const Footer: React.FC = () => {
 
           {/* Ecosystem Links */}
           <div>
-            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-primary)] mb-3">
+            <h2 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-primary)] mb-3">
               {t.footer.ecosystem}
-            </h4>
+            </h2>
             <ul className="space-y-2 text-xs">
               <li>
                 <Link
                   to="/"
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                  onClick={() =>
+                    window.scrollTo({ top: 0, behavior: "smooth" })
+                  }
                   className="hover:text-[var(--text-primary)] transition-colors"
                 >
                   DubInstante
@@ -60,9 +62,9 @@ export const Footer: React.FC = () => {
 
           {/* Resources */}
           <div>
-            <h4 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-primary)] mb-3">
+            <h2 className="text-xs font-mono font-semibold uppercase tracking-wider text-[var(--text-primary)] mb-3">
               GitHub & Documentation
-            </h4>
+            </h2>
             <ul className="space-y-2 text-xs">
               <li>
                 <a
@@ -71,7 +73,9 @@ export const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   className="hover:text-[var(--text-primary)] transition-colors"
                 >
-                  {language === 'en' ? 'Source Code (GitHub)' : 'Code source (GitHub)'}
+                  {language === "en"
+                    ? "Source Code (GitHub)"
+                    : "Code source (GitHub)"}
                 </a>
               </li>
               <li>
@@ -89,15 +93,19 @@ export const Footer: React.FC = () => {
                   to="/features"
                   className="hover:text-[var(--text-primary)] transition-colors"
                 >
-                  {language === 'en' ? 'Features & Engine' : 'Fonctionnalités & Moteur'}
+                  {language === "en"
+                    ? "Features & Engine"
+                    : "Fonctionnalités & Moteur"}
                 </Link>
               </li>
               <li>
                 <Link
-                  to="/docs"
+                  to="/documentation"
                   className="hover:text-[var(--text-primary)] transition-colors"
                 >
-                  {language === 'en' ? 'Documentation & Shortcuts' : 'Documentation & Raccourcis'}
+                  {language === "en"
+                    ? "Documentation & Shortcuts"
+                    : "Documentation & Raccourcis"}
                 </Link>
               </li>
               <li>
@@ -105,7 +113,9 @@ export const Footer: React.FC = () => {
                   to="/pourquoi"
                   className="hover:text-[var(--text-primary)] transition-colors"
                 >
-                  {language === 'en' ? 'Why DubInstante?' : 'Pourquoi DubInstante ?'}
+                  {language === "en"
+                    ? "Why DubInstante?"
+                    : "Pourquoi DubInstante ?"}
                 </Link>
               </li>
               <li>
@@ -135,8 +145,10 @@ export const Footer: React.FC = () => {
           <div>© 2026 DubInstante · {t.footer.madeBy}</div>
           <div>{t.footer.license}</div>
         </div>
+        <p className="mt-3 text-[11px] text-[var(--text-muted)] text-center sm:text-left">
+          {t.footer.siteNote}
+        </p>
       </div>
     </footer>
   );
 };
-

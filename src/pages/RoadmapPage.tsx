@@ -1,5 +1,4 @@
 import React from 'react';
-import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useLanguage } from '../context/LanguageContext';
 import { Reveal, Eyebrow, Halo } from '../components/ui/Primitives';
 import { Check, Circle } from 'lucide-react';
@@ -250,7 +249,6 @@ const PHASES_EN = [
 export const RoadmapPage: React.FC = () => {
   const { language } = useLanguage();
   const isEn = language === 'en';
-  useDocumentTitle(isEn ? 'Roadmap' : 'Feuille de route');
   const phases = isEn ? PHASES_EN : PHASES_FR;
 
   const getStatusLabel = (status: string) => {
@@ -266,7 +264,7 @@ export const RoadmapPage: React.FC = () => {
         <Reveal className="max-w-3xl mb-14">
           <Eyebrow className="mb-3">{isEn ? 'Roadmap' : 'Feuille de route'}</Eyebrow>
           <h1 className="font-display font-bold text-4xl sm:text-5xl tracking-tightest text-balance text-[var(--text-primary)]">
-            {isEn ? 'On the road to v1.0.' : 'En route vers la v1.0.'}
+            {isEn ? 'DubInstante roadmap: on the road to v1.0.' : 'Feuille de route de DubInstante : en route vers la v1.0.'}
           </h1>
           <p className="mt-4 text-base text-[var(--text-secondary)] leading-relaxed">
             {isEn ? 'Current version: ' : 'Version courante : '}{' '}
@@ -303,9 +301,9 @@ export const RoadmapPage: React.FC = () => {
                     <span className="text-xs font-mono text-[var(--text-muted)]">{p.date}</span>
                   )}
                 </div>
-                <h3 className="font-display font-bold text-xl text-[var(--text-primary)] mb-3">
+                <h2 className="font-display font-bold text-xl text-[var(--text-primary)] mb-3">
                   {p.title}
-                </h3>
+                </h2>
                 <ul className="space-y-2">
                   {p.items.map((it, j) => (
                     <li key={j} className="flex items-start gap-3 text-sm text-[var(--text-secondary)]">

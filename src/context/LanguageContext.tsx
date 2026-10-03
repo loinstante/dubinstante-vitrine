@@ -1,8 +1,8 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useEffect } from "react";
 
 import { CURRENT_VERSION } from "../config/downloads";
+import type { Language } from "../seo";
 
-type Language = "fr" | "en";
 
 export interface Translations {
   nav: {
@@ -39,7 +39,6 @@ export interface Translations {
     themeDark: string;
     themeLight: string;
     toggleTheme: string;
-    changeLang: string;
     sourceCode: string;
     menu: string;
   };
@@ -121,13 +120,12 @@ export interface Translations {
     subtitle: string;
     yourOs: string;
     fileLabel: string;
-    installNotes: string;
     btnDownload: string;
     allReleases: string;
     sourceCode: string;
-    gatekeeperNote: string;
-    smartScreenNote: string;
-    linuxNote: string;
+    macTitle: string;
+    macDesc: string;
+    macLink: string;
     androidTitle: string;
     androidDesc: string;
     androidLink: string;
@@ -135,6 +133,7 @@ export interface Translations {
   footer: {
     brandDesc: string;
     license: string;
+    siteNote: string;
     ecosystem: string;
     madeBy: string;
     reportBug: string;
@@ -167,7 +166,6 @@ const translations: Record<Language, Translations> = {
       themeDark: "Passer au thème sombre",
       themeLight: "Passer au thème clair",
       toggleTheme: "Changer de thème",
-      changeLang: "Changer de langue",
       sourceCode: "Code source GitHub",
       menu: "Menu",
     },
@@ -175,7 +173,7 @@ const translations: Record<Language, Translations> = {
       "BANDE RYTHMO",
       "ENREGISTREMENT MULTIPISTE",
       "DOUBLAGE VIDÉO",
-      "FICHIERS 50 Go+",
+      "JUSQU'À 4 PISTES",
       "IMAGE PAR IMAGE",
       "OPEN SOURCE",
       "100% LOCAL",
@@ -184,8 +182,9 @@ const translations: Record<Language, Translations> = {
     stats: {
       stat1Value: "0 €",
       stat1Label: "Pour toujours. Sans abonnement, sans compte, 100% local.",
-      stat2Value: "50 Go+",
-      stat2Label: "Performance extrême pour vos flux HD non compressés.",
+      stat2Value: "4 pistes",
+      stat2Label:
+        "Jusqu'à 4 bandes rythmo et 4 micros enregistrés en simultané.",
       stat3Value: CURRENT_VERSION,
       stat3Label: "Refonte UI majeure, en route vers la v1.0 finale.",
     },
@@ -196,7 +195,8 @@ const translations: Record<Language, Translations> = {
         "Doublez vos vidéos avec une vraie bande rythmo fluide. Gratuit, open source et 100 % hors-ligne : pas de compte, pas de cloud, pas d'abonnement.",
       downloadFor: "Télécharger pour",
       viewGithub: "Code source sur GitHub",
-      metaSpecs: "EUPL-1.2 · C++17 & Qt 6 · Rendu OpenGL · FFmpeg natif · 100% Hors-ligne",
+      metaSpecs:
+        "EUPL-1.2 · C++17 & Qt 6 · Rendu OpenGL · FFmpeg natif · 100% Hors-ligne",
       whatIsRythmoTitle: "Qu'est-ce qu'une bande rythmo ?",
       whatIsRythmoDesc:
         "C'est le bandeau de texte défilant synchronisé avec l'image, utilisé en studio pour caler précisément la voix des comédiens sur le mouvement des lèvres.",
@@ -205,11 +205,11 @@ const translations: Record<Language, Translations> = {
       eyebrow: "Aperçu du logiciel",
       title: "Conçu pour la fluidité en studio.",
       subtitle:
-        "Bande rythmo défilante à 60 images par seconde, alignement syllabique chirurgical et lecture sans saccade.",
+        "Bande rythmo défilante à 60 images par seconde, syllabes calées sur la grille temporelle et navigation image par image.",
       tabScreenshot: "Capture native Studio (Qt6)",
       tabSimulator: "Simulateur Rythmo interactif",
       screenshotCaption:
-        "Interface native DubInstante 2026 sous macOS / Linux / Windows. Rendu accéléré par OpenGL.",
+        "Interface native DubInstante 2026 sous Linux et Windows. Rendu accéléré par OpenGL.",
       play: "Lecture",
       pause: "Pause",
       speed: "Vitesse",
@@ -241,12 +241,12 @@ const translations: Record<Language, Translations> = {
       f2Tag: "Audio Broadcast",
       f3Title: "Moteur natif C++17 & OpenGL",
       f3Desc:
-        "Aucune couche web lourde, aucun framework Electron. Gestion fluide des vidéos 4K et des fichiers bruts de plus de 50 Go sans perte de synchronisation.",
+        "Aucune couche web lourde, aucun framework Electron. Lecture vidéo par Qt Multimedia et FFmpeg, bande rythmo rendue à 60 images par seconde et navigation image par image.",
       f3Tag: "Performance native",
-      f4Title: "Export FFmpeg sans réencodage",
+      f4Title: "Export FFmpeg intégré",
       f4Desc:
-        "Assemblez vos prises de voix avec la vidéo originale instantanément grâce au multiplexage FFmpeg. Zéro perte de piqué visuel sur le rush d'origine.",
-      f4Tag: "Workflow non destructif",
+        "Mixez vos prises avec la vidéo d'origine : H.264 + AAC par défaut ; H.265, ProRes, PCM 24 bits ou copie du flux vidéo sans réencodage en mode expert. FFmpeg est fourni avec l'application.",
+      f4Tag: "Export vidéo",
     },
     opensource: {
       eyebrow: "Philosophie & Indépendance",
@@ -272,16 +272,16 @@ const translations: Record<Language, Translations> = {
       eyebrow: "Téléchargements",
       title: "Télécharger DubInstante.",
       subtitle:
-        "Disponible gratuitement pour macOS, Windows et Linux (Debian, Arch). Sans inscription ni carte bancaire.",
+        "Disponible gratuitement pour Windows et Linux (Debian, Arch). Sans inscription ni carte bancaire.",
       yourOs: "Votre OS",
       fileLabel: "Fichier :",
-      installNotes: "Notes d'installation :",
       btnDownload: "Télécharger",
       allReleases: "Toutes les versions et binaires sur GitHub Releases",
       sourceCode: "Dépôt de code source",
-      gatekeeperNote: "macOS : décompressez l'archive .zip, puis faites Clic droit > Ouvrir si Gatekeeper demande une confirmation lors du premier lancement.",
-      smartScreenNote: "Windows : décompressez l'archive .zip. Si SmartScreen apparaît au lancement, cliquez sur 'Informations complémentaires' puis 'Exécuter quand même'.",
-      linuxNote: "Linux : décompressez l'archive .zip, rendez le binaire exécutable (chmod +x) et lancez-le directement.",
+      macTitle: "macOS — en attente",
+      macDesc:
+        "La version macOS est mise de côté : sans licence développeur Apple, l'application ne peut pas être autorisée à utiliser les micros, donc à enregistrer. Le build Apple Silicon de la v0.12.0 reste publié sur GitHub à titre expérimental.",
+      macLink: "Voir le build macOS expérimental sur GitHub",
       androidTitle: "Android — refonte en cours",
       androidDesc:
         "L\u2019application Android est réécrite de zéro pour les tablettes, avec environ 95 % des fonctions du studio (hors enregistrement multi-micro). Elle arrive avec la v0.13. La v0.6 sur GitHub n\u2019était qu\u2019un test de découverte, à ne pas prendre pour le résultat final.",
@@ -290,7 +290,10 @@ const translations: Record<Language, Translations> = {
     footer: {
       brandDesc:
         "DubInstante est un logiciel libre et gratuit de bande rythmo et de doublage vidéo. Conçu pour les comédiens, adaptateurs et créateurs indépendants.",
-      license: "Licence libre EUPL-1.2 · Vos données restent sur votre ordinateur.",
+      license:
+        "Licence libre EUPL-1.2 · Vos données restent sur votre ordinateur.",
+      siteNote:
+        "Ce site : aucun cookie ni traceur. Thème et langue sont mémorisés dans votre navigateur ; les polices sont chargées depuis Google Fonts et les téléchargements depuis GitHub.",
       ecosystem: "Écosystème LOINSTANTE",
       madeBy: "Projet libre développé par LOINSTANTE",
       reportBug: "Signaler un bug",
@@ -307,7 +310,7 @@ const translations: Record<Language, Translations> = {
       tableSubtitle:
         "Une comparaison transparente des fonctionnalités, des coûts réels et de la philosophie de travail.",
       sourcesNote:
-        "Tarifs et fonctionnalités constatés en septembre 2026 à titre indicatif selon les documentations publiques des éditeurs cités.",
+        "Tarifs et fonctionnalités relevés en octobre 2026, à titre indicatif, sur les sites des éditeurs :",
       wallEyebrow: "Le mur des bricolages",
       wallTitle: "Reconnaissez-vous ces galères ?",
       wallSubtitle:
@@ -325,7 +328,8 @@ const translations: Record<Language, Translations> = {
     notFound: {
       badge: "Erreur 404 · Signal Perdu",
       title: "Timecode introuvable.",
-      subtitle: "La scène ou la piste demandée n'existe pas dans cette session. Vérifiez l'adresse ou revenez au studio principal.",
+      subtitle:
+        "La scène ou la piste demandée n'existe pas dans cette session. Vérifiez l'adresse ou revenez au studio principal.",
       backHome: "Retourner à l'accueil",
       downloadBtn: "Télécharger DubInstante",
     },
@@ -346,7 +350,6 @@ const translations: Record<Language, Translations> = {
       themeDark: "Switch to dark theme",
       themeLight: "Switch to light theme",
       toggleTheme: "Toggle theme",
-      changeLang: "Switch language",
       sourceCode: "GitHub source code",
       menu: "Menu",
     },
@@ -354,7 +357,7 @@ const translations: Record<Language, Translations> = {
       "RYTHMO BAND",
       "MULTI-TRACK RECORDING",
       "VIDEO DUBBING",
-      "50 GB+ FILES",
+      "UP TO 4 TRACKS",
       "FRAME BY FRAME",
       "OPEN SOURCE",
       "100% LOCAL",
@@ -362,9 +365,10 @@ const translations: Record<Language, Translations> = {
     ],
     stats: {
       stat1Value: "0 €",
-      stat1Label: "Free forever. No subscription, no account, 100% local-first.",
-      stat2Value: "50 GB+",
-      stat2Label: "Extreme performance for heavy uncompressed broadcast streams.",
+      stat1Label:
+        "Free forever. No subscription, no account, 100% local-first.",
+      stat2Value: "4 tracks",
+      stat2Label: "Up to 4 rythmo bands and 4 microphones recorded at once.",
       stat3Value: CURRENT_VERSION,
       stat3Label: "Major UI overhaul, heading towards final v1.0.",
     },
@@ -375,7 +379,8 @@ const translations: Record<Language, Translations> = {
         "Dub your videos with a true fluid rythmo band. Free, open source and 100% offline: no account, no cloud, no subscription.",
       downloadFor: "Download for",
       viewGithub: "Source code on GitHub",
-      metaSpecs: "EUPL-1.2 · C++17 & Qt 6 · OpenGL rendering · Native FFmpeg · 100% Offline",
+      metaSpecs:
+        "EUPL-1.2 · C++17 & Qt 6 · OpenGL rendering · Native FFmpeg · 100% Offline",
       whatIsRythmoTitle: "What is a rythmo band?",
       whatIsRythmoDesc:
         "It's the scrolling text band synchronized with video, used by voice actors in studios to match lip movements frame by frame.",
@@ -384,11 +389,11 @@ const translations: Record<Language, Translations> = {
       eyebrow: "App Preview",
       title: "Engineered for studio fluidity.",
       subtitle:
-        "60 FPS scrolling rythmo band, surgical syllable timing, and stutter-free playback on heavy footage.",
+        "60 FPS scrolling rythmo band, syllables locked to the time grid, and frame-by-frame navigation.",
       tabScreenshot: "Native Studio Screenshot (Qt6)",
       tabSimulator: "Interactive Rythmo Band (60 FPS)",
       screenshotCaption:
-        "Native DubInstante interface on macOS / Linux / Windows. Hardware-accelerated OpenGL rendering.",
+        "Native DubInstante interface on Linux and Windows. Hardware-accelerated OpenGL rendering.",
       play: "Play",
       pause: "Pause",
       speed: "Speed",
@@ -401,7 +406,7 @@ const translations: Record<Language, Translations> = {
       nextFrame: "Next frame (+1 frame)",
       scrubLabel: "Timeline position in session",
       simDisclaimer:
-        "Interactive web demonstration of the rythmo band principle. The DubInstante desktop application runs native GPU-accelerated rendering (OpenGL / Qt 6 Multimedia) with multi-track audio and heavy footage support.",
+        "Interactive web demonstration of the rythmo band principle. The DubInstante desktop application runs native GPU-accelerated rendering (OpenGL / Qt 6 Multimedia) with multi-track audio recording.",
     },
     features: {
       eyebrow: "Core Capabilities",
@@ -420,12 +425,12 @@ const translations: Record<Language, Translations> = {
       f2Tag: "Broadcast Audio",
       f3Title: "Native C++17 & OpenGL Engine",
       f3Desc:
-        "No heavy web wrappers, no Electron bloat. Effortlessly scrubs 4K video files and 50GB+ raw footage with zero dropped frames.",
+        "No heavy web wrappers, no Electron bloat. Video playback through Qt Multimedia and FFmpeg, a rythmo band rendered at 60 FPS, and frame-by-frame navigation.",
       f3Tag: "Native Performance",
-      f4Title: "Instant Lossless FFmpeg Export",
+      f4Title: "Built-in FFmpeg Export",
       f4Desc:
-        "Mux voice takes and source video streams together in seconds using FFmpeg pass-through. Preserves 100% of the original video bitrate.",
-      f4Tag: "Non-destructive workflow",
+        "Mix your takes with the source video: H.264 + AAC by default; H.265, ProRes, 24-bit PCM or video stream copy without re-encoding in expert mode. FFmpeg ships with the app.",
+      f4Tag: "Video export",
     },
     opensource: {
       eyebrow: "Philosophy & Independence",
@@ -451,16 +456,16 @@ const translations: Record<Language, Translations> = {
       eyebrow: "Downloads",
       title: "Download DubInstante.",
       subtitle:
-        "Freely available for macOS, Windows, and Linux (Debian, Arch). No credit card, no registration.",
+        "Freely available for Windows and Linux (Debian, Arch). No credit card, no registration.",
       yourOs: "Your OS",
       fileLabel: "File:",
-      installNotes: "Installation notes:",
       btnDownload: "Download",
       allReleases: "All releases and binaries on GitHub Releases",
       sourceCode: "Source code repository",
-      gatekeeperNote: "macOS: Unzip the archive, then Right-click > Open if Gatekeeper asks for confirmation on first launch.",
-      smartScreenNote: "Windows: Unzip the archive. If SmartScreen pops up at launch, click 'More info' then 'Run anyway'.",
-      linuxNote: "Linux: Unzip the archive, make the binary executable (chmod +x), and launch directly.",
+      macTitle: "macOS — on hold",
+      macDesc:
+        "The macOS version is on hold: without an Apple developer licence, the app cannot be granted microphone access, and therefore cannot record. The v0.12.0 Apple Silicon build remains on GitHub as an experimental release.",
+      macLink: "See the experimental macOS build on GitHub",
       androidTitle: "Android — being rebuilt",
       androidDesc:
         "The Android app is being rewritten from scratch for tablets, with about 95% of the studio features (minus multi-microphone recording). It arrives with v0.13. The v0.6 build on GitHub was only a discovery experiment, not representative of the final app.",
@@ -470,6 +475,8 @@ const translations: Record<Language, Translations> = {
       brandDesc:
         "DubInstante is a free and open-source video dubbing and rythmo band studio. Built with craft for actors, adapters, and independent creators.",
       license: "EUPL-1.2 Free Software · All data remains on your machine.",
+      siteNote:
+        "This website: no cookies, no trackers. Theme and language are stored in your browser; fonts load from Google Fonts and downloads from GitHub.",
       ecosystem: "LOINSTANTE Ecosystem",
       madeBy: "Open-source project created by LOINSTANTE",
       reportBug: "Report a bug",
@@ -486,7 +493,7 @@ const translations: Record<Language, Translations> = {
       tableSubtitle:
         "A transparent comparison of studio features, actual lifetime costs, and architectural philosophy.",
       sourcesNote:
-        "Prices and features observed in September 2026 based on publicly available documentation.",
+        "Prices and features checked in October 2026, for indicative comparison, on the vendors' websites:",
       wallEyebrow: "The Wall of Workaround Pain",
       wallTitle: "Do you recognize these struggles?",
       wallSubtitle:
@@ -504,7 +511,8 @@ const translations: Record<Language, Translations> = {
     notFound: {
       badge: "404 Error · Lost Signal",
       title: "Timecode not found.",
-      subtitle: "The requested scene or track does not exist in this session. Check the URL or return to the main studio.",
+      subtitle:
+        "The requested scene or track does not exist in this session. Check the URL or return to the main studio.",
       backHome: "Return to Homepage",
       downloadBtn: "Download DubInstante",
     },
@@ -513,50 +521,25 @@ const translations: Record<Language, Translations> = {
 
 interface LanguageContextType {
   language: Language;
-  setLanguage: (lang: Language) => void;
   t: Translations;
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+const LanguageContext = createContext<LanguageContextType | undefined>(
+  undefined,
+);
 
-const getInitialLanguage = (): Language => {
-  if (typeof window === "undefined") return "fr";
-  const params = new URLSearchParams(window.location.search);
-  const langParam = params.get("lang");
-  if (langParam === "en" || langParam === "fr") {
-    return langParam;
-  }
-  const saved = localStorage.getItem("dubinstante_lang") as Language;
-  if (saved === "fr" || saved === "en") {
-    return saved;
-  }
-  return navigator.language.startsWith("fr") ? "fr" : "en";
-};
-
-export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<Language>(getInitialLanguage);
-
+// The language comes from the URL (French at the root, English under /en),
+// so every address has exactly one language for visitors and crawlers alike.
+export const LanguageProvider: React.FC<{
+  language: Language;
+  children: React.ReactNode;
+}> = ({ language, children }) => {
   useEffect(() => {
     document.documentElement.lang = language;
   }, [language]);
 
-  const setLanguage = (lang: Language) => {
-    setLanguageState(lang);
-    localStorage.setItem("dubinstante_lang", lang);
-    document.documentElement.lang = lang;
-    if (typeof window !== "undefined") {
-      const url = new URL(window.location.href);
-      if (lang === "en") {
-        url.searchParams.set("lang", "en");
-      } else {
-        url.searchParams.delete("lang");
-      }
-      window.history.replaceState({}, "", url.toString());
-    }
-  };
-
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t: translations[language] }}>
+    <LanguageContext.Provider value={{ language, t: translations[language] }}>
       {children}
     </LanguageContext.Provider>
   );
@@ -569,4 +552,3 @@ export const useLanguage = () => {
   }
   return context;
 };
-

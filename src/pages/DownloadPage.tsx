@@ -1,12 +1,10 @@
 import React from 'react';
 import { DownloadHub } from '../components/DownloadHub';
 import { Reveal, Eyebrow, Halo } from '../components/ui/Primitives';
-import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useLanguage } from '../context/LanguageContext';
 
 export const DownloadPage: React.FC = () => {
-  const { language, t } = useLanguage();
-  useDocumentTitle(language === 'fr' ? 'Télécharger' : 'Download');
+  const { t } = useLanguage();
 
   return (
     <section className="relative pt-32 md:pt-40 pb-24 overflow-hidden">

@@ -55,8 +55,14 @@
     --accent-press: #762f32;
 
     --accent-soft: rgba(163, 69, 74, 0.12);
+    --accent-text-rgb: 140 58 62;
     --accent-text: #8c3a3e;
     --on-accent: #ffffff;
+
+    /* Text-safe variants (WCAG AA on light surfaces) */
+    --rec-text-rgb: 184 45 23; /* = rec-dim */
+    --success-text-rgb: 8 114 74;
+    --warning-text-rgb: 133 85 0;
 
     /* Record / Danger */
     --rec-rgb: 217 56 30;
@@ -129,15 +135,22 @@
     --accent-rgb: 182 90 95;
     --accent: #b65a5f;
 
-    --accent-hover-rgb: 196 102 107;
-    --accent-hover: #c4666b;
+    /* Deliberately darker than style_dark.qss (#c4666b): white text only reaches 3.85:1 on it */
+    --accent-hover-rgb: 166 79 84;
+    --accent-hover: #a64f54;
 
     --accent-press-rgb: 155 74 79;
     --accent-press: #9b4a4f;
 
     --accent-soft: rgba(182, 90, 95, 0.15);
+    --accent-text-rgb: 212 119 125;
     --accent-text: #d4777d;
     --on-accent: #ffffff;
+
+    /* Text-safe variants (WCAG AA on dark surfaces) */
+    --rec-text-rgb: 255 106 77; /* = danger */
+    --success-text-rgb: 18 197 130;
+    --warning-text-rgb: 243 164 0;
 
     /* Record / Danger */
     --rec-rgb: 217 56 30;

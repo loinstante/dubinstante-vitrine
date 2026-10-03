@@ -43,6 +43,16 @@ export default {
           red: 'rgb(var(--danger-rgb) / <alpha-value>)',
         },
       },
+      // Variantes "texte" des couleurs vives : mêmes classes (text-accent, text-rec…),
+      // mais teintes qui passent WCAG AA sur les fonds du site. bg-/border- gardent la teinte d'origine.
+      textColor: {
+        accent: { DEFAULT: 'rgb(var(--accent-text-rgb) / <alpha-value>)' },
+        rec: { DEFAULT: 'rgb(var(--rec-text-rgb) / <alpha-value>)' },
+        audio: {
+          green: 'rgb(var(--success-text-rgb) / <alpha-value>)',
+          amber: 'rgb(var(--warning-text-rgb) / <alpha-value>)',
+        },
+      },
       fontFamily: {
         sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
         display: ['Manrope', 'Inter', 'system-ui', 'sans-serif'],

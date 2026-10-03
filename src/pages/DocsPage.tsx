@@ -1,22 +1,21 @@
 import React from 'react';
-import { useDocumentTitle } from '../hooks/useDocumentTitle';
 import { useLanguage } from '../context/LanguageContext';
 import { Reveal, Eyebrow, Halo, TimecodeWatermark } from '../components/ui/Primitives';
 import { CURRENT_VERSION, GITHUB_REPO_URL } from '../config/downloads';
 import { Play, MousePointerClick, Mic, Download, Keyboard } from 'lucide-react';
 
 const QUICK_STEPS_FR = [
-  { num: '1', icon: Play, title: 'Importez votre vidéo', desc: 'Cliquez sur « Ouvrir Vidéo ». MP4 et standards supportés. Fichiers 50 Go+ chargés sans latence.' },
+  { num: '1', icon: Play, title: 'Importez votre vidéo', desc: 'Cliquez sur « Ouvrir Vidéo ». Formats acceptés : MP4, MKV, MOV, AVI, M4V, WebM, MXF.' },
   { num: '2', icon: MousePointerClick, title: 'Préparez la bande rythmo', desc: 'Saisissez votre texte directement sur la bande. Sync automatique avec l\'image. Cliquez pour naviguer.' },
   { num: '3', icon: Mic, title: 'Enregistrez les voix', desc: 'Sélectionnez vos micros, ajustez les gains, lancez l\'enregistrement. Jusqu\'à 4 pistes et micros simultanés avec paramètres et styles distincts.' },
-  { num: '4', icon: Download, title: 'Exportez votre projet', desc: 'L\'export fusionne vidéo + audio via FFmpeg en préservant la qualité source. Sauvegarde .dbi pour retravailler.' },
+  { num: '4', icon: Download, title: 'Exportez votre projet', desc: 'L\'export mixe vos prises avec la vidéo via FFmpeg (H.264 + AAC par défaut, copie du flux vidéo possible en mode expert). Sauvegarde .dbi pour retravailler.' },
 ];
 
 const QUICK_STEPS_EN = [
-  { num: '1', icon: Play, title: 'Import your video', desc: 'Click "Open Video". MP4 and broadcast formats supported. 50 GB+ raw video files scrub with zero latency.' },
+  { num: '1', icon: Play, title: 'Import your video', desc: 'Click "Open Video". Accepted formats: MP4, MKV, MOV, AVI, M4V, WebM, MXF.' },
   { num: '2', icon: MousePointerClick, title: 'Build the rythmo band', desc: 'Type dialogue syllables directly onto the timeline. Instant frame-sync. Click anywhere to jump timecodes.' },
   { num: '3', icon: Mic, title: 'Record vocal takes', desc: 'Select audio interface inputs, dial gain levels, and start recording. Up to 4 simultaneous broadcast tracks and discrete microphones with independent styling.' },
-  { num: '4', icon: Download, title: 'Export finished mixes', desc: 'Mux audio and video tracks via lossless FFmpeg stream copy. Save portable .dbi session packages.' },
+  { num: '4', icon: Download, title: 'Export finished mixes', desc: 'The export mixes your takes with the video through FFmpeg (H.264 + AAC by default, video stream copy available in expert mode). Save .dbi sessions to keep working.' },
 ];
 
 const FEATURES_FR = [
@@ -40,7 +39,7 @@ const FEATURES_FR = [
   ]},
   { emoji: '📦', title: 'Export & Intégration', items: [
     'Intégration FFmpeg pour fusion vidéo/audio pro',
-    'Export multipiste préservant la qualité originale',
+    'H.264 + AAC par défaut ; H.265, ProRes, PCM ou copie du flux vidéo en mode expert',
     'Format .dbi compact, archives ZIP portables',
     'I/O asynchrone : sauvegardes sans bloquer l\'interface',
   ]},
@@ -50,7 +49,7 @@ const FEATURES_EN = [
   { emoji: '🎬', title: 'Video Playback Engine', items: [
     'GPU-accelerated OpenGL canvas via native Qt 6 Multimedia',
     'Frame-by-frame stepping with audio scrubbing and visual timeline',
-    'Sub-frame clock sync between source audio, video and rythmo tracks',
+    'Real-time sync between source audio, video and rythmo tracks',
     'Adjustable variable playback speed (1% to 400%) for delivery pacing',
   ]},
   { emoji: '📝', title: 'Rythmo Band Timeline', items: [
@@ -66,8 +65,8 @@ const FEATURES_EN = [
     'Lossless uncompressed WAV broadcast audio storage locked to timecode',
   ]},
   { emoji: '📦', title: 'Export & Studio Workflows', items: [
-    'Embedded FFmpeg engine for lossless audio/video muxing',
-    'Non-destructive pass-through preserving source bitrates and colorspaces',
+    'Bundled FFmpeg for audio/video export',
+    'H.264 + AAC by default; H.265, ProRes, PCM or video stream copy in expert mode',
     'Compact binary .dbi session files, portable ZIP package archives',
     'Asynchronous background saves preventing UI stutters',
   ]},
@@ -104,13 +103,12 @@ const WORKFLOW_EN = [
   'Configure Audio: Assign studio microphones (up to 4), customize track appearance and calibrate preamp levels.',
   'Edit Rythmo: Type dialogue onto the scrolling track in sync with lip flaps.',
   'Record Takes: Click REC, deliver lines at the red cursor, click to finish.',
-  'Export Master: Render synced dialogue mixes losslessly via FFmpeg.',
+  'Export: render the final video with your takes mixed in via FFmpeg.',
 ];
 
 export const DocsPage: React.FC = () => {
   const { language } = useLanguage();
   const isEn = language === 'en';
-  useDocumentTitle(isEn ? 'Documentation & User Guide' : 'Documentation & Guide Studio');
 
   const steps = isEn ? QUICK_STEPS_EN : QUICK_STEPS_FR;
   const features = isEn ? FEATURES_EN : FEATURES_FR;
@@ -240,7 +238,7 @@ export const DocsPage: React.FC = () => {
             href={GITHUB_REPO_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 mt-5 text-sm font-medium text-accent hover:text-accent-hover transition-colors"
+            className="inline-flex items-center gap-2 mt-5 text-sm font-medium text-accent hover:underline transition-colors"
           >
             {isEn ? 'View source code on GitHub →' : 'Voir le code source →'}
           </a>

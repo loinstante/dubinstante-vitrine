@@ -253,6 +253,10 @@ export const StudioPreview: React.FC = () => {
               <img
                 src={isDark ? '/assets/dubinstante-studio-real.png' : '/assets/dubinstante-studio-white.png'}
                 alt={language === 'en' ? 'DubInstante Studio native interface with video player, 60 FPS rythmo band and 4-track discrete microphone meters' : 'Interface native de DubInstante avec lecteur vidéo, bande rythmo 60 FPS et vumètres 4 micros distincts'}
+                width={2048}
+                height={1227}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-auto block"
               />
             </div>
@@ -266,7 +270,7 @@ export const StudioPreview: React.FC = () => {
               tabIndex={0}
               onKeyDown={handleKeyDown}
               aria-label={language === 'en' ? 'Interactive Rythmo Band Simulator. Press Space to play/pause, left and right arrows to step frame by frame.' : 'Simulateur interactif de bande rythmo. Appuyez sur Espace pour lancer/pause, flèches gauche et droite pour avancer image par image.'}
-              className="rounded-2xl overflow-hidden border border-[var(--border-strong)] bg-ink focus:outline-none focus:ring-1 focus:ring-accent/50 shadow-2xl shadow-black/25 dark:shadow-black/70 animate-fade-up"
+              className="rounded-2xl overflow-hidden border border-[var(--border-strong)] bg-ink shadow-2xl shadow-black/25 dark:shadow-black/70 animate-fade-up"
             >
               {/* Video Stage */}
               <div className="relative aspect-[16/9] max-h-[380px] w-full flex flex-col justify-end overflow-hidden bg-black">
@@ -285,7 +289,7 @@ export const StudioPreview: React.FC = () => {
 
                 {/* Status indicator */}
                 <div className="absolute top-3 left-3 z-10 text-[11px] font-mono text-white/70 bg-black/60 px-2.5 py-1 rounded">
-                  {language === 'en' ? '4K Video · 60 FPS OpenGL Render' : 'Vidéo 4K · Rendu OpenGL 60 FPS'}
+                  {language === 'en' ? 'Web demo · simulated band' : 'Démo web · bande simulée'}
                 </div>
 
                 {/* The Rythmo Band at bottom */}

@@ -33,24 +33,24 @@ interface ComparisonData {
 
 const DATA_FR: ComparisonData = {
   eyebrow: 'La Troisième Voie',
-  title: 'Pourquoi payer 300 € / mois ou subir des outils cassés ?',
+  title: 'Pourquoi payer jusqu\'à 279 $ / mois ou subir des outils cassés ?',
   subtitle:
     'Dans le doublage, vous étiez coincé entre deux extrêmes : la rente mensuelle de logiciels fermés, ou l\'enfer de logiciels abandonnés. DubInstante a été créé pour offrir le standard studio avec une liberté absolue.',
   corpo: {
-    badge: '50 € à 280 € / mois',
+    badge: '39 $ à 279 $ / mois',
     title: 'Suites Big Corpo',
     examples: 'VoiceQ Pro · Noblurway Mosaic · Synchronos',
-    price: '50 € – 280 €',
+    price: '39 $ – 279 $',
     pricePeriod: '/ mois',
-    priceSub: 'ou jusqu\'à 3 650 € d\'achat + clé matérielle',
+    priceSub: 'ou jusqu\'à 3 650 € HT d\'achat + dongle',
     points: [
       {
         strong: 'Abonnements exorbitants',
-        detail: 'de 39 $/mois (Writer) à 279 $/mois (VoiceQ Pro Studio).',
+        detail: 'de 39 $/mois (Writer) à 279 $/mois (VoiceQ Pro).',
       },
       {
-        strong: 'Dongle USB obligatoire',
-        detail: 'clés physiques iLok ou Noblurway et contrôle permanent.',
+        strong: 'Dongle ou licence en ligne',
+        detail: 'iLok ou dongle Noblurway (USB ou logiciel), ou connexion permanente.',
       },
       {
         strong: 'Verrouillage d\'OS',
@@ -61,8 +61,8 @@ const DATA_FR: ComparisonData = {
         detail: 'vos projets et traductions restent captifs de leur écosystème.',
       },
       {
-        strong: 'Rente perpétuelle',
-        detail: 'obligation de payer chaque mois pour rouvrir vos anciens fichiers.',
+        strong: 'Location mensuelle',
+        detail: 'en location, l\'accès au logiciel s\'arrête avec le paiement.',
       },
     ],
     footerNote: 'Formats propriétaires captifs & dongles obligatoires',
@@ -81,11 +81,11 @@ const DATA_FR: ComparisonData = {
       },
       {
         strong: 'Bande rythmo native 60 FPS',
-        detail: 'défilement fluide au centième de frame (moteur C++ / OpenGL).',
+        detail: 'défilement fluide calé sur la grille temporelle (moteur C++ / OpenGL).',
       },
       {
         strong: 'Enregistrement multipiste',
-        detail: 'jusqu\'à 4 micros simultanés sans aucune dérive audio.',
+        detail: 'jusqu\'à 4 micros simultanés, prises calées sur le timecode.',
       },
       {
         strong: 'Moteur vidéo moderne',
@@ -97,7 +97,7 @@ const DATA_FR: ComparisonData = {
       },
       {
         strong: 'Vraiment multiplateforme',
-        detail: 'fonctionne nativement sur Windows, macOS, Linux et Android.',
+        detail: 'fonctionne nativement sur Windows et Linux (macOS en attente, Android en réécriture).',
       },
     ],
     footerNote: '100% Libre & Gratuit · Zéro compromis technique',
@@ -105,18 +105,18 @@ const DATA_FR: ComparisonData = {
   free: {
     badge: '« Gratuit » mais laborieux',
     title: 'Freewares Délaissés & Hacks',
-    examples: 'Voxdub (filigrane) · Cappella · Détours Aegisub · VLC',
+    examples: 'Voxdub · Cappella · Détours Aegisub · VLC',
     price: '0 €',
     pricePeriod: 'en apparence',
     priceSub: 'mais payé cher en temps perdu et frustration',
     points: [
       {
-        strong: 'Filigrane imposé',
-        detail: 'outils web type Voxdub avec filigrane obligatoire (ou 99 €/an).',
+        strong: 'Sans filigrane = payant',
+        detail: 'outils web type Voxdub : export sans filigrane réservé à l\'offre Pro (99 €/an).',
       },
       {
         strong: 'Abandonwares figés',
-        detail: 'outils des années 2000 (Cappella) bloqués sur de vieux Windows.',
+        detail: 'outils des années 2000 (Cappella) sans mise à jour depuis 2008.',
       },
       {
         strong: 'Dérive audio inévitable',
@@ -131,7 +131,7 @@ const DATA_FR: ComparisonData = {
         detail: 'des heures perdues à animer des sous-titres dans Premiere.',
       },
     ],
-    footerNote: 'Filigranes imposés, dérive audio & heures perdues',
+    footerNote: 'Filigranes, dérive audio & heures perdues',
   },
   linkText: 'Consulter les deux grands tableaux comparatifs →',
   disclaimer:
@@ -140,24 +140,24 @@ const DATA_FR: ComparisonData = {
 
 const DATA_EN: ComparisonData = {
   eyebrow: 'The Third Choice',
-  title: 'Why Pay $300 / mo or Suffer Broken Tools?',
+  title: 'Why Pay Up to $279 / mo or Suffer Broken Tools?',
   subtitle:
     'In dubbing, you were stuck between two extremes: paying recurring corporate subscriptions, or struggling with abandoned 2000s software. DubInstante was built to provide the studio standard with total freedom.',
   corpo: {
-    badge: '$50 to $280 / month',
+    badge: '$39 to $279 / month',
     title: 'Big Corpo Suites',
     examples: 'VoiceQ Pro · Noblurway Mosaic · Synchronos',
-    price: '$50 – $280',
+    price: '$39 – $279',
     pricePeriod: '/ month',
-    priceSub: 'or up to $3,650 upfront + hardware dongle',
+    priceSub: 'or up to €3,650 excl. VAT upfront + dongle',
     points: [
       {
         strong: 'Steep recurring costs',
-        detail: 'from $39/mo (Writer) up to $279/mo (VoiceQ Pro Studio).',
+        detail: 'from $39/mo (Writer) up to $279/mo (VoiceQ Pro).',
       },
       {
-        strong: 'Mandatory USB dongles',
-        detail: 'hardware iLok or Noblurway keys and strict DRM check-ins.',
+        strong: 'Dongle or online license',
+        detail: 'iLok or Noblurway dongle (USB or software), or an always-on connection.',
       },
       {
         strong: 'OS lock-in',
@@ -168,8 +168,8 @@ const DATA_EN: ComparisonData = {
         detail: 'your translation projects remain trapped in proprietary files.',
       },
       {
-        strong: 'Continuous rent',
-        detail: 'stop paying and you lose access to reopen your own past projects.',
+        strong: 'Monthly rental',
+        detail: 'on a rental plan, access to the software ends when you stop paying.',
       },
     ],
     footerNote: 'Vendor lock-in & mandatory hardware dongles',
@@ -192,7 +192,7 @@ const DATA_EN: ComparisonData = {
       },
       {
         strong: 'Multi-track studio recording',
-        detail: 'up to 4 microphones synchronized with zero audio drift.',
+        detail: 'up to 4 microphones at once, takes locked to the timecode.',
       },
       {
         strong: 'Modern video engine',
@@ -204,7 +204,7 @@ const DATA_EN: ComparisonData = {
       },
       {
         strong: 'True cross-platform',
-        detail: 'runs natively on Windows, macOS, Linux, and Android.',
+        detail: 'runs natively on Windows and Linux (macOS on hold, Android being rebuilt).',
       },
     ],
     footerNote: '100% Free & Open-Source · Zero technical compromise',
@@ -212,18 +212,18 @@ const DATA_EN: ComparisonData = {
   free: {
     badge: 'Free but Painful',
     title: 'Broken Freeware & Hacks',
-    examples: 'Voxdub (watermark) · Cappella · Aegisub Hacks · VLC',
+    examples: 'Voxdub · Cappella · Aegisub Hacks · VLC',
     price: '$0',
     pricePeriod: 'upfront',
     priceSub: 'heavy cost in wasted time and vocal desync',
     points: [
       {
-        strong: 'Forced watermark',
-        detail: 'freemium web tools like Voxdub requiring $99/yr to remove.',
+        strong: 'Watermark-free costs extra',
+        detail: 'web tools like Voxdub keep watermark-free export for the Pro plan (€99/yr).',
       },
       {
         strong: 'Stuck in the 2000s',
-        detail: 'abandonware like Cappella locked to legacy Windows XP/7.',
+        detail: 'tools like Cappella, not updated since 2008.',
       },
       {
         strong: 'Severe audio drift',
@@ -238,7 +238,7 @@ const DATA_EN: ComparisonData = {
         detail: 'hours lost animating subtitle keyframes inside Premiere or DaVinci.',
       },
     ],
-    footerNote: 'Forced watermarks, audio drift & wasted hours',
+    footerNote: 'Watermarks, audio drift & wasted hours',
   },
   linkText: 'View the full dual comparison tables →',
   disclaimer:
@@ -311,7 +311,7 @@ export const Comparison: React.FC = () => {
               <ul className="space-y-3.5">
                 {d.corpo.points.map((pt, i) => (
                   <li key={i} className="flex items-start gap-2.5 text-sm leading-snug">
-                    <X className="w-4 h-4 text-rec/70 shrink-0 mt-0.5" />
+                    <X className="w-4 h-4 text-rec shrink-0 mt-0.5" />
                     <span>
                       <strong className="font-semibold text-[var(--text-primary)]">
                         {pt.strong}
@@ -358,7 +358,7 @@ export const Comparison: React.FC = () => {
                     {d.dub.price}
                   </span>
                   {d.dub.pricePeriod && (
-                    <span className="text-sm font-mono font-semibold text-accent/90">
+                    <span className="text-sm font-mono font-semibold text-accent">
                       {d.dub.pricePeriod}
                     </span>
                   )}
@@ -463,7 +463,7 @@ export const Comparison: React.FC = () => {
           <div>
             <Link
               to="/pourquoi"
-              className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-accent hover:text-accent-hover transition-colors px-4 py-2.5 rounded-xl bg-accent/10 border border-accent/25 hover:bg-accent/15"
+              className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-accent hover:underline transition-colors px-4 py-2.5 rounded-xl bg-accent/10 border border-accent/25 hover:bg-accent/15"
             >
               <span>{d.linkText}</span>
               <ArrowRight className="w-3.5 h-3.5" />

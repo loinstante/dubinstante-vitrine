@@ -1,20 +1,12 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useLanguage } from '../context/LanguageContext';
-import { useDocumentTitle } from '../hooks/useDocumentTitle';
-import { Eyebrow, RecDot, Halo } from '../components/ui/Primitives';
-import { Home, Download, Compass, ArrowRight } from 'lucide-react';
+import React from "react";
+import { Link } from "react-router-dom";
+import { useLanguage } from "../context/LanguageContext";
+import { Eyebrow, RecDot, Halo } from "../components/ui/Primitives";
+import { Home, Download, Compass, ArrowRight } from "lucide-react";
 
 export const NotFoundPage: React.FC = () => {
   const { t, language } = useLanguage();
-  const isEn = language === 'en';
-
-  useDocumentTitle(
-    isEn ? '404 · Signal Lost — DubInstante' : '404 · Signal Perdu — DubInstante',
-    isEn
-      ? 'The requested scene or track does not exist in this session.'
-      : 'La page ou le timecode demandé est introuvable.'
-  );
+  const isEn = language === "en";
 
   return (
     <div className="relative min-h-[80vh] flex items-center justify-center py-20 px-4 sm:px-6 overflow-hidden">
@@ -71,14 +63,16 @@ export const NotFoundPage: React.FC = () => {
         <div className="pt-8 border-t border-[var(--border-subtle)]">
           <p className="text-xs font-mono uppercase tracking-wider text-[var(--text-muted)] mb-4 flex items-center justify-center gap-1.5">
             <Compass className="w-3.5 h-3.5" />
-            <span>{isEn ? 'Direct Studio Links' : 'Accès rapide au studio'}</span>
+            <span>
+              {isEn ? "Direct Studio Links" : "Accès rapide au studio"}
+            </span>
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 text-xs font-medium text-[var(--text-secondary)]">
             <Link
               to="/features"
               className="hover:text-accent transition-colors inline-flex items-center gap-1"
             >
-              <span>{isEn ? 'Features & Engine' : 'Fonctionnalités'}</span>
+              <span>{isEn ? "Features & Engine" : "Fonctionnalités"}</span>
               <ArrowRight className="w-3 h-3 text-[var(--text-muted)]" />
             </Link>
             <span className="text-[var(--border-subtle)]">•</span>
@@ -86,7 +80,9 @@ export const NotFoundPage: React.FC = () => {
               to="/documentation"
               className="hover:text-accent transition-colors inline-flex items-center gap-1"
             >
-              <span>{isEn ? 'Documentation' : 'Documentation & Raccourcis'}</span>
+              <span>
+                {isEn ? "Documentation" : "Documentation & Raccourcis"}
+              </span>
               <ArrowRight className="w-3 h-3 text-[var(--text-muted)]" />
             </Link>
             <span className="text-[var(--border-subtle)]">•</span>
@@ -94,7 +90,7 @@ export const NotFoundPage: React.FC = () => {
               to="/pourquoi"
               className="hover:text-accent transition-colors inline-flex items-center gap-1"
             >
-              <span>{isEn ? 'Comparison' : 'Comparatif'}</span>
+              <span>{isEn ? "Comparison" : "Comparatif"}</span>
               <ArrowRight className="w-3 h-3 text-[var(--text-muted)]" />
             </Link>
             <span className="text-[var(--border-subtle)]">•</span>
