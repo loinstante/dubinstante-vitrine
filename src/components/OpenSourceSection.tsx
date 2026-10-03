@@ -10,7 +10,7 @@ export const OpenSourceSection: React.FC = () => {
 
   return (
     <section id="opensource" className="py-20 md:py-28 border-t border-[var(--border-subtle)]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
           {/* Left / Main text */}
           <div className="lg:col-span-7">

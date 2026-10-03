@@ -186,10 +186,10 @@ export const FeaturesPage: React.FC = () => {
       <Spotlight className="top-[-8rem] left-1/2 -translate-x-1/2 w-[42rem] h-[42rem] opacity-50" />
       <span id="tech" className="sr-only" aria-hidden />
 
-      <div className="relative max-w-5xl mx-auto px-4 sm:px-6">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Page Header */}
-        <Reveal className="max-w-3xl mb-12">
-          <div className="inline-flex items-center gap-2 mb-4">
+        <Reveal className="max-w-3xl mb-12 mx-auto text-center">
+          <div className="inline-flex items-center gap-2 mb-4 justify-center">
             <span className="relative flex h-2.5 w-2.5">
               <span className="absolute inline-flex h-full w-full rounded-full bg-accent opacity-60 animate-glow-pulse" />
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-accent" />
@@ -198,7 +198,7 @@ export const FeaturesPage: React.FC = () => {
               {CURRENT_VERSION} {isEn ? '(Public Beta)' : '(Bêta Publique)'}
             </Eyebrow>
           </div>
-          <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl tracking-tightest text-balance text-[var(--text-primary)]">
+          <h1 className="font-display font-bold text-4xl sm:text-5xl tracking-tightest text-balance text-[var(--text-primary)]">
             {isEn ? 'Complete Dubbing Studio. Interface & Native Engine.' : 'Le studio complet de doublage. Interface & Moteur.'}
           </h1>
           <p className="mt-5 text-base sm:text-lg text-[var(--text-secondary)] leading-relaxed">
@@ -237,45 +237,47 @@ export const FeaturesPage: React.FC = () => {
         </Reveal>
 
         {/* SECTION 1: WORKFLOW FEATURES */}
-        <div id="workflow" className="space-y-16 pt-4 scroll-mt-28">
-          <div className="border-b border-[var(--border-subtle)] pb-6">
+        <div id="workflow" className="space-y-10 pt-4 scroll-mt-28">
+          <div className="border-b border-[var(--border-subtle)] pb-6 text-center">
             <span className="font-mono text-xs uppercase tracking-widest text-accent font-semibold">{t.features.part1}</span>
             <h2 className="mt-1 font-display font-bold text-2xl sm:text-3xl tracking-tight text-[var(--text-primary)]">
               {isEn ? 'Studio Features & Recording Workflow' : 'Fonctionnalités Studio & Prise de Son'}
             </h2>
           </div>
 
-          {features.map((f, i) => (
-            <Reveal key={i} delay={i * 80} className="relative">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="font-mono text-sm font-bold text-accent tabular-nums">{f.num}</span>
-                <span className="h-px flex-1 bg-[var(--border-subtle)]" />
-              </div>
-              <h3 className="font-display font-bold text-xl sm:text-2xl tracking-tight text-[var(--text-primary)] mb-5">
-                {f.title}
-              </h3>
-              <div className="p-6 md:p-7 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] scan-hover">
-                <ul className="space-y-3">
-                  {f.items.map((it, j) => (
-                    <li key={j} className="flex items-start gap-3 text-sm text-[var(--text-secondary)] leading-relaxed">
-                      <span className="text-accent mt-0.5 shrink-0">▸</span>
-                      <span>{it}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          ))}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {features.map((f, i) => (
+              <Reveal key={i} delay={i * 80} className="relative flex flex-col justify-between p-6 sm:p-7 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] scan-hover">
+                <div>
+                  <div className="flex items-center gap-3 mb-4">
+                    <span className="font-mono text-sm font-bold text-accent tabular-nums">{f.num}</span>
+                    <span className="h-px flex-1 bg-[var(--border-subtle)]" />
+                  </div>
+                  <h3 className="font-display font-bold text-lg sm:text-xl tracking-tight text-[var(--text-primary)] mb-5">
+                    {f.title}
+                  </h3>
+                  <ul className="space-y-3">
+                    {f.items.map((it, j) => (
+                      <li key={j} className="flex items-start gap-3 text-sm text-[var(--text-secondary)] leading-relaxed">
+                        <span className="text-accent mt-0.5 shrink-0">▸</span>
+                        <span>{it}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </Reveal>
+            ))}
+          </div>
         </div>
 
         {/* SECTION 2: C++ NATIVE ENGINE & ARCHITECTURE */}
         <div id="engine" className="mt-28 space-y-14 pt-10 border-t border-[var(--border-subtle)] scroll-mt-28">
-          <div>
+          <div className="text-center">
             <span className="font-mono text-xs uppercase tracking-widest text-accent font-semibold">{t.features.part2}</span>
             <h2 className="mt-1 font-display font-bold text-2xl sm:text-3xl tracking-tight text-[var(--text-primary)]">
               {isEn ? 'Under the Hood: Architecture & C++ Performance' : 'Sous le Capot : Architecture & Moteur C++'}
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl leading-relaxed">
+            <p className="mt-3 text-sm sm:text-base text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed">
               {isEn
                 ? 'DubInstante avoids heavy Electron web wrappers. Everything is compiled natively with C++17, Qt 6, FFmpeg, and OpenGL to guarantee microsecond synchronization.'
                 : 'DubInstante refuse les surcouches web lourdes type Electron. Tout est compilé nativement en C++17, Qt 6, FFmpeg et OpenGL pour garantir une synchronisation à la microseconde.'}

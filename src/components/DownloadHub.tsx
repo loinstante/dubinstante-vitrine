@@ -172,7 +172,7 @@ export const DownloadHub: React.FC<DownloadHubProps> = ({ showHeader = true }) =
 
   return (
     <section id="download" className="py-20 md:py-28 border-t border-[var(--border-subtle)]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6">
         {/* Section Header */}
         <div className="max-w-2xl mb-14">
           <p className="text-xs font-mono font-medium text-[var(--text-muted)] uppercase tracking-wider mb-2">

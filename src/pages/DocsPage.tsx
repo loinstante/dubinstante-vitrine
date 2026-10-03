@@ -121,8 +121,8 @@ export const DocsPage: React.FC = () => {
     <section className="relative pt-32 md:pt-40 pb-24 overflow-hidden">
       <Halo className="top-[-6rem] left-1/2 -translate-x-1/2 w-[36rem] h-[36rem] opacity-40" />
       <TimecodeWatermark timecode="00:00:00:00" className="hidden md:block absolute top-28 right-8 text-5xl font-bold" />
-      <div className="relative max-w-4xl mx-auto px-4 sm:px-6">
-        <Reveal className="max-w-2xl mb-16">
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
+        <Reveal className="max-w-3xl mb-16">
           <Eyebrow className="mb-3">Documentation</Eyebrow>
           <h1 className="font-display font-bold text-4xl sm:text-5xl tracking-tightest text-balance text-[var(--text-primary)]">
             {isEn ? 'DubInstante User Guide.' : 'Documentation DubInstante.'}
@@ -142,19 +142,21 @@ export const DocsPage: React.FC = () => {
         <Reveal className="text-[var(--text-secondary)] mb-8 text-sm">
           {isEn ? 'Dub your first scene in 4 easy steps.' : 'Doublez votre première vidéo en 4 étapes simples.'}
         </Reveal>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
           {steps.map((s, i) => {
             const Icon = s.icon;
             return (
-              <Reveal key={i} delay={i * 80} className="p-6 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] scan-hover">
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="font-display font-bold text-2xl text-accent tabular-nums">{s.num}</span>
-                  <span className="w-9 h-9 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
-                    <Icon className="w-4 h-4" />
-                  </span>
+              <Reveal key={i} delay={i * 80} className="p-6 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] scan-hover flex flex-col justify-between">
+                <div>
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="font-display font-bold text-2xl text-accent tabular-nums">{s.num}</span>
+                    <span className="w-9 h-9 rounded-lg bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
+                      <Icon className="w-4 h-4" />
+                    </span>
+                  </div>
+                  <h3 className="font-display font-bold text-base text-[var(--text-primary)] mb-2">{s.title}</h3>
                 </div>
-                <h3 className="font-display font-bold text-lg text-[var(--text-primary)] mb-2">{s.title}</h3>
-                <p className="text-sm text-[var(--text-secondary)] leading-relaxed">{s.desc}</p>
+                <p className="text-xs text-[var(--text-secondary)] leading-relaxed mt-2">{s.desc}</p>
               </Reveal>
             );
           })}
@@ -164,20 +166,22 @@ export const DocsPage: React.FC = () => {
         <Reveal as="h2" className="font-display font-bold text-2xl mb-6 flex items-center gap-2">
           <span className="text-accent">✨</span> {isEn ? 'Core Workstation Modules' : 'Fonctionnalités principales'}
         </Reveal>
-        <div className="space-y-4 mb-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-16">
           {features.map((f, i) => (
-            <Reveal key={i} className="p-6 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)]">
-              <h3 className="font-display font-bold text-lg text-[var(--text-primary)] mb-3 flex items-center gap-2">
-                <span aria-hidden>{f.emoji}</span> {f.title}
-              </h3>
-              <ul className="space-y-2">
-                {f.items.map((it, j) => (
-                  <li key={j} className="flex items-start gap-2.5 text-sm text-[var(--text-secondary)]">
-                    <span className="text-accent mt-0.5">▸</span>
-                    <span>{it}</span>
-                  </li>
-                ))}
-              </ul>
+            <Reveal key={i} className="p-6 rounded-2xl border border-[var(--border-subtle)] bg-[var(--bg-surface)] flex flex-col justify-between">
+              <div>
+                <h3 className="font-display font-bold text-lg text-[var(--text-primary)] mb-3 flex items-center gap-2">
+                  <span aria-hidden>{f.emoji}</span> {f.title}
+                </h3>
+                <ul className="space-y-2">
+                  {f.items.map((it, j) => (
+                    <li key={j} className="flex items-start gap-2.5 text-sm text-[var(--text-secondary)]">
+                      <span className="text-accent mt-0.5">▸</span>
+                      <span>{it}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </Reveal>
           ))}
         </div>

@@ -13,7 +13,7 @@ export const StatsBar: React.FC = () => {
 
   return (
     <section className="py-16 md:py-20">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-[var(--border-subtle)] border border-[var(--border-subtle)] rounded-2xl overflow-hidden">
           {stats.map((s, i) => (
             <Reveal

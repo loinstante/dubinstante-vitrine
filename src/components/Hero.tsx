@@ -58,10 +58,12 @@ export const Hero: React.FC = () => {
 
         {/* Subtitle */}
         <p
-          className="mt-7 text-base sm:text-lg text-[var(--text-secondary)] max-w-2xl mx-auto leading-relaxed animate-fade-up opacity-0"
+          className="mt-7 text-base sm:text-lg text-[var(--text-secondary)] max-w-3xl mx-auto leading-relaxed animate-fade-up opacity-0"
           style={{ animationDelay: '600ms' }}
         >
-          {t.hero.subtitle}
+          {t.hero.subtitle.split(/(?<=\.)\s+/).map((sentence) => (
+            <span key={sentence} className="block">{sentence}</span>
+          ))}
         </p>
 
         {/* Rythmo explanation callout for newcomers */}

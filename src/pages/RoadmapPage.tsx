@@ -68,8 +68,8 @@ export const RoadmapPage: React.FC = () => {
   return (
     <section className="relative pt-32 md:pt-40 pb-24 overflow-hidden">
       <Halo className="top-[-6rem] left-1/2 -translate-x-1/2 w-[36rem] h-[36rem] opacity-40" />
-      <div className="relative max-w-3xl mx-auto px-4 sm:px-6">
-        <Reveal className="max-w-2xl mb-14">
+      <div className="relative max-w-4xl mx-auto px-4 sm:px-6">
+        <Reveal className="max-w-3xl mb-14">
           <Eyebrow className="mb-3">{isEn ? 'Roadmap' : 'Feuille de route'}</Eyebrow>
           <h1 className="font-display font-bold text-4xl sm:text-5xl tracking-tightest text-balance text-[var(--text-primary)]">
             {isEn ? 'On the road to v1.0.' : 'En route vers la v1.0.'}

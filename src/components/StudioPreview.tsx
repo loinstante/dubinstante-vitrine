@@ -193,7 +193,7 @@ export const StudioPreview: React.FC = () => {
   return (
     <section id="preview" className="relative py-24 md:py-32 border-t border-[var(--border-subtle)] overflow-hidden">
       <Halo className="top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] opacity-30" />
-      <div className="relative max-w-5xl mx-auto px-4 sm:px-6">
+      <div className="relative max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <Reveal className="text-center max-w-2xl mx-auto mb-10">
           <Eyebrow className="mb-2">{t.preview.eyebrow}</Eyebrow>
@@ -246,6 +246,7 @@ export const StudioPreview: React.FC = () => {
         </Reveal>
 
         {/* Display Container */}
+        <div className="max-w-6xl mx-auto">
         {activeTab === 'screenshot' ? (
           <Reveal id="panel-screenshot" role="tabpanel" aria-labelledby="tab-screenshot">
             <div className="rounded-2xl overflow-hidden border border-[var(--border-strong)] bg-ink shadow-2xl shadow-black/25 dark:shadow-black/70">
@@ -409,6 +410,7 @@ export const StudioPreview: React.FC = () => {
             </p>
           </div>
         )}
+        </div>
       </div>
     </section>
   );

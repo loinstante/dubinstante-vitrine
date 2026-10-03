@@ -193,7 +193,7 @@ const translations: Record<Language, Translations> = {
       eyebrow: "Studio libre de doublage et de bande rythmo",
       title: "Le studio libre de bande rythmo et de doublage.",
       subtitle:
-        "DubInstante est un logiciel de post-production gratuit et open source (EUPL-1.2). 100% hors-ligne, écrit en C++17 et Qt 6, sans compte, sans cloud et sans abonnement.",
+        "Doublez vos vidéos avec une vraie bande rythmo fluide. Gratuit, open source et 100 % hors-ligne : pas de compte, pas de cloud, pas d'abonnement.",
       downloadFor: "Télécharger pour",
       viewGithub: "Code source sur GitHub",
       metaSpecs: "EUPL-1.2 · C++17 & Qt 6 · Rendu OpenGL · FFmpeg natif · 100% Hors-ligne",
@@ -372,7 +372,7 @@ const translations: Record<Language, Translations> = {
       eyebrow: "Free & Open-Source Dubbing and Rythmo Band Studio",
       title: "The open studio for rythmo bands and dubbing.",
       subtitle:
-        "DubInstante is a free and open-source post-production tool (EUPL-1.2). 100% offline, engineered in C++17 and Qt 6, zero accounts, zero cloud, and zero subscriptions.",
+        "Dub your videos with a true fluid rythmo band. Free, open source and 100% offline: no account, no cloud, no subscription.",
       downloadFor: "Download for",
       viewGithub: "Source code on GitHub",
       metaSpecs: "EUPL-1.2 · C++17 & Qt 6 · OpenGL rendering · Native FFmpeg · 100% Offline",

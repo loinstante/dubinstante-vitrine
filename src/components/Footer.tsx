@@ -7,8 +7,8 @@ export const Footer: React.FC = () => {
   const { t, language } = useLanguage();
 
   return (
-    <footer className="border-t border-[var(--border-subtle)] py-14 text-sm text-[var(--text-muted)]">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+    <footer className="dark:relative dark:z-10 border-t border-[var(--border-subtle)] py-14 text-sm text-[var(--text-muted)]">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 pb-10 border-b border-[var(--border-subtle)]">
           {/* Brand Col */}
           <div className="md:col-span-2">

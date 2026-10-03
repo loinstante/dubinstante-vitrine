@@ -11,7 +11,7 @@ export const DownloadPage: React.FC = () => {
   return (
     <section className="relative pt-32 md:pt-40 pb-24 overflow-hidden">
       <Halo className="top-[-6rem] left-1/2 -translate-x-1/2 w-[40rem] h-[40rem] opacity-50" />
-      <div className="relative max-w-5xl mx-auto px-4 sm:px-6">
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6">
         <Reveal className="max-w-2xl mb-14">
           <Eyebrow className="mb-2">{t.download.eyebrow}</Eyebrow>
           <h1 className="font-display font-bold text-3xl sm:text-4xl md:text-5xl tracking-tight text-balance text-[var(--text-primary)]">

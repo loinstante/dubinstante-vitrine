@@ -44,15 +44,16 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['"Inter Tight"', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
-        display: ['"Space Grotesk"', '"Inter Tight"', 'Inter', 'system-ui', 'sans-serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        display: ['Manrope', 'Inter', 'system-ui', 'sans-serif'],
         mono: ['"JetBrains Mono"', 'Consolas', 'Fira Code', 'monospace'],
       },
       letterSpacing: {
-        tightest: '-0.04em',
+        tightest: '-0.03em',
       },
       maxWidth: {
         '7xl': '80rem',
+        '8xl': '85rem',
       },
       keyframes: {
         'fade-up': {

@@ -68,7 +68,7 @@ export const Navbar: React.FC = () => {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-6xl mx-auto h-16 px-4 sm:px-6 flex items-center justify-between gap-4">
+      <div className="max-w-8xl mx-auto h-16 px-4 sm:px-6 flex items-center justify-between gap-4">
         {/* Brand identity */}
         <Link to="/" className="flex items-center gap-2.5 group">
           <img
