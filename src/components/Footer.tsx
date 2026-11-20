@@ -39,9 +39,6 @@ export const Footer: React.FC = () => {
               <li>
                 <Link
                   to="/"
-                  onClick={() =>
-                    window.scrollTo({ top: 0, behavior: "smooth" })
-                  }
                   className="hover:text-[var(--text-primary)] transition-colors"
                 >
                   DubInstante

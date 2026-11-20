@@ -14,7 +14,6 @@ export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const location = useLocation();
-  const isLanding = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,19 +49,14 @@ export const Navbar: React.FC = () => {
   const otherLanguageLabel = otherLanguage === 'en' ? 'English version' : 'Version française';
 
   const navLinks = [
-    { to: '/', label: t.nav.preview, anchor: '#preview' },
+    { to: '/', label: t.nav.preview },
     { to: '/features', label: t.nav.features },
     { to: '/pourquoi', label: t.nav.why },
     { to: '/documentation', label: t.nav.docs },
     { to: '/roadmap', label: t.nav.roadmap },
   ];
 
-  const isLinkActive = (link: { to: string; anchor?: string }) => {
-    if (link.anchor) {
-      return isLanding && location.hash === link.anchor;
-    }
-    return location.pathname === link.to;
-  };
+  const isLinkActive = (link: { to: string }) => location.pathname === link.to;
 
   return (
     <header
@@ -90,27 +84,7 @@ export const Navbar: React.FC = () => {
           {navLinks.map((link) => {
             const active = isLinkActive(link);
             const activeClass = active ? 'text-[var(--text-primary)] font-semibold' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]';
-            return link.anchor ? (
-              isLanding ? (
-                <a
-                  key={link.anchor}
-                  href={link.anchor}
-                  aria-current={active ? 'page' : undefined}
-                  className={`text-sm font-medium transition-colors ${activeClass}`}
-                >
-                  {link.label}
-                </a>
-              ) : (
-                <Link
-                  key={link.anchor}
-                  to={`/${link.anchor}`}
-                  aria-current={active ? 'page' : undefined}
-                  className={`text-sm font-medium transition-colors ${activeClass}`}
-                >
-                  {link.label}
-                </Link>
-              )
-            ) : (
+            return (
               <Link
                 key={link.to}
                 to={link.to}
@@ -210,29 +184,7 @@ export const Navbar: React.FC = () => {
             {navLinks.map((link) => {
               const active = isLinkActive(link);
               const activeClass = active ? 'text-[var(--text-primary)] font-semibold' : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]';
-              return link.anchor ? (
-                isLanding ? (
-                  <a
-                    key={link.anchor}
-                    href={link.anchor}
-                    onClick={() => setMobileMenuOpen(false)}
-                    aria-current={active ? 'page' : undefined}
-                    className={`text-sm font-medium py-1 ${activeClass}`}
-                  >
-                    {link.label}
-                  </a>
-                ) : (
-                  <Link
-                    key={link.anchor}
-                    to={`/${link.anchor}`}
-                    onClick={() => setMobileMenuOpen(false)}
-                    aria-current={active ? 'page' : undefined}
-                    className={`text-sm font-medium py-1 ${activeClass}`}
-                  >
-                    {link.label}
-                  </Link>
-                )
-              ) : (
+              return (
                 <Link
                   key={link.to}
                   to={link.to}

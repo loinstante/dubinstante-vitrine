@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
   useLocation,
+  useNavigationType,
   Navigate,
 } from "react-router-dom";
 import { LanguageProvider } from "./context/LanguageContext";
@@ -40,21 +41,57 @@ const PageLoader: React.FC = () => (
   </div>
 );
 
-const ScrollToTop: React.FC = () => {
+const scrollPositions = new Map<string, number>();
+
+const ScrollManager: React.FC = () => {
   const { pathname, hash } = useLocation();
+  const navigationType = useNavigationType();
+
   useEffect(() => {
+    let rafId: number | undefined;
+    let timerId: ReturnType<typeof setTimeout> | undefined;
+    let isRestoring = true;
+
+    const handleScroll = () => {
+      if (!isRestoring) {
+        scrollPositions.set(pathname, window.scrollY);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
     if (hash) {
-      setTimeout(() => {
+      isRestoring = false;
+      timerId = setTimeout(() => {
         const id = hash.replace("#", "");
         const element = document.getElementById(id);
         if (element) {
           element.scrollIntoView({ behavior: "smooth" });
         }
       }, 60);
+    } else if (
+      (pathname === "/" || navigationType === "POP") &&
+      scrollPositions.has(pathname)
+    ) {
+      const savedY = scrollPositions.get(pathname) ?? 0;
+      rafId = requestAnimationFrame(() => {
+        window.scrollTo({ top: savedY, left: 0, behavior: "instant" });
+        isRestoring = false;
+      });
     } else {
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+      rafId = requestAnimationFrame(() => {
+        isRestoring = false;
+      });
     }
-  }, [pathname, hash]);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      if (rafId !== undefined) cancelAnimationFrame(rafId);
+      if (timerId !== undefined) clearTimeout(timerId);
+    };
+  }, [pathname, hash, navigationType]);
+
   return null;
 };
 
@@ -63,7 +100,7 @@ export const AppRoutes: React.FC<{ language: Language }> = ({ language }) => {
   return (
     <ThemeProvider>
       <LanguageProvider language={language}>
-        <ScrollToTop />
+        <ScrollManager />
         <Routes>
           <Route element={<Layout />}>
             <Route path="/" element={<Landing />} />

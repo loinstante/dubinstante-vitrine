@@ -226,7 +226,7 @@ const translations: Record<Language, Translations> = {
     },
     features: {
       eyebrow: "Capacités réelles",
-      title: "L'essentiel, sans fioritures.",
+      title: "Conçu pour le doublage hors-ligne.",
       subtitle:
         "Chaque outil répond à un besoin concret de la chaîne de doublage, de la synchro labiale jusqu'à l'export master.",
       part1: "Partie 01",
@@ -410,7 +410,7 @@ const translations: Record<Language, Translations> = {
     },
     features: {
       eyebrow: "Core Capabilities",
-      title: "What matters, zero fluff.",
+      title: "Built for offline dubbing.",
       subtitle:
         "Each tool solves a real, practical challenge in dubbing workflows, from lip sync to master exports.",
       part1: "Part 01",
