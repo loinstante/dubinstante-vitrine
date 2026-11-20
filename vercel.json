@@ -4,6 +4,8 @@
   "cleanUrls": true,
   "trailingSlash": false,
   "redirects": [
+    { "source": "/documentation.html", "destination": "/documentation", "permanent": true },
+    { "source": "/en/documentation.html", "destination": "/en/documentation", "permanent": true },
     { "source": "/docs", "destination": "/documentation", "permanent": false },
     { "source": "/tech", "destination": "/features", "permanent": false },
     { "source": "/why", "destination": "/pourquoi", "permanent": false },

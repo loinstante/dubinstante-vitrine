@@ -16,7 +16,7 @@ export const PAGES: { path: string; fr: PageText; en: PageText }[] = [
   {
     path: "/",
     fr: {
-      title: "DubInstante — Logiciel libre de bande rythmo et doublage",
+      title: "DubInstante — Logiciel gratuit de bande rythmo et doublage",
       description:
         "Logiciel gratuit et open source de doublage vidéo : bande rythmo défilante, enregistrement jusqu'à 4 micros, export FFmpeg. Windows et Linux, hors-ligne.",
     },
@@ -45,7 +45,7 @@ export const PAGES: { path: string; fr: PageText; en: PageText }[] = [
         "Bande rythmo 60 FPS de 1 à 4 pistes, enregistrement WAV jusqu'à 4 micros, export FFmpeg (H.264, H.265, ProRes) et moteur natif C++17, Qt 6 et OpenGL.",
     },
     en: {
-      title: "DubInstante Features — Rythmo Band, Recording, Export",
+      title: "DubInstante Features — Free Rythmo Band & Dubbing Tool",
       description:
         "1 to 4 rythmo bands at 60 FPS, WAV recording of up to 4 microphones, FFmpeg export (H.264, H.265, ProRes) and a native C++17, Qt 6 and OpenGL engine.",
     },
@@ -66,14 +66,14 @@ export const PAGES: { path: string; fr: PageText; en: PageText }[] = [
   {
     path: "/documentation",
     fr: {
-      title: "Documentation DubInstante — Prise en main et raccourcis",
+      title: "Documentation DubInstante — Guide bande rythmo & doublage",
       description:
-        "Guide de démarrage de DubInstante : importer une vidéo, écrire la bande rythmo, enregistrer les voix, exporter. Raccourcis clavier et compilation des sources.",
+        "Apprenez à créer votre bande rythmo, enregistrer vos voix et exporter votre doublage vidéo avec DubInstante. Guide complet et raccourcis clavier.",
     },
     en: {
-      title: "DubInstante Documentation — Quick Start and Shortcuts",
+      title: "DubInstante Docs — Rythmo Band & Video Dubbing Guide",
       description:
-        "DubInstante quick-start guide: import a video, write the rythmo band, record the voices, export. Keyboard shortcuts and building from source.",
+        "Step-by-step guide to creating a rythmo band, recording voices and exporting dubbed videos with DubInstante. Includes keyboard shortcuts.",
     },
   },
   {
